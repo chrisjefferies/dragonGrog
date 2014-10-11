@@ -1,0 +1,341 @@
+/* style.less */
+
+
+
+
+body
+	{
+	background-color: #222;
+	
+	font-family: Sintony;
+	}
+
+.intro
+	{
+	width: 90%;
+	max-width: 600px;
+	color: #fff;
+	margin: 0 auto;
+	h1, h2, h3
+		{
+		text-align: center;
+		}
+	}
+
+.rules
+	{
+	font-family: ubuntu mono;
+	width: 90%;
+	max-width: 600px;
+	color: #fff;
+	background-color: #333;
+	margin: 0 auto;
+	h1, h2, h3, p
+		{
+		text-align: center;
+		padding: 30px 20px;
+		}
+	
+	}
+
+#build
+	{
+	width: 90%;
+	max-width: 800px;
+	display: block;
+	margin: 0 auto;
+	color: #fff;
+	}
+
+#class-select
+	{
+	display: block;
+	}
+
+
+#race-select
+	{
+	display: none;
+	}
+
+#race-bonus-human, #race-bonus-elf, #race-bonus-dwarf, #race-bonus-drake, #race-bonus-orc
+	{
+	display: none;
+	}
+/*
+#roll-stats
+	{
+	display: none;
+	}
+
+#dice-sys
+	{
+	display: none;
+	}
+
+
+#select-skills
+	{
+	display: none;
+	}
+*/
+
+#skills-finish
+	{
+	display: none;
+	padding-bottom: 40px;
+	input
+		{
+		display: block;
+		margin: 0 auto;
+		}
+	}
+
+
+
+#initialize
+	{
+	width: 90%;
+	max-width: 700px;
+	margin: 0 auto;
+	padding-top: 30vh;
+	}
+
+.button
+	{
+	width: 200px;
+	margin: 0 auto;
+	display: block;
+	background-color: #ddd;
+	a
+		{
+		text-decoration: none;
+		text-align: center;
+		color: #222;
+		p
+			{
+			padding: 10px 0;
+			}
+		}
+	a:hover, a:hover > .button
+		{
+		color: #444;
+		}
+	}
+
+.button:hover
+	{
+	background-color: #fff;
+	}
+
+.sm-button
+	{
+	.button;
+	width: 50px;
+	}
+
+
+
+.roll-stats
+	{
+	article
+		{
+		.attribute-name, .attribute-value
+			{
+			width: 60px;
+			float: left;
+			}
+		.roll-buttons
+			{
+			width: 220px;
+			float: left;
+			input
+				{
+				margin: 17px 0;
+				}
+			}
+		}
+	}
+
+#dice-sys
+	{
+	form
+		{
+		clear: both;
+		}
+	label
+		{
+		float: left;
+		width: 30px;
+		font-size: 16px;
+		padding: 8px 0;
+		clear: both;
+		}
+	select
+		{
+		margin: 10px 0;
+		}
+	}
+
+#final-base-attributes
+	{
+	width: 262px;
+	margin: 0 auto;
+	h2
+		{
+		text-align: center;
+		}
+	h3, h4
+		{
+		float: left;
+		width: 80px;
+		background-color: black;
+		margin: 0 0;
+		padding: 4px 2px;
+		text-align: center;
+		}
+	h4
+		{
+		background-color: white;
+		color: black;
+		border: 2px solid black;
+		padding: 4px 2px;
+		}
+	}
+#select-skills
+	{
+	padding-top: 50px;
+	clear: both;
+	}
+.float-left
+	{
+	float: left;
+	font-size: 20px;
+	}
+
+.stat-values
+	{
+	padding-left: 10px;
+	padding-right: 30px;
+	}
+
+.total-points
+	{
+	clear: both;
+	text-align: center;
+	padding-top: 50px;
+	}
+
+#stat-assigner
+	{
+	display: block;
+	float: left;
+	width: 290px;
+	#stat-assgnr-one, #stat-assgnr-two, #stat-assgnr-three,
+	#stat-assgnr-four, #stat-assgnr-five, #stat-assgnr-six
+		{
+		height: 47px;
+		form
+			{
+			margin-top: 17px;
+			margin-right: 45px;
+			padding: 0;
+			float: left;
+			}
+		input
+			{
+			margin-top: 23px;
+			float: left;
+			}
+		}
+	}
+
+#stat-assgnr-two, #stat-assgnr-three,
+#stat-assgnr-four, #stat-assgnr-five, #stat-assgnr-six
+	{
+	display: none;
+	}
+
+.skills
+	{
+	float: left;
+	padding-right: 10px;
+	p
+		{
+		padding: 0 0;
+		margin: 0 0;
+		}
+	}
+
+.class-name
+	{
+	input
+		{
+		height: 10px;
+		}
+	p
+		{
+		border-bottom: 1px solid #fff;
+		}
+	}
+
+.class-sk, .ab-mod, .skill-total
+	{
+	p
+		{
+		border-bottom: 1px solid #fff;
+		}
+	input
+		{
+		height: 10px;
+		width: 80px;
+		}
+	}
+
+.input-points
+	{
+	padding-left: 10px;
+	select
+		{
+		width: 80px;
+		height: 12px;
+		clear: both;
+		}
+	input
+		{
+		width: 80px;
+		height: 12px;
+		clear: both;
+		}
+	}
+
+.full-width
+	{
+	width: 100%;
+	display: block;
+	clear: both;
+	padding-top: 50px;
+	input
+		{
+		display: block;
+		margin: 0 auto;
+		}
+	}
+
+.skill-button-top
+	{
+	padding-bottom: 40px;
+	input
+		{
+		display: block;
+		margin: 0 auto;
+		}
+	}
+
+
+#mondodevspacer
+	{
+	width: 100%;
+	display: block;
+	height: 500px;
+	}
