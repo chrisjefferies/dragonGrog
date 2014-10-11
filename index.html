@@ -6,7 +6,7 @@
 
   <title>dragonGrog</title>
   
-  <meta name="description" content="A novice javascript project">
+  <meta name="description" content="An HTML/Javascript Character Sheet that doesn't suck.">
   
   <!-- .less style links for DEVELOPMENT COMMENT OUT AFTER COMPILE, BEFORE COMMIT -->
 
@@ -262,9 +262,8 @@
 				This is the skills section
 			</h2>
 			<p>
-				Skill points remaining will update when you type a number into the Points column. 
-				When all skill points have been allocated, a compile button will appear and you
-				can move on. 
+				Spend your skill points in the Points column, and press update to calculate
+				the results. When finished, press Accept Skills.
 			</p>
 			
 			<p id ="sk-points-starting">
@@ -542,6 +541,480 @@
 	
 	<section id="print">
 		<div id="paper">
+		
+		<!-- SKILLS SECTION FLOAT RIGHT HALFS -->
+			<div class="half float-right">
+				<div class="box blackbox dragongrog">
+					<h1> 
+						SKILLS
+					</h1>
+					<p>
+						 NEVER LEAVE HOME WITHOUT THEM
+					</p>
+				</div>
+				<div class="twelfth">
+					<p class="mini-title">
+						SKILL NAME
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						TOTAL
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						RANK
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						ABILITY MOD.
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						MISC. MOD.
+					</p>
+				</div>
+				<div class="sixteenth-blackbox">
+					<p class="mini-title">
+						NOTES
+					</p>
+				</div>
+				
+				
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						appraise
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						balance
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						bluff
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						climb
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						concentration
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						craft:
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						decipher script
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						diplomacy
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						disable device
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						disguise
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						escape artist
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						forgery
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						gather information
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						handle animal
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						heal
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						hide
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						intimidate
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						jump
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						knowledge:
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						listen
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						move silently
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						open lock
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						perform: 
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						profession
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						ride
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						search
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						sense motive
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						sleight of hand
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						spellcraft
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						spot
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						survival
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						swim
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						tumble
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						use magic device
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						use rope
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						________________________________
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						________________________________
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						________________________________
+					</p>
+				</div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				
+				<p class="form-skill-form">
+					Space Below Intentionally left blank to accomodate for user added skills
+				</p>
+				
+				
+				
+				
+			</div>
+		
+		
+		<!-- NAME, PLAYER, ETC BLOCK TOP -->
 			<div class="half">
 				<div class="quarter">
 					<div class="fill-space half">
@@ -628,16 +1101,18 @@
 					</div>
 				</div>
 			</div>
-			
+		
+		
+		<!-- DRAGONGROG BLOCK. ABILITY SCORES. HIT POINTS -->
 			<div class="half">
 				
 				<div class="fill-space"></div>
 				<div class="box blackbox dragongrog">
 					<h1> 
-						dragonGrog.com HTML d20/3.5/PF character sheet V1.0.0
+						dragonGrog.com V1.0.0
 					</h1>
 					<p>
-						IT'S LIKE THE INTERNET, ONLY BETTER
+						 HTML d20/3.5/PF character sheet
 					</p>
 				</div>
 				<div class="fill-space"></div>
@@ -753,16 +1228,11 @@
 					</div>
 				</div>
 			</div>
+
+		<!-- SAVING THROWS -->
 			<div class="half">
 				<div class="fill-space"></div>
-				<div class="box blackbox dragongrog">
-					<h1> 
-						dragonGrog.com HTML d20/3.5/PF character sheet V1.0.0
-					</h1>
-					<p>
-						IT'S LIKE THE INTERNET, ONLY BETTER
-					</p>
-				</div>
+				
 				<div class="quarter">
 					<div class="twelfth">
 						<p class="mini-title">
@@ -906,6 +1376,9 @@
 				<div class="sm-fill-space"></div>
 			</div>
 			
+		
+			
+		<!-- ARMOR CLASS MINI TITLES-->
 			<div class="half">
 				<div class="fill-space"></div>
 				<div class="twentieth-blackbox">
@@ -959,6 +1432,8 @@
 					</p>
 				</div>
 			</div>
+			
+		<!-- AC, BASE ARMOR CLASS -->
 			<div class="half">
 				<div class="twentieth-blackbox">
 					<div class="box blackbox">
@@ -1000,6 +1475,8 @@
 					<div class="box"></div>
 				</div>
 			</div>
+			
+		<!-- FF, CONDITIONAL ARMOR CLASS -->
 			<div class="half">
 				<div class="twentieth-blackbox">
 					<div class="box blackbox">
@@ -1043,6 +1520,8 @@
 					<div class="box"></div>
 				</div>
 			</div>
+			
+		<!-- TOUCH, CONDITIONAL ARMOR CLASS -->
 			<div class="half">
 				<div class="twentieth-blackbox">
 					<div class="box blackbox">
@@ -1090,7 +1569,11 @@
 					<div class="box"></div>
 				</div>
 			</div>
-			
+		
+		
+		
+		
+		<!-- MELEE ATTACK MINI TITLES -->
 			<div class="half">
 				<div class="fill-space"></div>
 				
@@ -1137,7 +1620,8 @@
 				
 				
 			</div>
-			
+		
+		<!-- MELEE ATTACK TOP ROW (1ST BASE ATTACK BONUS) -->
 			<div class="half">
 				
 				<div class="sixteenth-blackbox">
@@ -1176,53 +1660,309 @@
 					<div class="box"></div>
 				</div>
 			</div>
+		
+		<!-- MELEE ATTACK TOP ROW (2nd BASE ATTACK BONUS) -->
 			<div class="half">
-				<div class="sixteenth-right-right">
-					<div class="box"></div>
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
 				</div>
-				<div class="sixteenth-right">
-					<div class="box"></div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
 				</div>
-				<div class="sixteenth-right">
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
 					<div class="box">
 						<h4>
 							2nd
 						</h4>
 					</div>
 				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
 			</div>
-			<div class="half clear-right">
-				<div class="sixteenth-right-right">
-					<div class="box"></div>
+		
+		<!-- MELEE ATTACK TOP ROW (3rd BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
 				</div>
-				<div class="sixteenth-right">
-					<div class="box"></div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
 				</div>
-				<div class="sixteenth-right">
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
 					<div class="box">
 						<h4>
 							3rd
 						</h4>
 					</div>
 				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
 			</div>
-			<div class="half clear-right">
-				<div class="sixteenth-right-right">
-					<div class="box"></div>
+		
+		<!-- MELEE ATTACK TOP ROW (4th BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
 				</div>
-				<div class="sixteenth-right">
-					<div class="box"></div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
 				</div>
-				<div class="sixteenth-right">
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
 					<div class="box">
 						<h4>
 							4th
 						</h4>
 					</div>
 				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
 			</div>
 			
-		<!-- GRAPPLE FLOATER -->
+		
+		<!-- RANGED ATTACK MINI TITLES -->
+			<div class="half">
+				<div class="fill-space"></div>
+				
+				<div class="sixteenth-blackbox">
+					<p class="mini-title">
+						RANGED<br>ATTACK
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						DEX<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						SIZE<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						MISC.<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						TEMP<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						BASE<br>ATTACK BONUS
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						<br>TOTAL
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						TOTAL 2nd<br>ATTACK
+					</p>
+				</div>
+				
+				
+			</div>
+		
+		<!-- RANGED ATTACK TOP ROW (1ST BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box blackbox">
+						<h2>
+							RANGED
+						</h2>
+						<p>
+							ATTACK BONUS
+						</p>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box">
+						<h4>
+							1st
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+			</div>
+		
+		<!-- RANGED ATTACK TOP ROW (2nd BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box">
+						<h4>
+							2nd
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+			</div>
+		
+		<!-- RANGED ATTACK TOP ROW (3rd BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box">
+						<h4>
+							3rd
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+			</div>
+		
+		<!-- RANGED ATTACK TOP ROW (4th BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box">
+						<h4>
+							4th
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+			</div>
+	
+		
+		
+		<!-- GRAPPLE AND INITIATIVE -->
 			<div class="half">
 				
 				<div class="sixteenth-blackbox">
@@ -1255,7 +1995,29 @@
 						<br><br>TOTAL
 					</p>
 				</div>
-				
+				<div class="operator">
+					<p></p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>DEX<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>MISC.<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br><br>TOTAL
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br><br>
+					</p>
+				</div>
 			</div>
 			<div class="half clear-left">
 				<div class="sixteenth-blackbox">
@@ -1283,96 +2045,34 @@
 				<div class="twentieth">
 					<div class="box"></div>
 				</div>
-			</div>
-			
-			
-		<!-- RANGED -->
-			<div class="half clear-both">
-				<div class="fill-space"></div>
-				<div class="sixteenth-blackbox">
+				<div class="operator">
+					<p></p>
+				</div>
+				
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
 					<div class="box blackbox">
 						<h1>
-							RANGED
+							INI
 						</h1>
 						<p>
-							ATTACK BONUS
+							INITIATIVE
 						</p>
 					</div>
 				</div>
-				<div class="sixteenth">
-					<div class="box"></div>
-				</div>
-				<div class="sixteenth">
-					<div class="box"></div>
-				</div>
-				<div class="sixteenth">
-					<div class="box"></div>
-				</div>
-				<div class="sixteenth">
-					<div class="box"></div>
-				</div>
-				<div class="sixteenth">
-					<div class="box">
-						<h4>
-							1st
-						</h4>
-					</div>
-				</div>
-				<div class="sixteenth">
-					<div class="box"></div>
-				</div>
-				<div class="sixteenth">
-					<div class="box"></div>
-				</div>
-			</div>
-			<div class="half">
-				<div class="sixteenth-right-right">
-					<div class="box"></div>
-				</div>
-				<div class="sixteenth-right">
-					<div class="box"></div>
-				</div>
-				<div class="sixteenth-right">
-					<div class="box">
-						<h4>
-							2nd
-						</h4>
-					</div>
-				</div>
-			</div>
-			<div class="half clear-right">
-				<div class="sixteenth-right-right">
-					<div class="box"></div>
-				</div>
-				<div class="sixteenth-right">
-					<div class="box"></div>
-				</div>
-				<div class="sixteenth-right">
-					<div class="box">
-						<h4>
-							3rd
-						</h4>
-					</div>
-				</div>
-			</div>
-			<div class="half clear-right">
-				<div class="sixteenth-right-right">
-					<div class="box"></div>
-				</div>
-				<div class="sixteenth-right">
-					<div class="box"></div>
-				</div>
-				<div class="sixteenth-right">
-					<div class="box">
-						<h4>
-							4th
-						</h4>
-					</div>
-				</div>
 			</div>
 			
 			
-		<!-- INITIATIVE -->
+			
+		<!-- INITIATIVE
 			<div class="half">
 				
 				<div class="sixteenth-blackbox">
@@ -1417,10 +2117,13 @@
 					<div class="box"></div>
 				</div>
 			</div>
-			
+		-->
+		
+		
+		<!-- RACIAL ABILITIES -->
 			<div class="half">
 				<div class="fill-space"></div>
-				<div class="box blackbox dragongrog">
+				<div class="box blackbox dragongrog half-wider">
 					<h1> 
 						RACIAL ABILITIES
 					</h1>
@@ -1429,27 +2132,34 @@
 					</p>
 				</div>
 				<div class="fill-space"></div>
-				<p class="label">
+				<p class="label half-wider">
 					DARKVISION?
 				</p>
 				<div class="fill-space"></div>
-				<p class="label">
+				<p class="label half-wider">
 					HIDDEN WALL SENSING?
 				</p>
+				
 				<div class="fill-space"></div>
-				<p class="label">
-					LIGHTENING IMMUNE?
-				</p>
-				<div class="fill-space"></div>
-				<p class="label">
+				<p class="label half-wider">
 					FLATULANT?
 				</p>
+				
 			</div>
-			
+		
+		
 		</div>
+		
+		
 	</section>
 	
 	
+	<div id="mondodevspacer"></div>
+	
+	
+	<section id="print-page-two">
+	
+	</section>
 	
 	
 				
