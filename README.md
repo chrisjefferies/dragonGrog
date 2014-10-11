@@ -3,11 +3,11 @@ dragonGrog
 
 A d20/3.5/PF js-based Character Sheet Generator
 
-<h1>
-  dragonGrog
-</h1>
+<h2>
+  An HTML and Javascript-based Character sheet generator that doesn't look like crap!
+</h2>
 
-HTML and Javascript-based Character sheet generator
+
 
 FUNCTIONING for ALL base races/classes:
 - Race Select
