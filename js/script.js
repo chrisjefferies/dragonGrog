@@ -880,7 +880,8 @@ var weaponFeat = function(featName) {
 }
 
 var skillFocus = function(featName) {
-	var confirmW = confirm("Select " + featName + "?");
+
+	var confirmW = confirm("Select Skill Focus?");
 	if (confirmW) {
 		var featsRemaining = document.getElementById("feats-remaining").innerHTML ;
 		var featsRemaining = Number(featsRemaining);
@@ -892,6 +893,7 @@ var skillFocus = function(featName) {
 			alert("In order for the skills calculation to update properly, \n enter the skill name without spaces \n Example: UseRope");
 			var featTarget = prompt("Which skill will this feat affect?");
 			document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = ( featName + " (" + featTarget + ") " ) ;
+			decodeSkillFocus(featTarget);
 		} else {
 			var confirmR = confirm("You have no more feats available. Suffer the wrath of your DM and continue anyway?");
 			if (confirmR) {
@@ -900,11 +902,113 @@ var skillFocus = function(featName) {
 				featHandler();
 				alert("In order for the skills calculation to update properly, \n enter the skill name without spaces \n Example: UseRope");
 				var featTarget = prompt("Which skill will this feat affect?");
+
 				document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = ( featName + " (" + featTarget + ") " ) ;
+				
+				decodeSkillFocus(featTarget);
 			}
 		}		
 	}
 }
+
+
+var decodeSkillFocus = function(featTarget) {
+
+	var skName = featTarget.toLowerCase().substring(0,4);
+
+	if (skName == "appr" || skName == "bala" || skName == "bluf" || skName == "clim" || skName == "conc" || skName == "craf" || skName == "deci" || skName == "dipl" || skName == "disa" || skName == "disg" || skName == "esca" || skName == "forg" || skName == "gath" || skName == "hand" || skName == "heal" || skName == "hide" || skName == "inti" || skName == "jump" || skName == "know" || skName == "list" || skName == "move" || skName == "open" || skName == "perf" || skName == "prof" || skName == "ride" || skName == "sear" || skName == "sens" || skName == "slei" || skName == "spel" || skName == "spot" || skName == "surv" || skName == "swim" || skName == "tumb" || skName == "usem" || skName == "user" ) {
+		
+		var msVariable = document.getElementById("ms-" + skName).innerHTML;
+
+		if (msVariable === "-") {
+			document.getElementById("ms-" + skName).innerHTML = 3;
+		} else {
+			var skillMisc = Number(document.getElementById("ms-" + skName).innerHTML);
+			skillMisc += 3;
+			document.getElementById("ms-" + skName).innerHTML = skillMisc;
+		}
+		
+
+		// document.getElementById("ms-" + skName).innerHTML = 3;
+	} else {
+		var tryAgain = confirm(featTarget + " was not recognized. Press Okay to log it as a write-in. Press cancel to try again.");
+		if (tryAgain) {
+			// Log it as a write in. 
+			alert("The code to do this has not been written.");
+		} else {
+
+			skillFocus("Skill Focus");
+		}
+	}
+
+}
+
+
+
+
+
+
+// OK OK I KNOW. THIS IS OVERLY COMPLEX. I'M TRYING TO TAKE INTO ACCOUNT WHETHER OTHER MISC. MODIFIERS 
+// WILL BE ADDED LATER. MAYBE 1'S OR 3'S. HALF ELFS EVEN HAVE SOME ONES. SO ITS EXPANDABLE. 
+
+
+
+var featUpdateSkill = function(featName) {
+
+
+
+	var confirmF = confirm("Select " + featName + "?");
+	if (confirmF) {
+		var featsRemaining = document.getElementById("feats-remaining").innerHTML ;
+		var featsRemaining = Number(featsRemaining);
+		if ( featsRemaining > 0) {
+			featsRemaining -= 1;
+			var confirmR = true;
+			document.getElementById("feats-remaining").innerHTML = featsRemaining;
+			featHandler();
+			document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = featName ;
+		} else {
+			var confirmR = confirm("You have no more feats available. Suffer the wrath of your DM and continue anyway?");
+			if (confirmR) {
+				featsRemaining -= 1;
+				document.getElementById("feats-remaining").innerHTML = featsRemaining;
+				featHandler();
+				document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = featName ;
+			}
+		}			
+	}
+
+	if (confirmF && confirmR) {
+
+		switch(featName) {
+			case "Acrobatic":
+				var jumpMiscMod = document.getElementById("ms-jump").innerHTML;
+				var tumbMiscMod = document.getElementById("ms-tumb").innerHTML;
+			
+				if (jumpMiscMod === "-") {
+					document.getElementById("ms-jump").innerHTML = 2;
+				} else {
+					jumpMiscMod = Number(jumpMiscMod);
+					jumpMiscMod += 2;
+					document.getElementById("ms-jump").innerHTML = jumpMiscMod;
+				}
+			
+				if (tumbMiscMod === "-") {
+					document.getElementById("ms-tumb").innerHTML = 2;
+				} else {
+					tumbMiscMod = Number(tumbMiscMod);
+					tumbMiscMod += 2;
+					document.getElementById("ms-tumb").innerHTML = tumbMiscMod;
+				}
+			break;
+
+
+		}
+		// document.getElementById("ms-clim").innerHTML = 2;
+		
+	}
+}
+
 
 
 
