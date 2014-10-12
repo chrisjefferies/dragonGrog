@@ -23,6 +23,7 @@ FUNCTIONING for ALL base races/classes:
 
 IN PROGRESS
 - Character Sheet Render
+- Feats handling. Some work. No game rule information written.
 
 
 TO DO
