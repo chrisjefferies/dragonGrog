@@ -1,3 +1,8 @@
+
+
+
+
+
 var classSelect = function(userClass) {
 	// Second if statement isn't entered until selection is made.
 	window.selClass = 0;
@@ -10,12 +15,37 @@ var classSelect = function(userClass) {
 	}
 	
 	if (window.selClass != 0) {
-	// turn on display of Choice.
-	document.getElementById("show-class").innerHTML = "Current Class: " + selClass;
-	// hide select Class buttons.
-	document.getElementById("class-select").style.display="none";
-	// show next block -- select race. 
-	document.getElementById("race-select").style.display="block";
+	
+	document.getElementById("show-class").innerHTML = "Current Class: " + selClass; // turn on display of Choice.
+
+	if (window.selClass === "MONK") {
+
+		var confirmMonk = confirm("Monks get either Improved Grapple or Stunning Fist as a bonus feat. Do you want Improved Grapple?");
+		if (confirmMonk) {
+			selectFeat("Improved Grapple");
+			document.getElementById("feats-remaining").innerHTML = 1;
+		} else {
+			selectFeat("Stunning Fist");
+			document.getElementById("feats-remaining").innerHTML = 1;
+		}
+	}
+	
+	if (window.selClass === "RANGER") {
+		alert("Rangers get Track as a bonus feat.");
+		selectFeat("Track");
+		document.getElementById("feats-remaining").innerHTML = 1;
+	}
+
+	if (window.selClass === "FIGHTER") {
+		var bonusFeat = document.getElementById("feats-remaining").innerHTML;
+		var bonusFeatHolder = Number(bonusFeat);
+		bonusFeatHolder += 1;
+		document.getElementById("feats-remaining").innerHTML = bonusFeatHolder;
+	}
+
+	document.getElementById("class-select").style.display="none"; // hide select Class buttons.
+	
+	document.getElementById("race-select").style.display="block"; // show next block -- select race. 
 	} else {
 		// exit function. Reset on next call.
 	}
@@ -33,28 +63,21 @@ var raceSelect = function(userRace) {
 	}
 	
 	if (window.selRace != 0) {
-		// turn on display of Choice.
+		
 		document.getElementById("show-race").innerHTML = "Current Race: " + window.selRace;
-		// hide select Race buttons.
+		
 		document.getElementById("race-select").style.display="none";
-		// show next block -- roll stats. 
+		
 		document.getElementById("dice-sys").style.display="block";
 		
-		//display the appropraite HTML Id.
-		document.getElementById("race-bonus-" + (window.selRace.toLowerCase()) ).style.display="block";
+		document.getElementById("race-bonus-" + (window.selRace.toLowerCase()) ).style.display="block"; // Display information block for this Race.
 		
-		// do above rather than having a switch for every case, build based on variable string data.    + window.selRace.toLowerCase();
-		/*switch (window.selRace) {
-		case "HUMAN":
-			document.getElementById("race-bonus-human").style.display="block";
-		break;
-		case "ELF":
-			document.getElementById("race-bonus-elf").style.display="block";
-		break;
-		case "DWARF":
-			document.getElementById("race-bonus-dwarf").style.display="block";
-		break;
-		}*/
+		if (window.selRace === "HUMAN") {
+			var bonusFeat = document.getElementById("feats-remaining").innerHTML;
+			var bonusFeatHolder = Number(bonusFeat);
+			bonusFeatHolder += 1;
+			document.getElementById("feats-remaining").innerHTML = bonusFeatHolder;
+		}
 	
 	} else {
 		// exit function. Reset on next call.
@@ -426,7 +449,7 @@ var showClassSkills = function() {
 			var allSkillsBool = new Array(false,	false,	false,	false,	true, 	true, 	false,	true, 	false,	false,	false,	false,	false,	true, 	true, 	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	true, 	false,	false,	false,	true, 	true, 	true, 	true, 	false,	false,	false);
 		break;
 		case "FIGHTER":
-			// data input was manual for testing rather than from docs/base%20skills%20booleans.js file, so there are spaces instead of tabs.
+			// data input was manual for testing rather than from /docs/base%20skills%20booleans.js file, so there are spaces instead of tabs.
 			var allSkillsBool = new Array(false, false, false, true,  false, true,  false, false, false, false, false, false, false, true,  false, false, true,  true,  false, false, false, false, false, false, true,  false, false, false, false, false, false, true,  false, false, false);
 		break;
 		case "MONK":
@@ -796,15 +819,92 @@ var acceptSkills = function() {
 	}
 	
 	if (confirmAccSk) {
-		document.getElementById("build").style.display = "none";
+		// document.getElementById("build").style.display = "none";
 	}
 }
 
 
+var featHandler = function() {
+	window.numOfFeats;
+	if (window.numOfFeats === undefined) {
+		window.numOfFeats = 0;
+	}
+	window.numOfFeats += 1;
+}
 
+var selectFeat = function(featName) {
+	var confirmF = confirm("Select " + featName + "?");
+	if (confirmF) {
+		var featsRemaining = document.getElementById("feats-remaining").innerHTML ;
+		var featsRemaining = Number(featsRemaining);
+		if ( featsRemaining > 0) {
+			featsRemaining -= 1;
+			document.getElementById("feats-remaining").innerHTML = featsRemaining;
+			featHandler();
+			document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = featName ;
+		} else {
+			var confirmR = confirm("You have no more feats available. Suffer the wrath of your DM and continue anyway?");
+			if (confirmR) {
+				featsRemaining -= 1;
+				document.getElementById("feats-remaining").innerHTML = featsRemaining;
+				featHandler();
+				document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = featName ;
+			}
+		}			
+	}
+}
 
+var weaponFeat = function(featName) {
+	var confirmW = confirm("Select " + featName + "?");
+	if (confirmW) {
+		var featsRemaining = document.getElementById("feats-remaining").innerHTML ;
+		var featsRemaining = Number(featsRemaining);
+		
+		if ( featsRemaining > 0) {
+			featsRemaining -= 1;
+			document.getElementById("feats-remaining").innerHTML = featsRemaining;
+			featHandler();
+			var featTarget = prompt("Which weapon will this feat affect?");
+			document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = ( featName + " (" + featTarget + ") " ) ;
+		} else {
+			var confirmR = confirm("You have no more feats available. Suffer the wrath of your DM and continue anyway?");
+			if (confirmR) {
+				featsRemaining -= 1;
+				document.getElementById("feats-remaining").innerHTML = featsRemaining;
+				featHandler();
+				var featTarget = prompt("Which weapon will this feat affect?");
+				document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = ( featName + " (" + featTarget + ") " ) ;
+			}
+		}		
+	}
+}
 
-
+var skillFocus = function(featName) {
+	var confirmW = confirm("Select " + featName + "?");
+	if (confirmW) {
+		var featsRemaining = document.getElementById("feats-remaining").innerHTML ;
+		var featsRemaining = Number(featsRemaining);
+		
+		if ( featsRemaining > 0) {
+			featsRemaining -= 1;
+			document.getElementById("feats-remaining").innerHTML = featsRemaining;
+			featHandler();
+			alert("In order for the skills calculation to update properly, \n enter the skill name without spaces \n Example: UseRope");
+			var featTarget = prompt("Which skill will this feat affect?");
+			document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = ( featName + " (" + featTarget + ") " ) ;
+		} else {
+			var confirmR = confirm("You have no more feats available. Suffer the wrath of your DM and continue anyway?");
+			if (confirmR) {
+				featsRemaining -= 1;
+				document.getElementById("feats-remaining").innerHTML = featsRemaining;
+				featHandler();
+				alert("In order for the skills calculation to update properly, \n enter the skill name without spaces \n Example: UseRope");
+				var featTarget = prompt("Which skill will this feat affect?");
+				document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = ( featName + " (" + featTarget + ") " ) ;
+			}
+		}		
+	}
+}
 
 
 

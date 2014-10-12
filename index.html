@@ -274,9 +274,15 @@
 				<input id="update-skills" form="skPtsInp" type="button" name="button" Value="Update Skills" onClick="updateSkillPoints(this.form);"> 
 				<!-- <input id="dev-load-skills" form="skPtsInp" type="button" name="button" Value="Load" onClick="loadSkills();"> 
 				<input id="log-ab-modifiers" type="button" name="button" value="Log Ab Mods" onClick="addAbModifiers();"> -->
+				<input id="accept-skills" type="button" name="button" value="Accept Skills" onClick="acceptSkills();">
 			</div>
 			<div id="skills-finish">
-				<input id="accept-skills" type="button" name="button" value="Accept Skills" onClick="acceptSkills();">
+				<!-- <input id="accept-skills" type="button" name="button" value="Accept Skills" onClick="acceptSkills();"> 
+				
+				^^^ THIS STILL NEEDS TO BE WRITTEN OUT OF THE JAVASCRIPT SO IT DOESNT DUMP OUT OF A FUNCTION WHEN IT 
+				CANT FIND IT. 
+				-->
+				
 			</div>
 			
 			<div class="skills class-sk">
@@ -531,16 +537,234 @@
 		
 		<div id="mondodevspacer"></div>
 		
-	
+		<section id="select-feats">
+			<h2>
+				Select Feats
+			</h2>
+			<p>
+				Select your feats from the lists below. As of V0.0.2, there is no error handling for 
+				feats with prerequisites. Consult the rule book before making your selections. Some 
+				feats will update your skill totals above. 
+			</p>
+			<p>
+				&Dagger; indicates feat has prerequisites.
+			</p>
+			<p>
+				A <em id="display-class-name">[Class Name Here]</em> is treated as having these feats for the purposes of
+				prerequisites:
+			</p>
+			<p id="feat-name-1" class="feat-name-list"></p>
+			<p id="feat-name-2" class="feat-name-list"></p>
+			<p id="feat-name-3" class="feat-name-list"></p>
+			<p id="feat-name-4" class="feat-name-list"></p>
+			<p id="feat-name-5" class="feat-name-list"></p>
+
+
+			<p id ="feats-starting">
+				Feats Remaining: <p id="feats-remaining">1</p>
+			</p>
+			
+			<div class="feat-group feat-group-wide">
+				<h2>
+					Combat Feats
+				</h2>
+				<div class="feat-group empty-feat-group">
+					<input class="button" type="button" value="Blind Fight" onclick="selectFeat('Blind Fight');">
+					<input class="button" type="button" value="&Dagger; Combat Expertise" onclick="selectFeat('Combat Expertise');">
+					<input class="button" type="button" value="&Dagger; Improved Disarm" onclick="selectFeat('Improved Disarm');">
+					<input class="button" type="button" value="&Dagger; Improved Feint" onclick="selectFeat('Improved Feint');">
+					<input class="button" type="button" value="&Dagger; Improved Trip" onclick="selectFeat('Improved Trip');">
+					<input class="button" type="button" value="&Dagger; Whirlwind Attack" onclick="selectFeat('Whirlwind Attack');">
+					<input class="button" type="button" value="Combat Reflexes" onclick="selectFeat('Combat Reflexes');">
+					<input class="button" type="button" value="&Dagger; Dodge" onclick="selectFeat('Dodge');">
+					<input class="button" type="button" value="&Dagger; Mobility" onclick="selectFeat('Mobility');">
+					<input class="button" type="button" value="&Dagger; Sprint Attack" onclick="selectFeat('Sprint Attack');">
+					<input class="button" type="button" value="&Dagger; Improved Critical" onclick="weaponFeat('Improved Critical');">
+					<input class="button" type="button" value="Improved Unarmed Strike" onclick="selectFeat('Improved Unarmed Strike');">
+				</div>
+				<div class="feat-group empty-feat-group">	
+					
+					<input class="button" type="button" value="&Dagger; Improved Grapple" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Deflect Arrows" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Snatch Arrows" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Stunning Fist" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Dodge" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Mounted Combat" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Mounted Archery" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Ride-By Attack" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Spirited Charge" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Trample" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="Point Blank Shot" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Far Shot" onclick="selectFeat('ACROBATIC');">
+				</div>
+			
+				<div class="feat-group empty-feat-group">
+					
+					<input class="button" type="button" value="&Dagger; Precise Shot" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Rapid Shot" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Manyshot" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Shot on the Run" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Improved Precise Shot" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Power Attack" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Cleave" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Great Cleave" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Improved Bull Rush" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Improved Overrun" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Improved Sunder" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Rapid Reload" onclick="selectFeat('ACROBATIC');">
+				</div>
+
+				<div class="feat-group empty-feat-group">
+					
+					<input class="button" type="button" value="&Dagger; Two-Weapon Defense" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Imp. Two-Weapon Fighting" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Gr. Two-Weapon Fighting" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Weapon Finesse" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Weapon Focus" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Weapon Sepcialization" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Greater Weapon Focus" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="&Dagger; Gr. Weapon Specialization" onclick="selectFeat('ACROBATIC');">
+				</div>
+			</div>
+			
+			<div class="feat-group feat-group-wide">
+				<h2>
+					Universal Skill Bonus
+				</h2>
+				<div class="empty-feat-group">
+					<input class="button" type="button" value="Acrobatic" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="Agile" onclick="classSelect('AGILE');">
+					<input class="button" type="button" value="Alertness" onclick="selectFeat('ALERTNESS');">
+					<input class="button" type="button" value="Animal Affinity" onclick="selectFeat('ANIMALAFFINITY');">
+				</div>
+				<div class="empty-feat-group">
+					<input class="button" type="button" value="Athletic" onclick="selectFeat('ATHLETIC');">
+					<input class="button" type="button" value="Deceitful" onclick="selectFeat('DECEITFUL');">
+					<input class="button" type="button" value="Deft Hands" onclick="selectFeat('DEFTHANDS');">
+					<input class="button" type="button" value="Diligent" onclick="selectFeat('ACROBATIC');">
+				</div>
+				<div class="empty-feat-group">
+					<input class="button" type="button" value="Investigator" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="Magical Aptitude" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="Negotiator" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="Nimble Fingers" onclick="selectFeat('ACROBATIC');">
+				</div>
+				<div class="empty-feat-group">
+					<input class="button" type="button" value="Persuasive" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="Self-Sufficient" onclick="selectFeat('ACROBATIC');">
+					<input class="button" type="button" value="Skill Focus" onclick="skillFocus('Skill Focus');">
+					<input class="button" type="button" value="Stealthy" onclick="selectFeat('ACROBATIC');">
+				</div>
+			</div>
+			
+							
+				
+			
+			<div class="feat-group">
+				<h2>
+					Item <br>Creation
+				</h2>
+				<input class="button" type="button" value="&Dagger; Scribe Scroll" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Craft Wondrous Item" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Brew Potion" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Craft Magic Arms and Armor" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Craft Wand" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Craft Rod" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Craft Staff" onclick="selectFeat('ACROBATIC');">
+				
+				
+				<input class="button" type="button" value="&Dagger; Forge Ring" onclick="selectFeat('ACROBATIC');">
+			</div>
+			
+			
+
+			<div class="feat-group">
+				<h2>
+					Other <br>Bonus
+				</h2>
+				
+				<input class="button" type="button" value="Great Fortitude" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Iron Will" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Lightening Reflexes" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Improved Initiative" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Endurance" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Diehard" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Leadership" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Run" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Toughness" onclick="selectFeat('ACROBATIC');">
+			</div>
+			
+			<div class="feat-group">
+				<h2>
+					Combat Proficiency
+				</h2>
+				
+				<input class="button" type="button" value="Armor Proficiency (Light)" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Armor Proficiency (Medium)" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Armor Proficiency (Heavy)" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Exotic Weapon Proficiency" onclick="weaponFeat('EXOTICWEAPONPROF');">
+				<input class="button" type="button" value="Martial Weapon Proficiency" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Shield Proficiency" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Tower Shield Proficiency" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Simple Weapon Proficiency" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Two Weapon Fighting" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Track" onclick="selectFeat('ACROBATIC');">
+			</div>	
+
+			<div class="feat-group">
+				<h2>
+					Casting <br>Feats
+				</h2>
+				
+				<input class="button" type="button" value="Combat Casting" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Eschew Materials" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Extra Turning" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Improved Counterspell" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Improved Turning" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Magical Aptitute" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Natural Spell" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Spell Focus" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Greater Spell Focus" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Spell Mastery" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Spell Penetration" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="&Dagger; Greater Spell Penetration" onclick="selectFeat('ACROBATIC');">
+
+
+			</div>
+
+			<div class="feat-group">
+				<h2>
+					Metamagic
+				</h2>
+				<input class="button" type="button" value="Empower Spell" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Enlarge Spell" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Extend Spell" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Heighten Spell" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Maximize Spell" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Quicken Spell" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Silent Spell" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Still Spell" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Widen Spell" onclick="selectFeat('ACROBATIC');">
+			</div>
+			
+			
+		</section>
+		
 	</section>
 	
+	
+	
+	<div id="mondodevspacer"></div>
+	<div id="mondodevspacer"></div>
+	<div id="mondodevspacer"></div>
+
 	
 	<section id="describe">
 	
 	</section>
 	
 	<section id="print">
-		<div id="paper">
+		<div class="paper">
 		
 		<!-- SKILLS SECTION FLOAT RIGHT HALFS -->
 			<div class="half float-right">
@@ -2158,7 +2382,301 @@
 	
 	
 	<section id="print-page-two">
-	
+		<div class="paper">
+			<div class="half">
+			
+				<div class="quarter">
+					<div class="fill-space half">
+					
+					</div>
+					<p class="label">
+						NAME
+					</p>
+				</div>
+				<div class="quarter">
+					<div class="fill-space half">
+					
+					</div>
+					<p class="label">
+						PLAYER
+					</p>
+				</div>
+			</div>
+		
+		<!-- FEATS -->
+			<div class="half">
+				<div class="fill-space">
+				
+				</div>
+				<div class="box blackbox dragongrog">
+					<h1> 
+						FEATS
+					</h1>
+					<p>
+						 SKILL FOCUS: SPEAK LANGUAGE, AND OTHER USEFUL THINGS TO KNOW
+					</p>
+				</div>
+			</div>
+		
+			<div class="half">
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES. NO, 20TH LEVEL HUMAN FIGHTER. THERE AREN'T ANY MORE SLOTS.
+				</p>
+			</div>
+		
+		
+		<!-- SPECIAL ABILITIES -->
+			<div class="half">
+				<div class="fill-space">
+				
+				</div>
+				<div class="box blackbox dragongrog">
+					<h1> 
+						CLASS & SPECIAL ABILITIES
+					</h1>
+					<p>
+						 CIRCUMSTANTIAL SKILL MODIFIERS AND OTHER THINGS THAT MAKE YOU... YOU KNOW... SPECIAL.
+					</p>
+				</div>
+			</div>
+			<div class="half">
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="fill-space fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				
+			</div>
+			
+			
+		</div>
+			
 	</section>
 	
 	
