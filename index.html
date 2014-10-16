@@ -8,6 +8,9 @@
   
   <meta name="description" content="An HTML/Javascript Character Sheet that doesn't suck.">
   
+  <link href='http://fonts.googleapis.com/css?family=Permanent+Marker|Walter+Turncoat' rel='stylesheet' type='text/css'>
+  
+  
   <!-- .less style links for DEVELOPMENT COMMENT OUT AFTER COMPILE, BEFORE COMMIT -->
 
   <link rel="stylesheet/less" type="text/css" href="less/style.less" />
@@ -40,8 +43,53 @@
 		<h1> 
 			A Dungeons and Dragons 3.5 character builder. 
 		</h1>
+		<p>
+			Hi all. This is a pre-beta testing site for this builder. Much of the site works, some doesn't. 
+			As of right now, it only has game rule information for 3.5. Once I get that working, my plan is
+			to include the ability to change rule sets from the start. 3.5 to Pathfinder should be relatively
+			straight forward, however, going to 4e and 5e is going to be a bit tougher. 
+		</p>
 		
-		
+		<ul>
+			<h2>
+				Stuff that works
+			</h2>
+			<li>
+				Select Race & Class
+			</li>
+			<li>
+				Roll (random number generator) and Assign Attributes
+			</li>
+			<li>
+				Calculate & allot skill points (Each Class' class/cross-class accounted for)
+			</li>
+			<li>
+				Feat counter, class feats and bonus feats (race and class)
+			</li>
+			<li>
+				Combat Feats selection.
+			</li>
+			<li>
+				Skill bonus feats update MISC Modifiers (after pressing "update skills"). Total calculations also work.
+			</li>
+			<li>
+				All other feat categories print "ACROBATIC" and do nothing.
+			</li>
+			<li>
+				Roll starting gold (based on class)
+			</li>
+			<li>
+				Select some equipment. Martial & Exotic Weapons, Armor, and half of Gear are in. Weights update
+				automatically to total weight carried. 
+			</li>
+			<li>
+				Input character name and information.
+			</li>
+			<li>
+				Populate printable sheet with much of the math taken care of. Still working on Skills (only totals work), and a handful
+				of MISC modifiers. Except for the title block, no written information prints. 
+			</li>
+		</ul>
 		
 		<h2>
 			Select your Class
@@ -271,10 +319,11 @@
 			</p>
 			
 			<div class="skill-button-top">
-				<input id="update-skills" form="skPtsInp" type="button" name="button" Value="Update Skills" onClick="updateSkillPoints(this.form);"> 
+				<input id="update-skills" form="skPtsInp" type="button" name="button" Value="Update Skills" onClick="calcPoints(this.form);"> 
 				<!-- <input id="dev-load-skills" form="skPtsInp" type="button" name="button" Value="Load" onClick="loadSkills();"> 
 				<input id="log-ab-modifiers" type="button" name="button" value="Log Ab Mods" onClick="addAbModifiers();"> -->
 				<input id="accept-skills" type="button" name="button" value="Accept Skills" onClick="acceptSkills();">
+
 			</div>
 			<div id="skills-finish">
 				<!-- <input id="accept-skills" type="button" name="button" value="Accept Skills" onClick="acceptSkills();"> 
@@ -549,10 +598,6 @@
 			<p>
 				&Dagger; indicates feat has prerequisites.
 			</p>
-			<p>
-				A <em id="display-class-name">[Class Name Here]</em> is treated as having these feats for the purposes of
-				prerequisites:
-			</p>
 			<p id="feat-name-1" class="feat-name-list"></p>
 			<p id="feat-name-2" class="feat-name-list"></p>
 			<p id="feat-name-3" class="feat-name-list"></p>
@@ -619,7 +664,7 @@
 					<input class="button" type="button" value="&Dagger; Two-Weapon Defense" onclick="selectFeat('Two-Weapon Defense');">
 					<input class="button" type="button" value="&Dagger; Imp. Two-Weapon Fighting" onclick="selectFeat('Improved Two-Weapon Fighting');">
 					<input class="button" type="button" value="&Dagger; Gr. Two-Weapon Fighting" onclick="selectFeat('Greater Two-Weapon Fighting');">
-					<input class="button" type="button" value="&Dagger; Weapon Finesse" onclick="selectFeat('Weapon Finesse');">
+					<input class="button" type="button" value="&Dagger; Weapon Finesse" onclick="featUpdateSkill('Weapon Finesse');">
 					<input class="button" type="button" value="&Dagger; Weapon Focus" onclick="weaponFeat('Weapon Focus');">
 					<input class="button" type="button" value="&Dagger; Weapon Sepcialization" onclick="weaponFeat('Weapon Specialization');">
 					<input class="button" type="button" value="&Dagger; Greater Weapon Focus" onclick="weaponFeat('Greater Weapon Focus');">
@@ -653,7 +698,7 @@
 					<input class="button" type="button" value="Persuasive" onclick="featUpdateSkill('Persuasive');">
 					<input class="button" type="button" value="Self-Sufficient" onclick="featUpdateSkill('Self-Sufficient');">
 					<input class="button" type="button" value="Skill Focus" onclick="skillFocus('Skill Focus');">
-					<input class="button" type="button" value="Stealthy" onclick="featUpdateSkill('ACROBATIC');">
+					<input class="button" type="button" value="Stealthy" onclick="featUpdateSkill('Stealthy');">
 				</div>
 			</div>
 			
@@ -686,7 +731,7 @@
 				<input class="button" type="button" value="Great Fortitude" onclick="selectFeat('ACROBATIC');">
 				<input class="button" type="button" value="Iron Will" onclick="selectFeat('ACROBATIC');">
 				<input class="button" type="button" value="Lightening Reflexes" onclick="selectFeat('ACROBATIC');">
-				<input class="button" type="button" value="Improved Initiative" onclick="selectFeat('ACROBATIC');">
+				<input class="button" type="button" value="Improved Initiative" onclick="featUpdateSkill('Improved Initiative');">
 				<input class="button" type="button" value="Endurance" onclick="selectFeat('ACROBATIC');">
 				<input class="button" type="button" value="&Dagger; Diehard" onclick="selectFeat('ACROBATIC');">
 				<input class="button" type="button" value="&Dagger; Leadership" onclick="selectFeat('ACROBATIC');">
@@ -750,19 +795,1108 @@
 			
 		</section>
 		
+		<div id="mondodevspacer"></div>
+		<div id="mondodevspacer"></div>
+
+		<section id="equipment">
+			<h2>
+				Select Equipment
+			</h2>
+			<p>
+				To roll your starting gold (anywhere from 5 to 240, depending on class) click below. 
+				For simplicity, all prices and values are displayed in Copper Value. Weight for everything
+				is calculated except for armor (as variances between small, medium and large creatures are 
+				so great. Treat this as a write-in until the function to account for this is coded.
+			</p>
+			<p>
+				Note: items with quantity always appear at the bottom of the list. This is just a strange 
+				artifact of how the functionality of the section was coded. 
+			</p>
+		
+			<input id="roll-starting-gold" type="button" value="Roll" onclick="rollStartingGold();">
+		
+			<div class="equip-inv-stat">
+				<p>Copper Coins: </p>
+				<p id="copper-remaining">10000000</p>
+				<p>Total Weight: </p>
+				<p id="total-weight">0</p>
+			</div>
+			
+			
+			
+			<div class="item-list equip-list-item">
+				
+				
+				<h3>
+					Inventory
+				</h3>
+				
+				<!--
+				artisan’s outfit, 
+				entertainer’s outfit, 
+				explorer’s outfit, 
+				monk’s outfit, 
+				peasant’s outfit, 
+				scholar’s outfit, or 
+				traveler’s outfit.
+				-->
+				
+				<p class="item" id="item-purchase-no-0"></p>
+				<p class="item" id="item-purchase-no-1"></p>
+				<p class="item" id="item-purchase-no-2"></p>
+				<p class="item" id="item-purchase-no-3"></p>		
+				<p class="item" id="item-purchase-no-4"></p>
+				<p class="item" id="item-purchase-no-5"></p>		
+				<p class="item" id="item-purchase-no-6"></p>
+				<p class="item" id="item-purchase-no-7"></p>		
+				<p class="item" id="item-purchase-no-8"></p>
+				<p class="item" id="item-purchase-no-9"></p>		
+				<p class="item" id="item-purchase-no-10"></p>
+				<p class="item" id="item-purchase-no-11"></p>
+				<p class="item" id="item-purchase-no-12"></p>
+				<p class="item" id="item-purchase-no-13"></p>		
+				<p class="item" id="item-purchase-no-14"></p>
+				<p class="item" id="item-purchase-no-15"></p>		
+				<p class="item" id="item-purchase-no-16"></p>
+				<p class="item" id="item-purchase-no-17"></p>		
+				<p class="item" id="item-purchase-no-18"></p>
+				<p class="item" id="item-purchase-no-19"></p>		
+				<p class="item" id="item-purchase-no-20"></p>
+				<p class="item" id="item-purchase-no-21"></p>
+				<p class="item" id="item-purchase-no-22"></p>
+				<p class="item" id="item-purchase-no-23"></p>		
+				<p class="item" id="item-purchase-no-24"></p>
+				<p class="item" id="item-purchase-no-25"></p>		
+				<p class="item" id="item-purchase-no-26"></p>
+				<p class="item" id="item-purchase-no-27"></p>		
+				<p class="item" id="item-purchase-no-28"></p>
+				<p class="item" id="item-purchase-no-29"></p>	
+				<p class="item" id="item-purchase-no-30"></p>
+				<p class="item" id="item-purchase-no-31"></p>
+				<p class="item" id="item-purchase-no-32"></p>
+				<p class="item" id="item-purchase-no-33"></p>		
+				<p class="item" id="item-purchase-no-34"></p>
+				<p class="item" id="item-purchase-no-35"></p>		
+				<p class="item" id="item-purchase-no-36"></p>
+				<p class="item" id="item-purchase-no-37"></p>		
+				<p class="item" id="item-purchase-no-38"></p>
+				<p class="item" id="item-purchase-no-39"></p>	
+				<p class="item" id="item-purchase-no-40"></p>
+				<p class="item" id="item-purchase-no-41"></p>
+				<p class="item" id="item-purchase-no-42"></p>
+				<p class="item" id="item-purchase-no-43"></p>		
+				<p class="item" id="item-purchase-no-44"></p>
+				<p class="item" id="item-purchase-no-45"></p>		
+				<p class="item" id="item-purchase-no-46"></p>
+				<p class="item" id="item-purchase-no-47"></p>		
+				<p class="item" id="item-purchase-no-48"></p>
+				<p class="item" id="item-purchase-no-49"></p>	
+				<p class="item" id="item-purchase-no-50"></p>
+				<p class="item" id="item-purchase-no-51"></p>
+				<p class="item" id="item-purchase-no-52"></p>
+				<p class="item" id="item-purchase-no-53"></p>		
+				<p class="item" id="item-purchase-no-54"></p>
+				<p class="item" id="item-purchase-no-55"></p>		
+				<p class="item" id="item-purchase-no-56"></p>
+				<p class="item" id="item-purchase-no-57"></p>		
+				<p class="item" id="item-purchase-no-58"></p>
+				<p class="item" id="item-purchase-no-59"></p>	
+				
+				<p class="item-stack" id="item-Arrows"></p>			<p class="item-qty" id="qty-Arrows"></p>
+				<p class="item-stack" id="item-Bolts"></p>			<p class="item-qty" id="qty-Bolts"></p>		
+				<p class="item-stack" id="item-Shuriken"></p>		<p class="item-qty" id="qty-Shuriken"></p>
+				<p class="item-stack" id="item-Ration"></p>			<p class="item-qty" id="qty-Ration"></p>
+				<p class="item-stack" id="item-Caltrops"></p>		<p class="item-qty" id="qty-Caltrops"></p>
+				<p class="item-stack" id="item-Canvas"></p>			<p class="item-qty" id="qty-Canvas"></p>	
+				<p class="item-stack" id="item-Firewood"></p>		<p class="item-qty" id="qty-Firewood"></p>
+				<p class="item-stack" id="item-Bullets"></p>			<p class="item-qty" id="qty-Bullets"></p>
+				<p class="item-stack" id="item-Rope (Hemp)"></p>		<p class="item-qty" id="qty-Rope (Hemp)"></p>
+				<p class="item-stack" id="item-Rope (Silk)"></p>		<p class="item-qty" id="qty-Rope (Silk)"></p>
+					
+				
+			</div>
+		
+			<!-- Simple Weapons -->		
+			<div class="item-list">
+				<div class="buy-item">
+					<h3>
+						Simple Weapons
+					</h3>
+				</div>
+				<div class="buy-item">
+					<p>Gauntlet</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Dagger</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Punching Dagger</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Spiked Gauntlet</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Light Mace</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Sickle</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Club</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Mace</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Morningstar</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Shortspear</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Longspear</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Quarterstaff</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Spear</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Crossbow</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Light Crossbow</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Bolts</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItemStack( 20, 'Bolts', 100, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Dart</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Javelin</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Sling</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Sling Bullets</p>
+					<input class="buy-item-button" type="button" value="50" onclick="buyItemStack( 10, 'Bullets', 50, 5 );">
+				</div>
+			</div>
+			
+			<!-- Martial Weapons 1 -->	
+			<div class="item-list">
+				<div class="buy-item">
+					<h3>
+						Martial Weapons
+					</h3>
+				</div>
+				<div class="buy-item">
+					<p>Throwing Axe</p>
+					<input class="buy-item-button" type="button" value="800" onclick="buyItem( 'Throwing Axe', 800, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Light Hammer</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItem( 'Light Hammer', 100, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Handaxe</p>
+					<input class="buy-item-button" type="button" value="600" onclick="buyItem( 'Handaxe', 600, 3 );">
+				</div>
+				<div class="buy-item">
+					<p>Kukri</p>
+					<input class="buy-item-button" type="button" value="800" onclick="buyItem( 'Kukri', 800, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Light Pick</p>
+					<input class="buy-item-button" type="button" value="400" onclick="buyItem( 'Light Pick', 400, 3 );">
+				</div>
+				<div class="buy-item">
+					<p>Sap</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItem( 'Sap', 100, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Short Sword</p>
+					<input class="buy-item-button" type="button" value="1000" onclick="buyItem( 'Short Sword', 1000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Battleaxe</p>
+					<input class="buy-item-button" type="button" value="1000" onclick="buyItem( 'Battleaxe', 1000, 6 );">
+				</div>
+				<div class="buy-item">
+					<p>Flail</p>
+					<input class="buy-item-button" type="button" value="800" onclick="buyItem( 'Flail', 800, 5 );">
+				</div>
+				<div class="buy-item">
+					<p>Longsword</p>
+					<input class="buy-item-button" type="button" value="1500" onclick="buyItem( 'Longsword', 1500, 4 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Pick</p>
+					<input class="buy-item-button" type="button" value="800" onclick="buyItem( 'Heavy Pick', 800, 6 );">
+				</div>
+				<div class="buy-item">
+					<p>Rapier</p>
+					<input class="buy-item-button" type="button" value="2000" onclick="buyItem( 'Rapier', 2000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Scimitar</p>
+					<input class="buy-item-button" type="button" value="1500" onclick="buyItem( 'Scimitar', 1500, 4 );">
+				</div>
+				<div class="buy-item">
+					<p>Trident</p>
+					<input class="buy-item-button" type="button" value="1500" onclick="buyItem( 'Trident', 1500, 4 );">
+				</div>
+				<div class="buy-item">
+					<p>Warhammer</p>
+					<input class="buy-item-button" type="button" value="1200" onclick="buyItem( 'Warhammer', 1200, 5 );">
+				</div>
+				<div class="buy-item">
+					<p>Falchion</p>
+					<input class="buy-item-button" type="button" value="7500" onclick="buyItem( 'Falchion', 7500, 8 );">
+				</div>
+				<div class="buy-item">
+					<p>Glaive</p>
+					<input class="buy-item-button" type="button" value="800" onclick="buyItem( 'Glaive', 800, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Greataxe</p>
+					<input class="buy-item-button" type="button" value="2000" onclick="buyItem( 'Greataxe', 2000, 12 );">
+				</div>
+				<div class="buy-item">
+					<p>Greatclub</p>
+					<input class="buy-item-button" type="button" value="500" onclick="buyItem( 'Greatclub', 500, 8 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Flail</p>
+					<input class="buy-item-button" type="button" value="1500" onclick="buyItem( 'Heavy Flail', 1500, 10 );">
+				</div>
+
+			</div>
+		
+			<!-- Martial Weapons 2 -->	
+			<div class="item-list">
+				<div class="buy-item">
+					<h3>
+						Martial Weapons
+					</h3>
+				</div>
+				<div class="buy-item">
+					<p>Greatsword</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Greatsword', 5000, 8 );">
+				</div>
+				<div class="buy-item">
+					<p>Guisarme</p>
+					<input class="buy-item-button" type="button" value="900" onclick="buyItem( 'Guisarme', 900, 12 );">
+				</div>
+				<div class="buy-item">
+					<p>Halberd</p>
+					<input class="buy-item-button" type="button" value="1000" onclick="buyItem( 'Halberd', 1000, 12 );">
+				</div>
+				<div class="buy-item">
+					<p>Lance</p>
+					<input class="buy-item-button" type="button" value="1000" onclick="buyItem( 'Lance', 1000, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Ranseur</p>
+					<input class="buy-item-button" type="button" value="1000" onclick="buyItem( 'Ranseur', 1000, 12 );">
+				</div>
+				<div class="buy-item">
+					<p>Scythe</p>
+					<input class="buy-item-button" type="button" value="1800" onclick="buyItem( 'Scythe', 1800, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Longbow</p>
+					<input class="buy-item-button" type="button" value="7500" onclick="buyItem( 'Longbow', 7500, 3 );">
+				</div>
+				<div class="buy-item">
+					<p>Composite Longbow</p>
+					<input class="buy-item-button" type="button" value="10000+" onclick="buyItem( 'Composite Longbow', 10000, 3 );">
+				</div>
+				<div class="buy-item">
+					<p>Shortbow</p>
+					<input class="buy-item-button" type="button" value="3000" onclick="buyItem( 'Shortbow', 3000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Composite Shortbow</p>
+					<input class="buy-item-button" type="button" value="7500" onclick="buyItem( 'Composite Shortbow', 7500, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>20 Arrows</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItemStack( 20, 'Arrows', 100, 3 );">
+				</div>
+				
+				<div class="buy-item-float-5">
+				</div>
+					
+			</div>
+
+			<!-- Exotic Weapons -->	
+			<div class="item-list sm-text-list">
+				<div class="buy-item">
+					<h3>
+						Exotic Weapons
+					</h3>
+				</div>
+				<div class="buy-item">
+					<p>Kama</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Kama', 200, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Nunchaku</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Nunchaku', 200, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Sai</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItem( 'Sai', 100, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Siangham</p>
+					<input class="buy-item-button" type="button" value="300" onclick="buyItem( 'Siangham', 300, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Bastard Sword</p>
+					<input class="buy-item-button" type="button" value="3500" onclick="buyItem( 'Bastard Sword', 3500, 6 );">
+				</div>
+				<div class="buy-item">
+					<p>Dwarven Waraxe</p>
+					<input class="buy-item-button" type="button" value="3000" onclick="buyItem( 'Dwarven Waraxe', 3000, 8 );">
+				</div>
+				<div class="buy-item">
+					<p>Whip</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItem( 'Whip', 100, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Orc Double Axe</p>
+					<input class="buy-item-button" type="button" value="6000" onclick="buyItem( 'Orc Double Axe', 6000, 15 );">
+				</div>
+				<div class="buy-item">
+					<p>Spiked Chain</p>
+					<input class="buy-item-button" type="button" value="2500" onclick="buyItem( 'Spiked Chain', 2500, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Dire Flail</p>
+					<input class="buy-item-button" type="button" value="9000" onclick="buyItem( 'Dire Flail', 9000, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Gnome Hooked Hammer</p>
+					<input class="buy-item-button" type="button" value="2000" onclick="buyItem( 'Gnome Hooked Hammer', 2000, 6 );">
+				</div>
+				<div class="buy-item">
+					<p>Two-Bladed Sword</p>
+					<input class="buy-item-button" type="button" value="10000" onclick="buyItem( 'Two-Bladed Sword', 10000, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Dwarven Urgrosh</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Dwarven Urgrosh', 5000, 12 );">
+				</div>
+				<div class="buy-item">
+					<p>Bolas</p>
+					<input class="buy-item-button" type="button" value="500" onclick="buyItem( 'Bolas', 500, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Net</p>
+					<input class="buy-item-button" type="button" value="2000" onclick="buyItem( 'Net', 2000, 6 );">
+				</div>
+				<div class="buy-item">
+					<p>Hand Crossbow</p>
+					<input class="buy-item-button" type="button" value="10000" onclick="buyItem( 'Hand Crossbow', 10000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Repeating Crossbow</p>
+					<input class="buy-item-button" type="button" value="40000" onclick="buyItem( 'Heavy Repeating Crossbow', 40000, 12 );">
+				</div>
+				<div class="buy-item">
+					<p>Light Repeating Crossbow</p>
+					<input class="buy-item-button" type="button" value="25000" onclick="buyItem( 'Light Repeating Crossbow', 25000, 6 );">
+				</div>
+				<div class="buy-item">
+					<p>20 Bolts</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItemStack( 20, 'Bolts', 100, 3 );">
+				</div>
+				<div class="buy-item">
+					<p>5 Shuriken</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItemStack( 5, 'Shuriken', 100, 0.5 );">
+				</div>
+				
+			</div>
+
+			<!-- Armor & Shields -->	
+			<div class="item-list sm-text-list">
+				<div class="buy-item">
+					<h3>
+						Armor & Shields
+					</h3>
+				</div>
+				<div class="buy-item">
+					<p>Lt Padded Armor</p>
+					<input class="buy-item-button" type="button" value="500" onclick="buyItem( 'Lt Padded Armor', 500, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Lt Leather Armor</p>
+					<input class="buy-item-button" type="button" value="1000" onclick="buyItem( 'Lt Leather Armor', 1000, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Lt Studded Leather Armor</p>
+					<input class="buy-item-button" type="button" value="2500" onclick="buyItem( 'Lt Studded Leather Armor', 2500, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Lt Chain Shirt</p>
+					<input class="buy-item-button" type="button" value="10000" onclick="buyItem( 'Lt Chain Shirt', 10000, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Med Hide Armor</p>
+					<input class="buy-item-button" type="button" value="1500" onclick="buyItem( 'Med Hide Armor', 1500, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Med Scale Mail</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Med Scale Mail', 5000, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Med Chain Mail</p>
+					<input class="buy-item-button" type="button" value="15000" onclick="buyItem( 'Med Chain Mail', 15000, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Med Breastplate</p>
+					<input class="buy-item-button" type="button" value="20000" onclick="buyItem( 'Med Breastplate', 20000, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Splint Mail</p>
+					<input class="buy-item-button" type="button" value="20000" onclick="buyItem( 'Heavy Splint Mail', 20000, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Banded Mail</p>
+					<input class="buy-item-button" type="button" value="25000" onclick="buyItem( 'Heavy Banded Mail', 25000, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Half-Plate</p>
+					<input class="buy-item-button" type="button" value="60000" onclick="buyItem( 'Heavy Half-Plate', 60000, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Full-Plate</p>
+					<input class="buy-item-button" type="button" value="150000" onclick="buyItem( 'Heavy Full-Plate', 150000, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Buckler</p>
+					<input class="buy-item-button" type="button" value="1500" onclick="buyItem( 'Buckler', 1500, 5 );">
+				</div>
+				<div class="buy-item">
+					<p>Light Wooden Shield</p>
+					<input class="buy-item-button" type="button" value="300" onclick="buyItem( 'Light Wooden Shield', 300, 5 );">
+				</div>
+				<div class="buy-item">
+					<p>Light Steel Shield</p>
+					<input class="buy-item-button" type="button" value="900" onclick="buyItem( 'Light Steel Shield', 900, 6 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Wooden Shield</p>
+					<input class="buy-item-button" type="button" value="700" onclick="buyItem( 'Heavy Wooden Shield', 700, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Steel Shield</p>
+					<input class="buy-item-button" type="button" value="2000" onclick="buyItem( 'Heavy Steel Shield', 2000, 15 );">
+				</div>
+				<div class="buy-item">
+					<p>Tower Shield</p>
+					<input class="buy-item-button" type="button" value="3000" onclick="buyItem( 'Tower Shield', 3000, 45 );">
+				</div>
+				<div class="buy-item">
+					<p>Armor Spikes</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Armor Spikes', 5000, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Locked Gauntlet</p>
+					<input class="buy-item-button" type="button" value="800" onclick="buyItem( 'Locked Gauntlet', 800, 5 );">
+				</div>
+			
+			</div>
+			<!-- Armor & Shields 2 -->		
+			<div class="item-list sm-text-list">
+				<div class="buy-item">
+					<h3>
+						Armor & Shields
+					</h3>
+				</div>
+
+				<div class="buy-item">
+					<p>Shield Spikes</p>
+					<input class="buy-item-button" type="button" value="1000" onclick="buyItem( 'Shield Spikes', 1000, 5 );">
+				</div>
+				
+				<div class="buy-item-float-19"></div>
+				
+			</div>
+		
+			<!-- Adventuring Gear 1 -->
+			<div class="item-list">
+				<div class="buy-item">
+					<h3>
+						Gear
+					</h3>
+				</div>
+				<div class="buy-item">
+					<p>Backpack</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Backpack', 200, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Small Backpack</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Small Backpack', 200, 0.5 );">
+				</div>
+				<div class="buy-item">
+					<p>Barrel</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Barrel', 200, 30 );">
+				</div>
+				<div class="buy-item">
+					<p>Basket</p>
+					<input class="buy-item-button" type="button" value="40" onclick="buyItem( 'Basket', 40, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Bedroll</p>
+					<input class="buy-item-button" type="button" value="10" onclick="buyItem( 'Bedroll', 10, 5 );">
+				</div>
+				<div class="buy-item">
+					<p>Small Bedroll</p>
+					<input class="buy-item-button" type="button" value="10" onclick="buyItem( 'Small Bedroll', 10, 1.25 );">
+				</div>
+				<div class="buy-item">
+					<p>Bell</p>
+					<input class="buy-item-button" type="button" value="10" onclick="buyItem( 'Bell', 10, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Winter Blanket</p>
+					<input class="buy-item-button" type="button" value="50" onclick="buyItem( 'Winter Blanket', 50, 5 );">
+				</div>
+				<div class="buy-item">
+					<p>Small Winter Blanket</p>
+					<input class="buy-item-button" type="button" value="50" onclick="buyItem( 'Small Winter Blanket', 50, 1.25 );">
+				</div>
+				<div class="buy-item">
+					<p>Block and Tackle</p>
+					<input class="buy-item-button" type="button" value="10" onclick="buyItem( 'Block and Tackle', 50, 5 );">
+				</div>
+				<div class="buy-item">
+					<p>Wine Bottle & Glass</p>
+					<input class="buy-item-button" type="button" value="10" onclick="buyItem( 'Wine Bottle & Glass', 200, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Bucket</p>
+					<input class="buy-item-button" type="button" value="50" onclick="buyItem( 'Bucket', 50, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Caltrops (bag)</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItemStack( 1, 'Caltrops', 100, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Candle</p>
+					<input class="buy-item-button" type="button" value="1" onclick="buyItem( 'Candle', 1, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Canvas (per sq-yd)</p>
+					<input class="buy-item-button" type="button" value="10" onclick="buyItemStack( 1, 'Canvas', 10, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Map Case</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItem( 'Map Case', 100, 0.5 );">
+				</div>
+				<div class="buy-item">
+					<p>Chain (per 10ft)</p>
+					<input class="buy-item-button" type="button" value="3000" onclick="buyItemStack( 10, 'Chain', 3000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Chalk</p>
+					<input class="buy-item-button" type="button" value="1" onclick="buyItem( 'Chalk', 1, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Chest</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Chest', 200, 25 );">
+				</div>
+				<div class="buy-item">
+					<p>Crowbar</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Crowbar', 200, 5 );">
+				</div>
+			
+			</div>
+			<!-- Adventuring Gear 2 -->
+			<div class="item-list">
+				<div class="buy-item">
+					<h3>
+						Gear
+					</h3>
+				</div>
+			
+				<div class="buy-item">
+					<p>Firewood (25lb)</p>
+					<input class="buy-item-button" type="button" value="1" onclick="buyItemStack( 25, 'Firewood', 1, 25 );">
+				</div>
+				<div class="buy-item">
+					<p>Fishhook</p>
+					<input class="buy-item-button" type="button" value="20" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Fishing Net</p>
+					<input class="buy-item-button" type="button" value="400" onclick="buyItem( 'Fishing Net', 400, 5 );">
+				</div>
+				<div class="buy-item">
+					<p>Flask</p>
+					<input class="buy-item-button" type="button" value="3" onclick="buyItem( 'Flask', 3, 1.5 );">
+				</div>
+				<div class="buy-item">
+					<p>Flint & Steel</p>
+					<input class="buy-item-button" type="button" value="1" onclick="buyItem( 'Flint and Steel', 1, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Grappling Hook</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItem( 'Grappling Hook', 100, 4 );">
+				</div>
+				<div class="buy-item">
+					<p>Hammer</p>
+					<input class="buy-item-button" type="button" value="50" onclick="buyItem( 'Hammer', 50, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Ink</p>
+					<input class="buy-item-button" type="button" value="800" onclick="buyItem( 'Ink', 800, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Inkpen</p>
+					<input class="buy-item-button" type="button" value="50" onclick="buyItem( 'Inkpen', 50, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Chalk</p>
+					<input class="buy-item-button" type="button" value="1" onclick="buyItem( 'Chalk', 1, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Clay Jug</p>
+					<input class="buy-item-button" type="button" value="3" onclick="buyItem( 'Clay Jug', 3, 9 );">
+				</div>
+				<div class="buy-item">
+					<p>10-Foot Ladder</p>
+					<input class="buy-item-button" type="button" value="5" onclick="buyItem( '10-Foot Ladder', 5, 20 );">
+				</div>
+				<div class="buy-item">
+					<p>Common Lamp</p>
+					<input class="buy-item-button" type="button" value="10" onclick="buyItem( 'Common Lamp', 10, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Bullseye Lantern</p>
+					<input class="buy-item-button" type="button" value="1200" onclick="buyItem( 'Bullseye Lantern', 1200, 3 );">
+				</div>
+				<div class="buy-item">
+					<p>Hooded Lantern</p>
+					<input class="buy-item-button" type="button" value="700" onclick="buyItem( 'Hooded Lantern', 700, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Simple Lock</p>
+					<input class="buy-item-button" type="button" value="2000" onclick="buyItem( 'Simple Lock', 2000, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Average Lock</p>
+					<input class="buy-item-button" type="button" value="4000" onclick="buyItem( 'Average Lock', 4000, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Good Lock</p>
+					<input class="buy-item-button" type="button" value="8000" onclick="buyItem( 'Good Lock', 8000, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Amazing Lock</p>
+					<input class="buy-item-button" type="button" value="15000" onclick="buyItem( 'Simple Lock', 15000, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Manacles</p>
+					<input class="buy-item-button" type="button" value="1500" onclick="buyItem( 'Manacles', 1500, 2 );">
+				</div>
+			
+			
+			</div>
+			<!-- Adventuring Gear 3 -->	
+			<div class="item-list">
+				<div class="buy-item">
+					<h3>
+						Gear
+					</h3>
+				</div>			
+				<div class="buy-item">
+					<p>Masterwork Manacles</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork Manacles', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Small Steel Mirror</p>
+					<input class="buy-item-button" type="button" value="1000" onclick="buyItem( 'Small Steel Mirror', 1000, 0.5 );">
+				</div>
+				<div class="buy-item">
+					<p>Clay Tankard</p>
+					<input class="buy-item-button" type="button" value="2" onclick="buyItem( 'Clay Tankard', 2, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Oil (1 pint flask)</p>
+					<input class="buy-item-button" type="button" value="10" onclick="buyItem( 'Oil (1 pint flask)', 10, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Paper (sheet)</p>
+					<input class="buy-item-button" type="button" value="20" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Parchment (sheet)</p>
+					<input class="buy-item-button" type="button" value="20" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Miner's Pick</p>
+					<input class="buy-item-button" type="button" value="20" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Clay Pitcher</p>
+					<input class="buy-item-button" type="button" value="20" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Piton</p>
+					<input class="buy-item-button" type="button" value="20" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>10-foot Pole</p>
+					<input class="buy-item-button" type="button" value="20" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Iron Pot</p>
+					<input class="buy-item-button" type="button" value="20" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Belt Pouch</p>
+					<input class="buy-item-button" type="button" value="20" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Portable Ram</p>
+					<input class="buy-item-button" type="button" value="20" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Trail Ration (1 day)</p>
+					<input class="buy-item-button" type="button" value="50" onclick="buyItemStack( 1, 'Ration', 50, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Hempen Rope (50ft)</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItemStack( 50, 'Rope (Hemp)', 100, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Silken Rope (50ft)</p>
+					<input class="buy-item-button" type="button" value="1000" onclick="buyItemStack( 50, 'Rope (Silk)', 1000, 5 );">
+				</div>
+				<div class="buy-item">
+					<p>Sack</p>
+					<input class="buy-item-button" type="button" value="20" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Sealing Wax</p>
+					<input class="buy-item-button" type="button" value="20" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Sewing Needle</p>
+					<input class="buy-item-button" type="button" value="20" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Signal Whistle</p>
+					<input class="buy-item-button" type="button" value="20" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				
+				
+				
+			</div>
+			<!-- Adventuring Gear 4 -->		
+			<div class="item-list">
+				<div class="buy-item">
+					<h3>
+						Gear
+					</h3>
+				</div>			
+				<div class="buy-item">
+					<p>Signet Ring</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Sledge</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Soap</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Shovel</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Spyglass</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Tent</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Torch</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Vial (1oz.)</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Waterskin</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Whet Stone</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item-float-10">
+				
+				</div>
+			</div>
+			
+			<!-- Adventuring Gear Specialty -->		
+			<div class="item-list">
+				<div class="buy-item">
+					<h3>
+						Specialty Gear
+					</h3>
+				</div>	
+				<div class="buy-item">
+					<p>Acid (flask)</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Alchemist's Fire (flask)</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Antitoxin (vial)</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Everburning Torch</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Holy Water (flask)</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Smokestick</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Sunrod</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Tanglefoot Bag</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Thunderstone</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Tindertwig</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item-float-10">
+				
+				</div>
+				
+			</div>
+			
+			<!-- Adventuring Gear Specialty -->		
+			<div class="item-list sm-text-list">
+				<div class="buy-item">
+					<h3>
+						Tools and Skill Kits
+					</h3>
+				</div>	
+				<div class="buy-item">
+					<p>Alchemist's Lab</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Artisan's Tools</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Climber's Kit</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Disguise Kit</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Healer's Kit</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Holly and Mistletoe</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Wooden Holy Symbol</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Silver Holy Symbol</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Hourglass</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Magnifying Glass</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Musical Instrument</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Merchant's Scale</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Spell Component Pouch</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Wizard's Spellbook</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Thieves' Tools</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Water Clock</p>
+					<input class="buy-item-button" type="button" value="100000" onclick="buyItem( 'Water Clock', 100000, 200 );">
+				</div>
+			
+			</div>
+			
+			
+			
+			
+		</section>
+	
+
 	</section>
 	
 	
-	
-	<div id="mondodevspacer"></div>
-	<div id="mondodevspacer"></div>
-	<div id="mondodevspacer"></div>
+
 
 	
-	<section id="describe">
+	<div id="mondodevspacer"></div>
+	<div id="mondodevspacer"></div>
+	<div id="mondodevspacer"></div>
+	<div id="mondodevspacer"></div>
+	<div id="mondodevspacer"></div>
 	
+
+	<section id="roll-playing">
+		<section id="describe">
+			<form>
+				<h2>
+					Character Description
+				</h2>
+				<p>
+					Here, input all of your description, character background information and other roll information. 
+					Soon, you'll also be able to select from character art or upload an image file to populate the print
+					sheet. 
+				</p>
+
+
+				<input class="form-input" id="form-name" type-"text" placeholder="Character Name">
+				<input class="form-input" id="form-player" type-"text" placeholder="Player Name">
+				<input class="form-input" id="form-alignment" type-"text" placeholder="Alignment">
+				<input class="form-input" id="form-eye" type-"text" placeholder="Eye Color">
+				<input class="form-input" id="form-hair" type-"text" placeholder="Hair Color">
+				<input class="form-input" id="form-height" type-"text" placeholder="Height">
+				<input class="form-input" id="form-weight" type-"text" placeholder="Weight">
+				<input class="form-input" id="form-skin" type-"text" placeholder="Skin">
+				<input class="form-input" id="form-handedness" type-"text" placeholder="Handedness">
+				<input class="form-input" id="form-age" type-"text" placeholder="Age">
+				<input class="form-input" id="form-gender" type-"text" placeholder="Gender">
+
+				<h3>
+					Appearance
+				</h3>
+
+				
+				
+				<textarea class="text-area" id="form-appearance"></textarea>
+				
+
+				<h3>
+					Personality
+				</h3>
+				<textarea class="text-area"></textarea>
+
+				<h3>
+					Quote
+				</h3>
+				<textarea  class="text-area describe-small"></textarea>
+
+				<h3>
+					Life Objective
+				</h3>
+				<textarea class="text-area"></textarea>
+
+				<h3>
+					Recent History
+				</h3>
+				<textarea class="text-area"></textarea>
+
+				<h3>
+					Allies & Enemies
+				</h3>
+				<textarea class="text-area"></textarea>
+
+				<h3>
+					Home, Ancestry, Family, Diety 
+				</h3>
+				<textarea class="text-area"></textarea>
+
+				<h3>
+					Other Notable Information
+				</h3>
+				<textarea class="text-area"></textarea>
+
+				<input type="button" class="form-button" value="Populate Sheet" onclick="populateCharacterSheet();">
+
+
+			</form>
+		</section>
 	</section>
+
 	
+	
+
+
 	<section id="print">
 		<div class="paper">
 		
@@ -814,7 +1948,7 @@
 						appraise
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-appr" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -825,7 +1959,7 @@
 						balance
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-bala" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -836,7 +1970,7 @@
 						bluff
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-bluf" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -847,7 +1981,7 @@
 						climb
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-clim" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -858,7 +1992,7 @@
 						concentration
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-conc" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -869,7 +2003,7 @@
 						craft:
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-craf" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -880,7 +2014,7 @@
 						decipher script
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-deci" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -891,7 +2025,7 @@
 						diplomacy
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-dipl" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -902,7 +2036,7 @@
 						disable device
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-disa" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -913,7 +2047,7 @@
 						disguise
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-disg" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -924,7 +2058,7 @@
 						escape artist
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-esca" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -935,7 +2069,7 @@
 						forgery
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-forg" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -946,7 +2080,7 @@
 						gather information
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-gath" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -957,7 +2091,7 @@
 						handle animal
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-hand" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -968,7 +2102,7 @@
 						heal
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-heal" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -979,7 +2113,7 @@
 						hide
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-hide" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -990,7 +2124,7 @@
 						intimidate
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-inti" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -1001,7 +2135,7 @@
 						jump
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-jump" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -1012,7 +2146,7 @@
 						knowledge:
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-know" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -1023,7 +2157,7 @@
 						listen
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-list" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -1034,7 +2168,7 @@
 						move silently
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-move" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -1045,7 +2179,7 @@
 						open lock
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-open" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -1056,7 +2190,7 @@
 						perform: 
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-perf" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -1067,7 +2201,7 @@
 						profession
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-prof" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -1078,7 +2212,7 @@
 						ride
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-ride" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -1089,7 +2223,7 @@
 						search
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-sear" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -1100,7 +2234,7 @@
 						sense motive
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-sens" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -1111,7 +2245,7 @@
 						sleight of hand
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-slei" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -1122,7 +2256,7 @@
 						spellcraft
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-spel" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -1133,7 +2267,7 @@
 						spot
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-spot" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -1144,7 +2278,7 @@
 						survival
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-surv" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -1155,7 +2289,7 @@
 						swim
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-swim" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -1166,7 +2300,7 @@
 						tumble
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-tumb" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -1177,7 +2311,7 @@
 						use magic device
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-usem" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -1188,7 +2322,7 @@
 						use rope
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-user" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -1199,7 +2333,7 @@
 						________________________________
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-bla1" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -1210,7 +2344,7 @@
 						________________________________
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div id="pr-bla2" class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
@@ -1221,7 +2355,7 @@
 						________________________________
 					</p>
 				</div>
-				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div id="pr-bla3" class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -1241,7 +2375,7 @@
 		<!-- NAME, PLAYER, ETC BLOCK TOP -->
 			<div class="half">
 				<div class="quarter">
-					<div class="fill-space half">
+					<div id="print-name" class="print-fill print-fill fill-space half">
 					
 					</div>
 					<p class="label">
@@ -1249,7 +2383,7 @@
 					</p>
 				</div>
 				<div class="quarter">
-					<div class="fill-space half">
+					<div id="print-player" class="print-fill print-fill fill-space half">
 					
 					</div>
 					<p class="label">
@@ -1257,7 +2391,7 @@
 					</p>
 				</div>
 				<div class="quarter">
-					<div class="fill-space half">
+					<div id="print-alignment" class="print-fill print-fill fill-space half">
 					
 					</div>
 					<p class="label">
@@ -1265,7 +2399,7 @@
 					</p>
 				</div>
 				<div class="quarter">
-					<div class="fill-space half">
+					<div id="print-experience" class="print-fill print-fill fill-space half">
 					
 					</div>
 					<p class="label">
@@ -1273,7 +2407,7 @@
 					</p>
 				</div>
 				<div class="quarter">
-					<div class="fill-space half">
+					<div id="print-class" class="print-fill print-fill fill-space half">
 					
 					</div>
 					<p class="label">
@@ -1282,15 +2416,15 @@
 				</div>
 				<div class="quarter">
 					<div class="eighth">
-						<div class="fill-space half">
-					
+						<div id="print-level" class="print-fill print-fill fill-space half">
+							
 						</div>
 						<p class="label">
 							LEVEL
 						</p>
 					</div>
 					<div class="eighth">
-						<div class="fill-space half">
+						<div id="print-levelup" class="print-fill print-fill fill-space half">
 					
 						</div>
 						<p class="label">
@@ -1299,7 +2433,7 @@
 					</div>
 				</div>
 				<div class="quarter">
-					<div class="fill-space half">
+					<div class="print-fill fill-space half">
 					
 					</div>
 					<p class="label">
@@ -1308,7 +2442,7 @@
 				</div>
 				<div class="quarter">
 					<div class="eighth">
-						<div class="fill-space half">
+						<div class="print-fill fill-space half">
 					
 						</div>
 						<p class="label">
@@ -1316,7 +2450,7 @@
 						</p>
 					</div>
 					<div class="eighth">
-						<div class="fill-space half">
+						<div class="print-fill fill-space half">
 					
 						</div>
 						<p class="label">
@@ -1330,7 +2464,7 @@
 		<!-- DRAGONGROG BLOCK. ABILITY SCORES. HIT POINTS -->
 			<div class="half">
 				
-				<div class="fill-space"></div>
+				<div class="print-fill fill-space"></div>
 				<div class="box blackbox dragongrog">
 					<h1> 
 						dragonGrog.com V1.0.0
@@ -1339,7 +2473,7 @@
 						 HTML d20/3.5/PF character sheet
 					</p>
 				</div>
-				<div class="fill-space"></div>
+				<div class="print-fill fill-space"></div>
 				
 				<div class="quarter">
 					<div class="twelfth">
@@ -1367,8 +2501,8 @@
 							</p>
 						</div>
 					</div>
-					<div class="twelfth"><div class="box"></div></div>
-					<div class="twelfth"><div class="box"></div></div>
+					<div class="twelfth"><div id="print-ab-str" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-str box"></div></div>
 					<div class="twelfth">
 						<div class="box blackbox">
 							<h1>
@@ -1379,8 +2513,8 @@
 							</p>
 						</div>
 					</div>
-					<div class="twelfth"><div class="box"></div></div>
-					<div class="twelfth"><div class="box"></div></div>
+					<div class="twelfth"><div id="print-ab-dex" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-dex box"></div></div>
 					<div class="twelfth">
 						<div class="box blackbox">
 							<h1>
@@ -1391,8 +2525,8 @@
 							</p>
 						</div>
 					</div>
-					<div class="twelfth"><div class="box"></div></div>
-					<div class="twelfth"><div class="box"></div></div>
+					<div class="twelfth"><div id="print-ab-con" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-con box"></div></div>
 					<div class="twelfth">
 						<div class="box blackbox">
 							<h1>
@@ -1403,8 +2537,8 @@
 							</p>
 						</div>
 					</div>
-					<div class="twelfth"><div class="box"></div></div>
-					<div class="twelfth"><div class="box"></div></div>
+					<div class="twelfth"><div id="print-ab-wis" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-wis box"></div></div>
 					<div class="twelfth">
 						<div class="box blackbox">
 							<h1>
@@ -1415,8 +2549,8 @@
 							</p>
 						</div>
 					</div>
-					<div class="twelfth"><div class="box"></div></div>
-					<div class="twelfth"><div class="box"></div></div>
+					<div class="twelfth"><div id="print-ab-int" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-int box"></div></div>
 					<div class="twelfth">
 						<div class="box blackbox">
 							<h1>
@@ -1427,8 +2561,8 @@
 							</p>
 						</div>
 					</div>
-					<div class="twelfth"><div class="box"></div></div>
-					<div class="twelfth"><div class="box"></div></div>
+					<div class="twelfth"><div id="print-ab-cha" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-cha box"></div></div>
 				</div>
 				<div class="quarter">
 					<div class="box blackbox">
@@ -1440,12 +2574,12 @@
 						</p>
 					</div>
 					<div class="box tallbox">
-						<div id="box">
-							<div class="fill-space"></div>
-							<p class="label">
-								BASE HP
-							</p>
-						</div>
+						
+						<div id="hit-points" class="print-text-center print-fill fill-space"></div>
+						<p class="label">
+							BASE HP
+						</p>
+						
 						<h2>
 							WOUNDS<br>CURRENT HP<br>NOTES
 						</h2>
@@ -1455,7 +2589,7 @@
 
 		<!-- SAVING THROWS -->
 			<div class="half">
-				<div class="fill-space"></div>
+				<div class="print-fill fill-space"></div>
 				
 				<div class="quarter">
 					<div class="twelfth">
@@ -1484,11 +2618,11 @@
 							</p>
 						</div>
 					</div>
-					<div class="twelfth with-operator"><div class="box op-box"></div></div>
+					<div class="twelfth with-operator"><div id="print-sav-for-tot" class="box op-box"></div></div>
 					<div class="operator">
 						<p>=</p>
 					</div>
-					<div class="twelfth with-operator"><div class="box op-box"></div></div>
+					<div class="twelfth with-operator"><div id="print-sav-for" class="box op-box"></div></div>
 					<div class="operator">
 						<p>+</p>
 					</div>
@@ -1513,19 +2647,19 @@
 					</div>
 					
 					<div class="twelfth with-operator">
-						<div class="box op-box"></div>
+						<div class="print-mod-con box op-box"></div>
 					</div>
 					<div class="operator"><p>+</p></div>
 					<div class="twelfth with-operator">
-						<div class="box op-box"></div>
+						<div class="print-sav-for-mag box op-box"></div>
 					</div>
 					<div class="operator"><p>+</p></div>
 					<div class="twelfth with-operator">
-						<div class="box op-box"></div>
+						<div class="print-sav-for-misc box op-box"></div>
 					</div>
 					
 				</div>
-				<div class="sm-fill-space"></div>
+				<div class="sm-print-fill fill-space"></div>
 				<div class="quarter">
 					<div class="twelfth">
 						<div class="box blackbox">
@@ -1537,11 +2671,11 @@
 							</p>
 						</div>
 					</div>
-					<div class="twelfth with-operator"><div class="box op-box"></div></div>
+					<div class="twelfth with-operator"><div id="print-sav-ref-tot" class="box op-box"></div></div>
 					<div class="operator">
 						<p>=</p>
 					</div>
-					<div class="twelfth with-operator"><div class="box op-box"></div></div>
+					<div class="twelfth with-operator"><div id="print-sav-ref" class="box op-box"></div></div>
 					<div class="operator">
 						<p>+</p>
 					</div>
@@ -1549,19 +2683,19 @@
 				<div class="quarter">
 					
 					<div class="twelfth with-operator">
-						<div class="box op-box"></div>
+						<div class="print-mod-dex box op-box"></div>
 					</div>
 					<div class="operator"><p>+</p></div>
 					<div class="twelfth with-operator">
-						<div class="box op-box"></div>
+						<div class="print-sav-ref-mag box op-box"></div>
 					</div>
 					<div class="operator"><p>+</p></div>
 					<div class="twelfth with-operator">
-						<div class="box op-box"></div>
+						<div class="print-sav-ref-misc box op-box"></div>
 					</div>
 					
 				</div>
-				<div class="sm-fill-space"></div>
+				<div class="sm-print-fill fill-space"></div>
 				<div class="quarter">
 					<div class="twelfth">
 						<div class="box blackbox">
@@ -1573,11 +2707,11 @@
 							</p>
 						</div>
 					</div>
-					<div class="twelfth with-operator"><div class="box op-box"></div></div>
+					<div class="twelfth with-operator"><div id="print-sav-wil-tot" class="box op-box"></div></div>
 					<div class="operator">
 						<p>=</p>
 					</div>
-					<div class="twelfth with-operator"><div class="box op-box"></div></div>
+					<div class="twelfth with-operator"><div id="print-sav-wil" class="box op-box"></div></div>
 					<div class="operator">
 						<p>+</p>
 					</div>
@@ -1585,7 +2719,7 @@
 				<div class="quarter">
 					
 					<div class="twelfth with-operator">
-						<div class="box op-box"></div>
+						<div class="print-mod-wis box op-box"></div>
 					</div>
 					<div class="operator"><p>+</p></div>
 					<div class="twelfth with-operator">
@@ -1597,14 +2731,14 @@
 					</div>
 					
 				</div>
-				<div class="sm-fill-space"></div>
+				<div class="sm-print-fill fill-space"></div>
 			</div>
 			
 		
 			
 		<!-- ARMOR CLASS MINI TITLES-->
 			<div class="half">
-				<div class="fill-space"></div>
+				<div class="print-fill fill-space"></div>
 				<div class="twentieth-blackbox">
 					<p class="mini-title">
 						ARMOR<br>CLASS
@@ -1670,7 +2804,7 @@
 					</div>
 				</div>
 				<div class="twentieth">
-					<div class="box"></div>
+					<div id="print-ac-tot" class="box"></div>
 				</div>
 				<div class="twentieth">
 					<p class="twentieth-fixed-value">
@@ -1678,7 +2812,7 @@
 					</p>
 				</div>
 				<div class="twentieth">
-					<div class="box"></div>
+					<div class="print-mod-dex box"></div>
 				</div>
 				<div class="twentieth">
 					<div class="box"></div>
@@ -1713,7 +2847,7 @@
 					</div>
 				</div>
 				<div class="twentieth">
-					<div class="box"></div>
+					<div id="print-ff-tot" class="box"></div>
 				</div>
 				<div class="twentieth">
 					<p class="twentieth-fixed-value">
@@ -1758,7 +2892,7 @@
 					</div>
 				</div>
 				<div class="twentieth">
-					<div class="box"></div>
+					<div id="print-to-tot" class="box"></div>
 				</div>
 				<div class="twentieth">
 					<p class="twentieth-fixed-value">
@@ -1766,7 +2900,7 @@
 					</p>
 				</div>
 				<div class="twentieth">
-					<div class="box"></div>
+					<div class="print-mod-dex box"></div>
 				</div>
 				<div class="twentieth">
 					<p class="twentieth-fixed-value">
@@ -1799,7 +2933,7 @@
 		
 		<!-- MELEE ATTACK MINI TITLES -->
 			<div class="half">
-				<div class="fill-space"></div>
+				<div class="print-fill fill-space"></div>
 				
 				<div class="sixteenth-blackbox">
 					<p class="mini-title">
@@ -1807,7 +2941,7 @@
 					</p>
 				</div>
 				<div class="sixteenth">
-					<p class="mini-title">
+					<p id="melee-attack-mod-title" class="mini-title">
 						STR<br>MODIFIER
 					</p>
 				</div>
@@ -1859,7 +2993,7 @@
 					</div>
 				</div>
 				<div class="sixteenth">
-					<div class="box"></div>
+					<div id="melee-attack-mod" class="box"></div>
 				</div>
 				<div class="sixteenth">
 					<div class="box"></div>
@@ -1871,14 +3005,14 @@
 					<div class="box"></div>
 				</div>
 				<div class="sixteenth">
-					<div class="box">
+					<div class="print-bab-one box">
 						<h4>
 							1st
 						</h4>
 					</div>
 				</div>
 				<div class="sixteenth">
-					<div class="box"></div>
+					<div id="print-attack-first-one" class="box"></div>
 				</div>
 				<div class="sixteenth">
 					<div class="box"></div>
@@ -1993,7 +3127,7 @@
 		
 		<!-- RANGED ATTACK MINI TITLES -->
 			<div class="half">
-				<div class="fill-space"></div>
+				<div class="print-fill fill-space"></div>
 				
 				<div class="sixteenth-blackbox">
 					<p class="mini-title">
@@ -2053,7 +3187,7 @@
 					</div>
 				</div>
 				<div class="sixteenth">
-					<div class="box"></div>
+					<div class="print-mod-dex box"></div>
 				</div>
 				<div class="sixteenth">
 					<div class="box"></div>
@@ -2065,17 +3199,17 @@
 					<div class="box"></div>
 				</div>
 				<div class="sixteenth">
-					<div class="box">
+					<div class="print-bab-one box">
 						<h4>
 							1st
 						</h4>
 					</div>
 				</div>
 				<div class="sixteenth">
-					<div class="box"></div>
+					<div id="print-ranged-first-one" class="box"></div>
 				</div>
 				<div class="sixteenth">
-					<div class="box"></div>
+					<div id="print-ranged-first-two" class="box"></div>
 				</div>
 			</div>
 		
@@ -2107,10 +3241,10 @@
 					</div>
 				</div>
 				<div class="sixteenth">
-					<div class="box"></div>
+					<div id="print-ranged-second-one" class="box"></div>
 				</div>
 				<div class="sixteenth">
-					<div class="box"></div>
+					<div id="print-ranged-second-two" class="box"></div>
 				</div>
 			</div>
 		
@@ -2255,7 +3389,7 @@
 					</div>
 				</div>
 				<div class="twentieth">
-					<div class="box"></div>
+					<div class="print-mod-str box"></div>
 				</div>
 				<div class="twentieth">
 					<div class="box"></div>
@@ -2264,23 +3398,23 @@
 					<div class="box"></div>
 				</div>
 				<div class="twentieth">
-					<div class="box"></div>
+					<div class="print-bab-one box"></div>
 				</div>
 				<div class="twentieth">
-					<div class="box"></div>
+					<div id="print-grapple-tot" class="box"></div>
 				</div>
 				<div class="operator">
 					<p></p>
 				</div>
 				
 				<div class="twentieth">
-					<div class="box"></div>
+					<div class="print-mod-dex box"></div>
 				</div>
 				<div class="twentieth">
-					<div class="box"></div>
+					<div id="print-ini-misc" class="box"></div>
 				</div>
 				<div class="twentieth">
-					<div class="box"></div>
+					<div id="print-ini-tot" class="box"></div>
 				</div>
 				<div class="twentieth">
 					<div class="box blackbox">
@@ -2346,7 +3480,7 @@
 		
 		<!-- RACIAL ABILITIES -->
 			<div class="half">
-				<div class="fill-space"></div>
+				<div class="print-fill fill-space"></div>
 				<div class="box blackbox dragongrog half-wider">
 					<h1> 
 						RACIAL ABILITIES
@@ -2355,16 +3489,16 @@
 						POWER TO THE PEOPLE
 					</p>
 				</div>
-				<div class="fill-space"></div>
+				<div class="print-fill fill-space"></div>
 				<p class="label half-wider">
 					DARKVISION?
 				</p>
-				<div class="fill-space"></div>
+				<div class="print-fill fill-space"></div>
 				<p class="label half-wider">
 					HIDDEN WALL SENSING?
 				</p>
 				
-				<div class="fill-space"></div>
+				<div class="print-fill fill-space"></div>
 				<p class="label half-wider">
 					FLATULANT?
 				</p>
@@ -2386,7 +3520,7 @@
 			<div class="half">
 			
 				<div class="quarter">
-					<div class="fill-space half">
+					<div class="print-fill fill-space half">
 					
 					</div>
 					<p class="label">
@@ -2394,7 +3528,7 @@
 					</p>
 				</div>
 				<div class="quarter">
-					<div class="fill-space half">
+					<div class="print-fill fill-space half">
 					
 					</div>
 					<p class="label">
@@ -2405,7 +3539,7 @@
 		
 		<!-- FEATS -->
 			<div class="half">
-				<div class="fill-space">
+				<div class="print-fill fill-space">
 				
 				</div>
 				<div class="box blackbox dragongrog">
@@ -2419,7 +3553,7 @@
 			</div>
 		
 			<div class="half">
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label feat-name">
@@ -2430,7 +3564,7 @@
 				</p>
 			</div>
 			<div class="half">
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label feat-name">
@@ -2441,7 +3575,7 @@
 				</p>
 			</div>
 			<div class="half">
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label feat-name">
@@ -2452,7 +3586,7 @@
 				</p>
 			</div>
 			<div class="half">
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label feat-name">
@@ -2463,7 +3597,7 @@
 				</p>
 			</div>
 			<div class="half">
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label feat-name">
@@ -2474,7 +3608,7 @@
 				</p>
 			</div>
 			<div class="half">
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label feat-name">
@@ -2485,7 +3619,7 @@
 				</p>
 			</div>
 			<div class="half">
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label feat-name">
@@ -2496,7 +3630,7 @@
 				</p>
 			</div>
 			<div class="half">
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label feat-name">
@@ -2507,7 +3641,7 @@
 				</p>
 			</div>
 			<div class="half">
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label feat-name">
@@ -2518,7 +3652,7 @@
 				</p>
 			</div>
 			<div class="half">
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label feat-name">
@@ -2532,7 +3666,7 @@
 		
 		<!-- SPECIAL ABILITIES -->
 			<div class="half">
-				<div class="fill-space">
+				<div class="print-fill fill-space">
 				
 				</div>
 				<div class="box blackbox dragongrog">
@@ -2545,127 +3679,127 @@
 				</div>
 			</div>
 			<div class="half">
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">
 					ABILITY
 				</p>
-				<div class="fill-space fill-space-feats">
+				<div class="print-fill fill-space print-fill fill-space-feats">
 				
 				</div>
 				<p class="label full-width">

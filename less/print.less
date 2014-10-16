@@ -1,4 +1,9 @@
 @body: 'helvetica neue', 'helvetica', arial, sans-serif;
+@marker: 'Permanent Marker', 'helvetica neue', arial, sans-serif;
+@walter: 'Walter Turncoat', serif;
+@ubuntu: 'ubuntu', 'helvetica neue', 'helvetica', 'arial', sans-serif;
+@sintony: 'sintony', 'times', 'times new roman', serif;
+
 
 body
 	{
@@ -170,6 +175,13 @@ h1, h2, h3, p
 	float: left;
 	}
 
+.print-text-center
+	{
+	font-family: @marker;
+	font-size: 19px;
+	text-align: center;
+	}
+
 .box
 	{
 	width: 94%;
@@ -179,6 +191,11 @@ h1, h2, h3, p
 	  -moz-box-sizing:border-box;
 	  -webkit-box-sizing:border-box;
 	margin-bottom: 5px;
+	font-family: @marker;
+	font-size: 19px;
+	text-align: center;
+	
+	
 	h1, h2, h4, p
 		{
 		padding: 0;
@@ -202,6 +219,7 @@ h1, h2, h3, p
 		font-size: 18px;
 		padding-top: 3px;
 		color: #ddd;
+		font-family: 'helvetica neue';
 		}
 	p
 		{

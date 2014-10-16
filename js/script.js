@@ -274,6 +274,7 @@ var assignAttributes = function(form) {
 			logMscSkModifiers();		// Shows all Racial Skill Misc Modifiers (and other racial bonuses) and re-calculates ability modifiers.
 			addAbModifiers();			// Displays all Ability Modifiers in Skills Section
 			showClassSkills();			// Shows all Class Skills
+			logAllSavingThrows();		// Calculate Saving Throws and Base Attack Bonus. They Don't Display immediately.
 			
 			document.getElementById("apply-all").style.display = "none"; // disable to "prevent" cheating.
 		} else {
@@ -437,38 +438,38 @@ var showClassSkills = function() {
 	switch (window.selClass) {
 		case "BARBARIAN":
 			//align with booleans below --appr---	bala---	bluf---	clim---	conc---	craf---	deci---	dipl---	disa---	disg---	esca---	forg---	gath---	hand---	heal---	hide---	inti---	jump---	know---	list---	move---	open---	perf---	prof---	ride---	sear---	sens---	slei---	spel---	spot---	surv---	swim---	tumb---	usem---	user
-			var allSkillsBool = new Array(false,	false,	false,	true, 	false,	true, 	false,	false,	false,	false,	false,	false,	false,	true, 	false,	false,	true, 	true, 	false,	true, 	false,	false,	false,	false,	true, 	false,	false,	false,	false,	false,	true, 	true, 	false,	false,	false);
+			window.allSkillsBool = new Array(false,	false,	false,	true, 	false,	true, 	false,	false,	false,	false,	false,	false,	false,	true, 	false,	false,	true, 	true, 	false,	true, 	false,	false,	false,	false,	true, 	false,	false,	false,	false,	false,	true, 	true, 	false,	false,	false);
 		break;
 		case "BARD":
-			var allSkillsBool = new Array(true, 	true, 	true, 	true, 	true, 	true, 	true, 	true, 	false,	true, 	true, 	true, 	true, 	false,	false,	true, 	false,	true, 	true, 	true, 	true, 	false,	true, 	true, 	false,	false,	true, 	true, 	true, 	false,	false,	true, 	true, 	true, 	false);
+			window.allSkillsBool = new Array(true, 	true, 	true, 	true, 	true, 	true, 	true, 	true, 	false,	true, 	true, 	true, 	true, 	false,	false,	true, 	false,	true, 	true, 	true, 	true, 	false,	true, 	true, 	false,	false,	true, 	true, 	true, 	false,	false,	true, 	true, 	true, 	false);
 		break;
 		case "CLERIC":
-			var allSkillsBool = new Array(false,	false,	false,	false,	true, 	true, 	false,	true, 	false,	false,	false,	false,	false,	false,	true, 	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	false,	false,	false,	false,	false,	false);
+			window.allSkillsBool = new Array(false,	false,	false,	false,	true, 	true, 	false,	true, 	false,	false,	false,	false,	false,	false,	true, 	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	false,	false,	false,	false,	false,	false);
 		break;
 		case "DRUID":
-			var allSkillsBool = new Array(false,	false,	false,	false,	true, 	true, 	false,	true, 	false,	false,	false,	false,	false,	true, 	true, 	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	true, 	false,	false,	false,	true, 	true, 	true, 	true, 	false,	false,	false);
+			window.allSkillsBool = new Array(false,	false,	false,	false,	true, 	true, 	false,	true, 	false,	false,	false,	false,	false,	true, 	true, 	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	true, 	false,	false,	false,	true, 	true, 	true, 	true, 	false,	false,	false);
 		break;
 		case "FIGHTER":
 			// data input was manual for testing rather than from /docs/base%20skills%20booleans.js file, so there are spaces instead of tabs.
-			var allSkillsBool = new Array(false, false, false, true,  false, true,  false, false, false, false, false, false, false, true,  false, false, true,  true,  false, false, false, false, false, false, true,  false, false, false, false, false, false, true,  false, false, false);
+			window.allSkillsBool = new Array(false, false, false, true,  false, true,  false, false, false, false, false, false, false, true,  false, false, true,  true,  false, false, false, false, false, false, true,  false, false, false, false, false, false, true,  false, false, false);
 		break;
 		case "MONK":
-			var allSkillsBool = new Array(false,	true, 	false,	true, 	true, 	true, 	false,	true, 	false,	false,	true, 	false,	false,	false,	false,	true, 	false,	true, 	true, 	true, 	true, 	false,	true, 	true, 	false,	false,	true, 	false,	false,	true, 	false,	true, 	true, 	false,	false);
+			window.allSkillsBool = new Array(false,	true, 	false,	true, 	true, 	true, 	false,	true, 	false,	false,	true, 	false,	false,	false,	false,	true, 	false,	true, 	true, 	true, 	true, 	false,	true, 	true, 	false,	false,	true, 	false,	false,	true, 	false,	true, 	true, 	false,	false);
 		break;
 		case "PALADIN":
-			var allSkillsBool = new Array(false,	false,	false,	false,	true, 	true, 	false,	true, 	false,	false,	false,	false,	false,	true, 	true, 	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	true, 	false,	true, 	false,	false,	false,	false,	false,	false,	false,	false);
+			window.allSkillsBool = new Array(false,	false,	false,	false,	true, 	true, 	false,	true, 	false,	false,	false,	false,	false,	true, 	true, 	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	true, 	false,	true, 	false,	false,	false,	false,	false,	false,	false,	false);
 		break;
 		case "RANGER":
-			var allSkillsBool = new Array(false,	false,	false,	true, 	true, 	true, 	false,	true, 	false,	false,	false,	false,	false,	true, 	true, 	true, 	false,	true, 	true, 	true, 	true, 	false,	false,	true, 	true, 	true, 	false,	false,	false,	true, 	true, 	true, 	false,	false,	true);
+			window.allSkillsBool = new Array(false,	false,	false,	true, 	true, 	true, 	false,	true, 	false,	false,	false,	false,	false,	true, 	true, 	true, 	false,	true, 	true, 	true, 	true, 	false,	false,	true, 	true, 	true, 	false,	false,	false,	true, 	true, 	true, 	false,	false,	true);
 		break;
 		case "ROGUE":
-			var allSkillsBool = new Array(true, 	true, 	true, 	true, 	false,	true, 	true, 	true, 	true, 	true, 	true, 	true, 	true, 	false,	false,	true, 	true, 	true, 	true, 	true, 	true, 	true, 	true, 	true, 	false,	true, 	true, 	true, 	false,	true, 	false,	true, 	true, 	true, 	true);
+			window.allSkillsBool = new Array(true, 	true, 	true, 	true, 	false,	true, 	true, 	true, 	true, 	true, 	true, 	true, 	true, 	false,	false,	true, 	true, 	true, 	true, 	true, 	true, 	true, 	true, 	true, 	false,	true, 	true, 	true, 	false,	true, 	false,	true, 	true, 	true, 	true);
 		break;
 		case "SORCERER":
-			var allSkillsBool = new Array(false,	false,	true, 	false,	true, 	true, 	false,	false,	false,	false,	false,	false,	false,	false,	false,	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	false,	false,	false,	false,	false,	false);
+			window.allSkillsBool = new Array(false,	false,	true, 	false,	true, 	true, 	false,	false,	false,	false,	false,	false,	false,	false,	false,	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	false,	false,	false,	false,	false,	false);
 		break;
 		case "WIZARD":
-			var allSkillsBool = new Array(false,	false,	false,	false,	true, 	true, 	true, 	false,	false,	false,	false,	false,	false,	false,	false,	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	false,	false,	false,	false,	false,	false);
+			window.allSkillsBool = new Array(false,	false,	false,	false,	true, 	true, 	true, 	false,	false,	false,	false,	false,	false,	false,	false,	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	false,	false,	false,	false,	true, 	false,	false,	false,	false,	false,	false);
 		break;
 		case "NewBlankClass":
 			// A placeholder for future class additions. 
@@ -481,302 +482,188 @@ var showClassSkills = function() {
 	var allSkillsString = new Array("appr", "bala", "bluf", "clim", "conc", "craf", "deci", "dipl", "disa", "disg", "esca", "forg", "gath", "hand", "heal", "hide", "inti", "jump", "know", "list", "move", "open", "perf", "prof", "ride", "sear", "sens", "slei", "spel", "spot", "surv", "swim", "tumb", "usem", "user");
 	
 	for ( var i = 0 ; i < 35 ; i++) {
-		if (allSkillsBool[i]) {
-			document.getElementById("c-" + allSkillsString[i]).innerHTML = "CLASS: 4" ;
+		if (window.allSkillsBool[i]) {
+			document.getElementById("c-" + allSkillsString[i]).innerHTML = "CLASS" ;
 		} else {
-			document.getElementById("c-" + allSkillsString[i]).innerHTML = "2";
+			document.getElementById("c-" + allSkillsString[i]).innerHTML = "-";
 		}
 	}
 }	
 
 
-var updateSkillPoints = function(form) {
-	// $('.sk-input').change(function(){
-	// var allInputVariables = {in_appr: , in_bala: , in_bluf: , in_clim: , in_conc: , in_craf: , in_deci: , in_dipl: , in_disa: , in_disg: , in_esca: , in_forg: , in_gath: , in_hand: , in_heal: , in_hide: , in_inti: , in_jump: , in_know: , in_list: , in_move: , in_open: , in_perf: , in_prof: , in_ride: , in_sear: , in_sens: , in_slei: , in_spel: , in_spot: , in_surv: , in_swim: , in_tumb: , in_usem: , in_user: , in_bla1: , in_bla2: , in_bla3: };
+var updateSavingThrows = function(fortSave, reflSave, willSave, baseAttack, hitPoints) {
+	/*
+	window.forSave = (fortSave + window.conMod);
+	window.refSave = (reflSave + window.dexMod);
+	window.wilSave = (willSave + window.wisMod);
+	*/
+	window.forSave = (fortSave);
+	window.refSave = (reflSave);
+	window.wilSave = (willSave);
+	window.baseAttackBonus = baseAttack; 
+	window.hitPoints = hitPoints + window.conMod;
+
+	alert( "Base Attack Bonus: +" + window.baseAttackBonus + "\nBase Saving Thows: \nFOR: +" + window.forSave + "\nREF: +" + window.refSave + "\nWIL: +" + window.wilSave + "\nHit Points: " + window.hitPoints );
+}
+
+
+
+var logAllSavingThrows = function() {
 	
-	// Take in all form data
-	var inappr = form.in_appr.value;
-	var inbala = form.in_bala.value;
-	var inbluf = form.in_bluf.value;
-	var inclim = form.in_clim.value;
-	var inconc = form.in_conc.value;
-	var incraf = form.in_craf.value;
-	var indeci = form.in_deci.value;
-	var indipl = form.in_dipl.value;
-	var indisa = form.in_disa.value;
-	var indisg = form.in_disg.value;
-	var inesca = form.in_esca.value;
-	var inforg = form.in_forg.value;
-	var ingath = form.in_gath.value;
-	var inhand = form.in_hand.value;
-	var inheal = form.in_heal.value;
-	var inhide = form.in_hide.value;
-	var ininti = form.in_inti.value;
-	var injump = form.in_jump.value;
-	var inknow = form.in_know.value;
-	var inlist = form.in_list.value;
-	var inmove = form.in_move.value;
-	var inopen = form.in_open.value;
-	var inperf = form.in_perf.value;
-	var inprof = form.in_prof.value;
-	var inride = form.in_ride.value;
-	var insear = form.in_sear.value;
-	var insens = form.in_sens.value;
-	var inslei = form.in_slei.value;
-	var inspel = form.in_spel.value;
-	var inspot = form.in_spot.value;
-	var insurv = form.in_surv.value;
-	var inswim = form.in_swim.value;
-	var intumb = form.in_tumb.value;
-	var inusem = form.in_usem.value;
-	var inuser = form.in_user.value;
-	var inbla1 = form.in_bla1.value;
-	var inbla2 = form.in_bla2.value;
-	var inbla3 = form.in_bla3.value;
+	switch (window.selClass) {
+		case "CLERIC":
+		case "DRUID":
+			updateSavingThrows(2, 0, 2, 0, 8);
+		break;
+		case "SORCERER":
+		case "WIZARD":
+			updateSavingThrows(0, 0, 2, 0, 4);
+		break;
+		case "BARBARIAN":
+			updateSavingThrows(2, 0, 0, 1, 12)
+		break;
+		case "FIGHTER":
+		case "PALADIN":
+			updateSavingThrows(2, 0, 0, 1, 10);
+		break;
+		case "MONK":
+			updateSavingThrows(2, 2, 2, 0, 8);
+		break;
+		case "BARD":
+			updateSavingThrows(0, 2, 2, 0, 6);
+		break;
+		case "RANGER":
+			updateSavingThrows(2, 2, 0, 1, 8);
+		break;
+		case "ROGUE":
+			updateSavingThrows(0, 2, 0, 0, 6);
+		break;
+		case "NewBlankClass":
+			// A placeholder for future class additions. 
+			//
+			// This is the SECOND place (in order of execution) where the value of window.selClass affects subsequent calculations. 
+			// 
+		break;
+	}
+
 	
-	//var skPts = ( inappr + inbala + inbluf + inclim + inconc + incraf + indeci + indipl + indisa + indisg + inesca + inforg + ingath + inhand + inheal + inhide + ininti + injump + inknow + inlist + inmove + inopen + inperf + inprof + inride + insear + insens + inslei + inspel + inspot + insurv + inswim + intumb + inusem + inuser + inbla1 + inbla2 + inbla3 );
-	
-	var skPtsUsed = ( Number(inappr) + Number(inbala) + Number(inbluf) + Number(inclim) + Number(inconc) + Number(incraf) + Number(indeci) + Number(indipl) + Number(indisa) + Number(indisg) + Number(inesca) + Number(inforg) + Number(ingath) + Number(inhand) + Number(inheal) + Number(inhide) + Number(ininti) + Number(injump) + Number(inknow) + Number(inlist) + Number(inmove) + Number(inopen) + Number(inperf) + Number(inprof) + Number(inride) + Number(insear) + Number(insens) + Number(inslei) + Number(inspel) + Number(inspot) + Number(insurv) + Number(inswim) + Number(intumb) + Number(inusem) + Number(inuser) + Number(inbla1) + Number(inbla2) + Number(inbla3) );
-	// alert("inappr " + inappr + "\ninbluf " + inbluf + "\nskPts = " + skPts);
+
+}
+
+
+var calcPoints = function(form) {
+
+	window.inappr = form.in_appr.value;
+	window.inbala = form.in_bala.value;
+	window.inbluf = form.in_bluf.value;
+	window.inclim = form.in_clim.value;
+	window.inconc = form.in_conc.value;
+	window.incraf = form.in_craf.value;
+	window.indeci = form.in_deci.value;
+	window.indipl = form.in_dipl.value;
+	window.indisa = form.in_disa.value;
+	window.indisg = form.in_disg.value;
+	window.inesca = form.in_esca.value;
+	window.inforg = form.in_forg.value;
+	window.ingath = form.in_gath.value;
+	window.inhand = form.in_hand.value;
+	window.inheal = form.in_heal.value;
+	window.inhide = form.in_hide.value;
+	window.ininti = form.in_inti.value;
+	window.injump = form.in_jump.value;
+	window.inknow = form.in_know.value;
+	window.inlist = form.in_list.value;
+	window.inmove = form.in_move.value;
+	window.inopen = form.in_open.value;
+	window.inperf = form.in_perf.value;
+	window.inprof = form.in_prof.value;
+	window.inride = form.in_ride.value;
+	window.insear = form.in_sear.value;
+	window.insens = form.in_sens.value;
+	window.inslei = form.in_slei.value;
+	window.inspel = form.in_spel.value;
+	window.inspot = form.in_spot.value;
+	window.insurv = form.in_surv.value;
+	window.inswim = form.in_swim.value;
+	window.intumb = form.in_tumb.value;
+	window.inusem = form.in_usem.value;
+	window.inuser = form.in_user.value;
+	window.inbla1 = form.in_bla1.value;
+	window.inbla2 = form.in_bla2.value;
+	window.inbla3 = form.in_bla3.value;
+
+	var skillsList = 	["appr", 	"bala", 	"bluf", 	"clim", 	"conc", 	"craf", 	"deci", 	"dipl", 	"disa", 	"disg", 	"esca", 	"forg", 	"gath", 	"hand", 	"heal", 	"hide", 	"inti", 	"jump", 	"know", 	"list", 	"move", 	"open", 	"perf", 	"prof", 	"ride", 	"sear", 	"sens", 	"slei", 	"spel", 	"spot", 	"surv", 	"swim", 	"tumb", 	"usem", 	"user"]; // 	"bla1", 	"bla2", 	"bla3" 
+	var whichModList = 	["int", 	"dex", 		"cha", 		"str", 		"con", 		"int", 		"int", 		"cha", 		"int", 		"cha", 		"dex", 		"int", 		"cha", 		"cha", 		"wis", 		"dex", 		"cha", 		"str", 		"int", 		"wis", 		"dex", 		"dex", 		"cha", 		"wis", 		"dex", 		"int", 		"wis", 		"dex", 		"int", 		"wis", 		"wis", 		"str", 		"dex", 		"cha", 		"dex"];  // 	"none",		"none",		"none"
+	// var untrained = [true, true, true, true, true, true, false, true, false, true, true, true, true, false, true, true, true, true, false, true, true, false, false, false, true, true, true, false, false, true, true, true, false, false, true, true, true, true ]
+
+	window.skillPointsSpent = 0;
+
+	for ( i = 0 ; i < skillsList.length ; i++ ) {
+		switch (whichModList[i]) {
+			case "str": 
+				var mod = window.strMod; 
+			break;
+			case "dex": 
+				var mod = window.dexMod; 
+			break;
+			case "con": 
+				var mod = window.conMod; 
+			break;
+			case "wis": 
+				var mod = window.wisMod; 
+			break;
+			case "int": 
+				var mod = window.intMod; 
+			break;
+			case "cha": 
+				var mod = window.chaMod; 
+			break;
+			case "none":
+				var mod = 0;
+			break;
+		}
+
 		
-	window.skPtsRemaining = window.skPts - skPtsUsed;
-	
-	document.getElementById("sk-points-starting").innerHTML = ("Skill Points Remaining: " + (window.skPts - skPtsUsed )) ; 	
-	
-	if (skPtsRemaining === 0) {
-		document.getElementById("skills-finish").style.display = "block";
-	} else {}
-	
-	//____________________________________________________________________________________
-	// --- This First one, Appraise, is written Un-Minified for ease of later editing. 
-	//
-	// --- Each function relies on a 4 character string ( here: "appr" ) which appears
-	//	   17 times in each. 
-	//
-	// --- It also relies on two occurances of the relevant modifier's 3 letter string
-	// 	   ("str", "dex", etc) which appear without quotes as part of a window.XXXMod 
-	//	   variable. 
-	//____________________________________________________________________________________
-	var apprInClass = document.getElementById("c-appr").innerHTML;
-	var apprMscMod = document.getElementById("ms-appr").innerHTML;
-	if (apprMscMod === "-") {
-		var apprMscMod = 0;						// set equal to zero if element value is "-" (default)
-	} else {
-		var apprMscMod = Number(apprMscMod);	// else, try to convert to a number
+		if (document.getElementById("ms-" + skillsList[i] ).innerHTML === "-") {
+			var misc = 0;
+		} else {
+			var misc = Number(document.getElementById("ms-" + skillsList[i] ).innerHTML ) ;
+		}
+
+		if (window.allSkillsBool[i]) {
+			var maths = Number(mod) + Number(misc) + Number(window["in" + skillsList[i] ] );
+			document.getElementById("t-" + skillsList[i] ).innerHTML = ("+ " + maths ) ;
+		} else {
+			var maths = Number(mod) + Number(misc) + ( (Number(window["in" + skillsList[i] ] ) ) / 2 ) ;
+			document.getElementById("t-" + skillsList[i] ).innerHTML = ("+ " + maths ) ;
+		}
+
+		window.skillPointsSpent += Number(window["in" + skillsList[i] ] ) ;
+
+		// alert("SPENT/Window.skPts: " + window.skillPointsSpent + " " + window.skPts );
+
 	}
-	if (apprInClass === "CLASS: 4") {			// If it is a class skill
-		var tappr = (window.intMod) + ( Number(inappr) ) + (apprMscMod);
-	} else {
-		var tappr = (window.intMod) + ( Number(inappr) / 2 ) + (apprMscMod);
-	}
-	document.getElementById("t-appr").innerHTML = ("+ " + (tappr)) ;
-	//____________________________________________________________________________________
-	var balaInClass = document.getElementById("c-bala").innerHTML;
-	var balaMscMod = document.getElementById("ms-bala").innerHTML;
-	if (balaMscMod === "-") { var balaMscMod = 0;} else {var balaMscMod = Number(balaMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (balaInClass === "CLASS: 4") { var tbala = (window.dexMod) + ( Number(inbala) ) + (balaMscMod); } else { var tbala = (window.dexMod) + ( Number(inbala) / 2 ) + (balaMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-bala").innerHTML = ("+ " + (tbala)) ;
-	//____________________________________________________________________________________
-	var blufInClass = document.getElementById("c-bluf").innerHTML;
-	var blufMscMod = document.getElementById("ms-bluf").innerHTML;
-	if (blufMscMod === "-") { var blufMscMod = 0;} else {var blufMscMod = Number(blufMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (blufInClass === "CLASS: 4") { var tbluf = (window.chaMod) + ( Number(inbluf) ) + (blufMscMod); } else { var tbluf = (window.chaMod) + ( Number(inbluf) / 2 ) + (blufMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-bluf").innerHTML = ("+ " + (tbluf)) ;
-	//____________________________________________________________________________________
-	var climInClass = document.getElementById("c-clim").innerHTML;
-	var climMscMod = document.getElementById("ms-clim").innerHTML;
-	if (climMscMod === "-") { var climMscMod = 0;} else {var climMscMod = Number(climMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (climInClass === "CLASS: 4") { var tclim = (window.strMod) + ( Number(inclim) ) + (climMscMod); } else { var tclim = (window.strMod) + ( Number(inclim) / 2 ) + (climMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-clim").innerHTML = ("+ " + (tclim)) ;
-	//____________________________________________________________________________________
-	var concInClass = document.getElementById("c-conc").innerHTML;
-	var concMscMod = document.getElementById("ms-conc").innerHTML;
-	if (concMscMod === "-") { var concMscMod = 0;} else {var concMscMod = Number(concMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (concInClass === "CLASS: 4") { var tconc = (window.conMod) + ( Number(inconc) ) + (concMscMod); } else { var tconc = (window.conMod) + ( Number(inconc) / 2 ) + (concMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-conc").innerHTML = ("+ " + (tconc)) ;
-	//____________________________________________________________________________________
-	var crafInClass = document.getElementById("c-craf").innerHTML;
-	var crafMscMod = document.getElementById("ms-craf").innerHTML;
-	if (crafMscMod === "-") { var crafMscMod = 0;} else {var crafMscMod = Number(crafMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (crafInClass === "CLASS: 4") { var tcraf = (window.intMod) + ( Number(incraf) ) + (crafMscMod); } else { var tcraf = (window.intMod) + ( Number(incraf) / 2 ) + (crafMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-craf").innerHTML = ("+ " + (tcraf)) ;
-	//____________________________________________________________________________________
-	var deciInClass = document.getElementById("c-deci").innerHTML;
-	var deciMscMod = document.getElementById("ms-deci").innerHTML;
-	if (deciMscMod === "-") { var deciMscMod = 0;} else {var deciMscMod = Number(deciMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (deciInClass === "CLASS: 4") { var tdeci = (window.intMod) + ( Number(indeci) ) + (deciMscMod); } else { var tdeci = (window.intMod) + ( Number(indeci) / 2 ) + (deciMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-deci").innerHTML = ("+ " + (tdeci)) ;
-	//____________________________________________________________________________________
-	var diplInClass = document.getElementById("c-dipl").innerHTML;
-	var diplMscMod = document.getElementById("ms-dipl").innerHTML;
-	if (diplMscMod === "-") { var diplMscMod = 0;} else {var diplMscMod = Number(diplMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (diplInClass === "CLASS: 4") { var tdipl = (window.chaMod) + ( Number(indipl) ) + (diplMscMod); } else { var tdipl = (window.chaMod) + ( Number(indipl) / 2 ) + (diplMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-dipl").innerHTML = ("+ " + (tdipl)) ;
-	//____________________________________________________________________________________
-	var disaInClass = document.getElementById("c-disa").innerHTML;
-	var disaMscMod = document.getElementById("ms-disa").innerHTML;
-	if (disaMscMod === "-") { var disaMscMod = 0;} else {var disaMscMod = Number(disaMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (disaInClass === "CLASS: 4") { var tdisa = (window.intMod) + ( Number(indisa) ) + (disaMscMod); } else { var tdisa = (window.intMod) + ( Number(indisa) / 2 ) + (disaMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-disa").innerHTML = ("+ " + (tdisa)) ;
-	//____________________________________________________________________________________
-	var disgInClass = document.getElementById("c-disg").innerHTML;
-	var disgMscMod = document.getElementById("ms-disg").innerHTML;
-	if (disgMscMod === "-") { var disgMscMod = 0;} else {var disgMscMod = Number(disgMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (disgInClass === "CLASS: 4") { var tdisg = (window.chaMod) + ( Number(indisg) ) + (disgMscMod); } else { var tdisg = (window.chaMod) + ( Number(indisg) / 2 ) + (disgMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-disg").innerHTML = ("+ " + (tdisg)) ;
-	//____________________________________________________________________________________
-	var escaInClass = document.getElementById("c-esca").innerHTML;
-	var escaMscMod = document.getElementById("ms-esca").innerHTML;
-	if (escaMscMod === "-") { var escaMscMod = 0;} else {var escaMscMod = Number(escaMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (escaInClass === "CLASS: 4") { var tesca = (window.dexMod) + ( Number(inesca) ) + (escaMscMod); } else { var tesca = (window.dexMod) + ( Number(inesca) / 2 ) + (escaMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-esca").innerHTML = ("+ " + (tesca)) ;
-	//____________________________________________________________________________________
-	var forgInClass = document.getElementById("c-forg").innerHTML;
-	var forgMscMod = document.getElementById("ms-forg").innerHTML;
-	if (forgMscMod === "-") { var forgMscMod = 0;} else {var forgMscMod = Number(forgMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (forgInClass === "CLASS: 4") { var tforg = (window.intMod) + ( Number(inforg) ) + (forgMscMod); } else { var tforg = (window.intMod) + ( Number(inforg) / 2 ) + (forgMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-forg").innerHTML = ("+ " + (tforg)) ;
-	//____________________________________________________________________________________
-	var gathInClass = document.getElementById("c-gath").innerHTML;
-	var gathMscMod = document.getElementById("ms-gath").innerHTML;
-	if (gathMscMod === "-") { var gathMscMod = 0;} else {var gathMscMod = Number(gathMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (gathInClass === "CLASS: 4") { var tgath = (window.chaMod) + ( Number(ingath) ) + (gathMscMod); } else { var tgath = (window.chaMod) + ( Number(ingath) / 2 ) + (gathMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-gath").innerHTML = ("+ " + (tgath)) ;
-	//____________________________________________________________________________________
-	var handInClass = document.getElementById("c-hand").innerHTML;
-	var handMscMod = document.getElementById("ms-hand").innerHTML;
-	if (handMscMod === "-") { var handMscMod = 0;} else {var handMscMod = Number(handMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (handInClass === "CLASS: 4") { var thand = (window.chaMod) + ( Number(inhand) ) + (handMscMod); } else { var thand = (window.chaMod) + ( Number(inhand) / 2 ) + (handMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-hand").innerHTML = ("+ " + (thand)) ;
-	//____________________________________________________________________________________
-	var healInClass = document.getElementById("c-heal").innerHTML;
-	var healMscMod = document.getElementById("ms-heal").innerHTML;
-	if (healMscMod === "-") { var healMscMod = 0;} else {var healMscMod = Number(healMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (healInClass === "CLASS: 4") { var theal = (window.wisMod) + ( Number(inheal) ) + (healMscMod); } else { var theal = (window.wisMod) + ( Number(inheal) / 2 ) + (healMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-heal").innerHTML = ("+ " + (theal)) ;
-	//____________________________________________________________________________________
-	var hideInClass = document.getElementById("c-hide").innerHTML;
-	var hideMscMod = document.getElementById("ms-hide").innerHTML;
-	if (hideMscMod === "-") { var hideMscMod = 0;} else {var hideMscMod = Number(hideMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (hideInClass === "CLASS: 4") { var thide = (window.dexMod) + ( Number(inhide) ) + (hideMscMod); } else { var thide = (window.dexMod) + ( Number(inhide) / 2 ) + (hideMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-hide").innerHTML = ("+ " + (thide)) ;
-	//____________________________________________________________________________________
-	var intiInClass = document.getElementById("c-inti").innerHTML;
-	var intiMscMod = document.getElementById("ms-inti").innerHTML;
-	if (intiMscMod === "-") { var intiMscMod = 0;} else {var intiMscMod = Number(intiMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (intiInClass === "CLASS: 4") { var tinti = (window.chaMod) + ( Number(ininti) ) + (intiMscMod); } else { var tinti = (window.chaMod) + ( Number(ininti) / 2 ) + (intiMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-inti").innerHTML = ("+ " + (tinti)) ;
-	//____________________________________________________________________________________
-	var jumpInClass = document.getElementById("c-jump").innerHTML;
-	var jumpMscMod = document.getElementById("ms-jump").innerHTML;
-	if (jumpMscMod === "-") { var jumpMscMod = 0;} else {var jumpMscMod = Number(jumpMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (jumpInClass === "CLASS: 4") { var tjump = (window.strMod) + ( Number(injump) ) + (jumpMscMod); } else { var tjump = (window.strMod) + ( Number(injump) / 2 ) + (jumpMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-jump").innerHTML = ("+ " + (tjump)) ;
-	//____________________________________________________________________________________
-	var knowInClass = document.getElementById("c-know").innerHTML;
-	var knowMscMod = document.getElementById("ms-know").innerHTML;
-	if (knowMscMod === "-") { var knowMscMod = 0;} else {var knowMscMod = Number(knowMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (knowInClass === "CLASS: 4") { var tknow = (window.intMod) + ( Number(inknow) ) + (knowMscMod); } else { var tknow = (window.intMod) + ( Number(inknow) / 2 ) + (knowMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-know").innerHTML = ("+ " + (tknow)) ;
-	//____________________________________________________________________________________
-	var listInClass = document.getElementById("c-list").innerHTML;
-	var listMscMod = document.getElementById("ms-list").innerHTML;
-	if (listMscMod === "-") { var listMscMod = 0;} else {var listMscMod = Number(listMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (listInClass === "CLASS: 4") { var tlist = (window.wisMod) + ( Number(inlist) ) + (listMscMod); } else { var tlist = (window.wisMod) + ( Number(inlist) / 2 ) + (listMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-list").innerHTML = ("+ " + (tlist)) ;
-	//____________________________________________________________________________________
-	var moveInClass = document.getElementById("c-move").innerHTML;
-	var moveMscMod = document.getElementById("ms-move").innerHTML;
-	if (moveMscMod === "-") { var moveMscMod = 0;} else {var moveMscMod = Number(moveMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (moveInClass === "CLASS: 4") { var tmove = (window.dexMod) + ( Number(inmove) ) + (moveMscMod); } else { var tmove = (window.dexMod) + ( Number(inmove) / 2 ) + (moveMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-move").innerHTML = ("+ " + (tmove)) ;
-	//____________________________________________________________________________________
-	var openInClass = document.getElementById("c-open").innerHTML;
-	var openMscMod = document.getElementById("ms-open").innerHTML;
-	if (openMscMod === "-") { var openMscMod = 0;} else {var openMscMod = Number(openMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (openInClass === "CLASS: 4") { var topen = (window.dexMod) + ( Number(inopen) ) + (openMscMod); } else { var topen = (window.dexMod) + ( Number(inopen) / 2 ) + (openMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-open").innerHTML = ("+ " + (topen)) ;
-	//____________________________________________________________________________________
-	var perfInClass = document.getElementById("c-perf").innerHTML;
-	var perfMscMod = document.getElementById("ms-perf").innerHTML;
-	if (perfMscMod === "-") { var perfMscMod = 0;} else {var perfMscMod = Number(perfMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (perfInClass === "CLASS: 4") { var tperf = (window.chaMod) + ( Number(inperf) ) + (perfMscMod); } else { var tperf = (window.chaMod) + ( Number(inperf) / 2 ) + (perfMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-perf").innerHTML = ("+ " + (tperf)) ;
-	//____________________________________________________________________________________
-	var profInClass = document.getElementById("c-prof").innerHTML;
-	var profMscMod = document.getElementById("ms-prof").innerHTML;
-	if (profMscMod === "-") { var profMscMod = 0;} else {var profMscMod = Number(profMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (profInClass === "CLASS: 4") { var tprof = (window.wisMod) + ( Number(inprof) ) + (profMscMod); } else { var tprof = (window.wisMod) + ( Number(inprof) / 2 ) + (profMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-prof").innerHTML = ("+ " + (tprof)) ;
-	//____________________________________________________________________________________
-	var rideInClass = document.getElementById("c-ride").innerHTML;
-	var rideMscMod = document.getElementById("ms-ride").innerHTML;
-	if (rideMscMod === "-") { var rideMscMod = 0;} else {var rideMscMod = Number(rideMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (rideInClass === "CLASS: 4") { var tride = (window.dexMod) + ( Number(inride) ) + (rideMscMod); } else { var tride = (window.dexMod) + ( Number(inride) / 2 ) + (rideMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-ride").innerHTML = ("+ " + (tride)) ;
-	//____________________________________________________________________________________
-	var searInClass = document.getElementById("c-sear").innerHTML;
-	var searMscMod = document.getElementById("ms-sear").innerHTML;
-	if (searMscMod === "-") { var searMscMod = 0;} else {var searMscMod = Number(searMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (searInClass === "CLASS: 4") { var tsear = (window.intMod) + ( Number(insear) ) + (searMscMod); } else { var tsear = (window.intMod) + ( Number(insear) / 2 ) + (searMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-sear").innerHTML = ("+ " + (tsear)) ;
-	//____________________________________________________________________________________
-	var sensInClass = document.getElementById("c-sens").innerHTML;
-	var sensMscMod = document.getElementById("ms-sens").innerHTML;
-	if (sensMscMod === "-") { var sensMscMod = 0;} else {var sensMscMod = Number(sensMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (sensInClass === "CLASS: 4") { var tsens = (window.wisMod) + ( Number(insens) ) + (sensMscMod); } else { var tsens = (window.wisMod) + ( Number(insens) / 2 ) + (sensMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-sens").innerHTML = ("+ " + (tsens)) ;
-	//____________________________________________________________________________________
-	var sleiInClass = document.getElementById("c-slei").innerHTML;
-	var sleiMscMod = document.getElementById("ms-slei").innerHTML;
-	if (sleiMscMod === "-") { var sleiMscMod = 0;} else {var sleiMscMod = Number(sleiMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (sleiInClass === "CLASS: 4") { var tslei = (window.dexMod) + ( Number(inslei) ) + (sleiMscMod); } else { var tslei = (window.dexMod) + ( Number(inslei) / 2 ) + (sleiMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-slei").innerHTML = ("+ " + (tslei)) ;
-	//____________________________________________________________________________________
-	var spelInClass = document.getElementById("c-spel").innerHTML;
-	var spelMscMod = document.getElementById("ms-spel").innerHTML;
-	if (spelMscMod === "-") { var spelMscMod = 0;} else {var spelMscMod = Number(spelMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (spelInClass === "CLASS: 4") { var tspel = (window.intMod) + ( Number(inspel) ) + (spelMscMod); } else { var tspel = (window.intMod) + ( Number(inspel) / 2 ) + (spelMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-spel").innerHTML = ("+ " + (tspel)) ;
-	//____________________________________________________________________________________
-	var spotInClass = document.getElementById("c-spot").innerHTML;
-	var spotMscMod = document.getElementById("ms-spot").innerHTML;
-	if (spotMscMod === "-") { var spotMscMod = 0;} else {var spotMscMod = Number(spotMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (spotInClass === "CLASS: 4") { var tspot = (window.wisMod) + ( Number(inspot) ) + (spotMscMod); } else { var tspot = (window.wisMod) + ( Number(inspot) / 2 ) + (spotMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-spot").innerHTML = ("+ " + (tspot)) ;
-	//____________________________________________________________________________________
-	var survInClass = document.getElementById("c-surv").innerHTML;
-	var survMscMod = document.getElementById("ms-surv").innerHTML;
-	if (survMscMod === "-") { var survMscMod = 0;} else {var survMscMod = Number(survMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (survInClass === "CLASS: 4") { var tsurv = (window.wisMod) + ( Number(insurv) ) + (survMscMod); } else { var tsurv = (window.wisMod) + ( Number(insurv) / 2 ) + (survMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-surv").innerHTML = ("+ " + (tsurv)) ;
-	//____________________________________________________________________________________
-	var swimInClass = document.getElementById("c-swim").innerHTML;
-	var swimMscMod = document.getElementById("ms-swim").innerHTML;
-	if (swimMscMod === "-") { var swimMscMod = 0;} else {var swimMscMod = Number(swimMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (swimInClass === "CLASS: 4") { var tswim = (window.strMod) + ( Number(inswim) ) + (swimMscMod); } else { var tswim = (window.strMod) + ( Number(inswim) / 2 ) + (swimMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-swim").innerHTML = ("+ " + (tswim)) ;
-	//____________________________________________________________________________________
-	var tumbInClass = document.getElementById("c-tumb").innerHTML;
-	var tumbMscMod = document.getElementById("ms-tumb").innerHTML;
-	if (tumbMscMod === "-") { var tumbMscMod = 0;} else {var tumbMscMod = Number(tumbMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (tumbInClass === "CLASS: 4") { var ttumb = (window.dexMod) + ( Number(intumb) ) + (tumbMscMod); } else { var ttumb = (window.dexMod) + ( Number(intumb) / 2 ) + (tumbMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-tumb").innerHTML = ("+ " + (ttumb)) ;
-	//____________________________________________________________________________________
-	var usemInClass = document.getElementById("c-usem").innerHTML;
-	var usemMscMod = document.getElementById("ms-usem").innerHTML;
-	if (usemMscMod === "-") { var usemMscMod = 0;} else {var usemMscMod = Number(usemMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (usemInClass === "CLASS: 4") { var tusem = (window.chaMod) + ( Number(inusem) ) + (usemMscMod); } else { var tusem = (window.chaMod) + ( Number(inusem) / 2 ) + (usemMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-usem").innerHTML = ("+ " + (tusem)) ;
-	//____________________________________________________________________________________
-	var userInClass = document.getElementById("c-user").innerHTML;
-	var userMscMod = document.getElementById("ms-user").innerHTML;
-	if (userMscMod === "-") { var userMscMod = 0;} else {var userMscMod = Number(userMscMod);}	// set equal to zero if element value is "-" (default)else, try to convert to a number
-	if (userInClass === "CLASS: 4") { var tuser = (window.dexMod) + ( Number(inuser) ) + (userMscMod); } else { var tuser = (window.dexMod) + ( Number(inuser) / 2 ) + (userMscMod); } // Whether or not it is a class skill
-	document.getElementById("t-user").innerHTML = ("+ " + (tuser)) ;
-	//____________________________________________________________________________________
-	
-}	// );
+
+	var dispSkillPoints = window.skPts - window.skillPointsSpent;
+
+	document.getElementById("sk-points-starting").innerHTML = "Skill Points Remaining: " + dispSkillPoints ;
+
+}
+
+
+/*
+if (untrained[i] === true) {
+			document.getElementById("pr-" + skillsList[i]).innerHTML = document.getElementById("t-" + skillsList[i]).innerHTML ;
+		} else if ( (window["in" + skillsList[i] ] ) > 0 ) {
+			document.getElementById("pr-" + skillsList[i]).innerHTML = document.getElementById("t-" + skillsList[i]).innerHTML ;
+		} else {
+			document.getElementById("pr-" + skillsList[i]).innerHTML = " " ;
+		}
+*/
+
+
+
+
 
 var addAbModifiers = function() {
 	// alert("function begin");
@@ -951,10 +838,7 @@ var decodeSkillFocus = function(featTarget) {
 // OK OK I KNOW. THIS IS OVERLY COMPLEX. I'M TRYING TO TAKE INTO ACCOUNT WHETHER OTHER MISC. MODIFIERS 
 // WILL BE ADDED LATER. MAYBE 1'S OR 3'S. HALF ELFS EVEN HAVE SOME ONES. SO ITS EXPANDABLE. 
 
-
-
 var featUpdateSkill = function(featName) {
-
 
 
 	var confirmF = confirm("Select " + featName + "?");
@@ -978,30 +862,74 @@ var featUpdateSkill = function(featName) {
 		}			
 	}
 
-	if (confirmF && confirmR) {
+	if (confirmF || confirmR) {
 
 		switch(featName) {
 			case "Acrobatic":
-				var jumpMiscMod = document.getElementById("ms-jump").innerHTML;
-				var tumbMiscMod = document.getElementById("ms-tumb").innerHTML;
-			
-				if (jumpMiscMod === "-") {
-					document.getElementById("ms-jump").innerHTML = 2;
-				} else {
-					jumpMiscMod = Number(jumpMiscMod);
-					jumpMiscMod += 2;
-					document.getElementById("ms-jump").innerHTML = jumpMiscMod;
-				}
-			
-				if (tumbMiscMod === "-") {
-					document.getElementById("ms-tumb").innerHTML = 2;
-				} else {
-					tumbMiscMod = Number(tumbMiscMod);
-					tumbMiscMod += 2;
-					document.getElementById("ms-tumb").innerHTML = tumbMiscMod;
-				}
+				featUpdateSkillTwin("jump");
+				featUpdateSkillTwin("tumb");
 			break;
+			case "Agile":
+				featUpdateSkillTwin("bala");
+				featUpdateSkillTwin("esca");
+			break;
+			case "Alertness":
+				featUpdateSkillTwin("list");
+				featUpdateSkillTwin("spot");
+			break;
+			case "Animal Affinity":
+				featUpdateSkillTwin("hand");
+				featUpdateSkillTwin("ride");
+			break;
+			case "Athletic":
+				featUpdateSkillTwin("clim");
+				featUpdateSkillTwin("swim");
+			break;
+			case "Deceitful":
+				featUpdateSkillTwin("disg");
+				featUpdateSkillTwin("forg");
+			break;
+			case "Deft Hands":
+				featUpdateSkillTwin("slei");
+				featUpdateSkillTwin("user");
+			break;
+			case "Diligent":
+				featUpdateSkillTwin("appr");
+				featUpdateSkillTwin("deci");
+			break;
+			case "Investigator":
+				featUpdateSkillTwin("gath");
+				featUpdateSkillTwin("sear");
+			break;
+			case "Magical Aptitude":
+				featUpdateSkillTwin("spel");
+				featUpdateSkillTwin("usem");
+			break;
+			case "Negotiator":
+				featUpdateSkillTwin("dipl");
+				featUpdateSkillTwin("sens");
+			break;
+			case "Nimble Fingers":
+				featUpdateSkillTwin("disa");
+				featUpdateSkillTwin("open");
+			break;
+			case "Persuasive":
+				featUpdateSkillTwin("bluf");
+				featUpdateSkillTwin("inti");
+			break;
+			case "Self-Sufficient":
+				featUpdateSkillTwin("heal");
+				featUpdateSkillTwin("surv");
+			break;
+			case "Stealthy":
+				featUpdateSkillTwin("hide");
+				featUpdateSkillTwin("move");
+			break;
+			case "Weapon Finesse":
+				alert("Melee Attack Modifier has been changed to DEX.");
+				window.weaponFinesse = true;
 
+			break;
 
 		}
 		// document.getElementById("ms-clim").innerHTML = 2;
@@ -1009,19 +937,316 @@ var featUpdateSkill = function(featName) {
 	}
 }
 
+var featUpdateSkillTwin = function(featShortCode) {
+	var featUpdateMiscMod = document.getElementById("ms-" + featShortCode).innerHTML;
+	if (featUpdateMiscMod === "-") { document.getElementById("ms-" + featShortCode).innerHTML = 2; } else {
+		featUpdateMiscMod = Number(featUpdateMiscMod);
+		featUpdateMiscMod += 2;
+		document.getElementById("ms-jump").innerHTML = featUpdateMiscMod; 
+	}
+}
 
 
+
+
+
+
+
+//	Treat	PLATINUM		=	1000
+// 			GOLD 		= 	100
+// 			SILVER 		= 	10
+//			COPPER		=	1
+//	
+
+var calculateGold = function(mxFactor, fMonks) {	
+	var startingGold = 0;
+	for ( i = 0 ; i < mxFactor ; i++ ) {	// Roll a d4 [mxFactor] times.
+		startingGold += ( Math.floor( Math.random() * 4 + 1) * fMonks ) * 100; // Calculate Number of Coppers in Possession. 
+	}
+	document.getElementById("copper-remaining").innerHTML = startingGold; // Display.
+	document.getElementById("roll-starting-gold").style.display = "none" ; // Remove button to prevent repeats. 
+}
+
+
+
+
+var rollStartingGold = function () {
+	switch (window.selClass) {
+		
+		case "DRUID":
+			calculateGold(2, 10);
+		break;
+		
+		case "SORCERER":
+		case "WIZARD":
+			calculateGold(3, 10);
+		break;
+		case "BARD":
+		case "BARBARIAN":
+			calculateGold(4, 10);
+		break;
+		case "CLERIC":
+		case "ROGUE":
+			calculateGold(5, 10);
+		break;
+		
+		case "FIGHTER":
+		case "PALADIN":
+		case "RANGER":
+			calculateGold(6, 10);
+		break;
+		case "MONK":
+			calculateGold(5, 1);
+		break;
+		case "NewBlankClass":
+			// A placeholder for future class additions. 
+			//
+			// This is the SECOND place (in order of execution) where the value of window.selClass affects subsequent calculations. 
+			// 
+		break;
+	}
+}
+
+
+var buyItem = function(itemName, itemCost, itemWeight) {
+
+	// alert("window item item-purchase-no :" + window.itemPurchaseNo);
+	
+	var goldRemaining = Number( document.getElementById("copper-remaining").innerHTML ) ;
+
+	if (itemCost <= goldRemaining) {
+		goldRemaining = goldRemaining - itemCost ;
+		document.getElementById("copper-remaining").innerHTML = goldRemaining ;
+
+		window.itemPurchaseNo;
+
+		if (window.itemPurchaseNo === undefined) {
+			window.itemPurchaseNo = 1;
+			document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = itemName ;
+			document.getElementById("item-purchase-no-" + window.itemPurchaseNo).style.display = "block" ;
+			
+			var totalWeight = Number(document.getElementById("total-weight").innerHTML);
+			totalWeight += itemWeight;
+			document.getElementById("total-weight").innerHTML = totalWeight;
+						
+			buySpecialItem(itemName, window.itemPurchaseNo);
+
+		} else {
+			window.itemPurchaseNo += 1;
+			document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = itemName ;
+			document.getElementById("item-purchase-no-" + window.itemPurchaseNo).style.display = "block" ;
+			
+			var totalWeight = Number(document.getElementById("total-weight").innerHTML);
+			totalWeight += itemWeight;
+			document.getElementById("total-weight").innerHTML = totalWeight;
+			
+			buySpecialItem(itemName, window.itemPurchaseNo);
+		}		
+	} else {
+		alert("You cannot afford this item.") ;
+	}
+}
+
+var buyItemStack = function(itemQty, itemName, itemCost, itemWeight) {
+	var goldRemaining = Number( document.getElementById("copper-remaining").innerHTML ) ;
+
+	if (itemCost <= goldRemaining) {
+		goldRemaining = goldRemaining - itemCost ;
+		document.getElementById("copper-remaining").innerHTML = goldRemaining ;
+		
+		var itemQuantity = Number(document.getElementById("qty-" + itemName).innerHTML );
+				
+		itemQuantity += itemQty ;
+
+		document.getElementById("item-" + itemName).innerHTML = itemName ;
+		document.getElementById("item-" + itemName).style.display = "block" ;
+		
+		document.getElementById("qty-" + itemName).innerHTML = itemQuantity ;
+		document.getElementById("qty-" + itemName).style.display = "block" ;
+			
+		var totalWeight = Number(document.getElementById("total-weight").innerHTML);
+		totalWeight += itemWeight;
+		document.getElementById("total-weight").innerHTML = totalWeight;
+		
+	} else {
+		alert("You cannot afford this item.") ;
+	}
+}
+
+
+var buySpecialItem = function(itemName, itemNumber) {
+	switch (itemName) { 
+	case "Composite Longbow":			
+		var confirmBow = prompt("Composite bows take a STR bonus. \n Input desired STR bonus. Cost is +100gp (10,000 CP) per point. \n Input a number.") ;
+		goldRemaining = Number( document.getElementById("copper-remaining").innerHTML ) ;
+		goldRemaining = goldRemaining - ( Number(confirmBow) * 10000 ) ;
+		document.getElementById("item-purchase-no-" + itemNumber ).innerHTML = itemName + " (+" + confirmBow + ")" ;		
+		document.getElementById("copper-remaining").innerHTML = goldRemaining ;
+		
+	break;		
+	case "Composite Shortbow":
+		var confirmBow = prompt("Composite bows take a STR bonus. \n Input desired STR bonus. Cost is +75gp (7,500 CP) per point. \n Input a number.") ;
+		goldRemaining = Number( document.getElementById("copper-remaining").innerHTML ) ;
+		goldRemaining = goldRemaining - ( Number(confirmBow) * 7500 ) ;
+		document.getElementById("item-purchase-no-" + itemNumber ).innerHTML = itemName + " (+" + confirmBow + ")" ;		
+		document.getElementById("copper-remaining").innerHTML = goldRemaining ;
+	break;	
+	}
+}
 
 
 /*
-var vacuumUpAttr = function(form) {
-	var whichAttrClass = (form.attributeOne.value.toLowerCase() + "-option");
-	var list = document.getElementsByClassName(whichAttrClass);
-	for (var i = 0; i < list.length; i++) {
-    	list[i].style.display = "none";	// list[i] is a node with the desired class name
-    }
-}
+Global Variables
+
+window.forSave
+window.refSave
+window.wilSave
+window.baseAttackBonus
+
+
+
+
 */
+
+
+var populateCharacterSheet = function() {
+	
+	var formName = document.getElementById("form-name").value;
+	var formPlayer = document.getElementById("form-player").value;
+	var formAlignment = document.getElementById("form-alignment").value;
+	
+	var formAppearance = document.getElementById("form-appearance").value;
+	
+	
+	// document.getElementById("print-appearance").innerHTML = formAppearance ;
+	
+	document.getElementById("print-name").innerHTML = formName ;
+	document.getElementById("print-player").innerHTML = formPlayer ;
+	document.getElementById("print-alignment").innerHTML = formAlignment ;
+	document.getElementById("print-class").innerHTML = window.selClass ;
+	document.getElementById("print-level").innerHTML = 1 ;
+	document.getElementById("print-experience").innerHTML = 0 ;
+	document.getElementById("print-levelup").innerHTML = 1000 ;
+	
+	document.getElementById("print-ab-str").innerHTML = window.strAttr ;
+	document.getElementById("print-ab-dex").innerHTML = window.dexAttr ;
+	document.getElementById("print-ab-con").innerHTML = window.conAttr ;
+	document.getElementById("print-ab-wis").innerHTML = window.wisAttr ;
+	document.getElementById("print-ab-int").innerHTML = window.intAttr ;
+	document.getElementById("print-ab-cha").innerHTML = window.chaAttr ;
+
+	document.getElementById("print-sav-for").innerHTML = window.forSave ;
+	document.getElementById("print-sav-ref").innerHTML = window.refSave ;
+	document.getElementById("print-sav-wil").innerHTML = window.wilSave ;
+
+	document.getElementById("print-sav-for-tot").innerHTML = ( window.forSave + window.conMod ) ;
+	document.getElementById("print-sav-ref-tot").innerHTML = ( window.refSave + window.dexMod ) ;
+	document.getElementById("print-sav-wil-tot").innerHTML = ( window.wilSave + window.wisMod ) ;
+	// Because the totals are logged as the innerHTML of ID's, they can be accessed later
+	// and updated if misc or magic modifiers affect them due to feat or other future rule additions
+	// This should be done with a function calling this update to compile after this funciton
+	// is finished executing. 
+
+	document.getElementById("hit-points").innerHTML = window.hitPoints;
+
+	
+	var listStr = document.getElementsByClassName("print-mod-str");
+	for ( var i = 0 ; i < listStr.length ; i++ ) {
+		listStr[i].innerHTML = ("+ " + window.strMod); }
+
+	var listDex = document.getElementsByClassName("print-mod-dex");
+	for ( var i = 0 ; i < listDex.length ; i++ ) {
+		listDex[i].innerHTML = ("+ " + window.dexMod); }
+
+	var listCon = document.getElementsByClassName("print-mod-con");
+	for ( var i = 0 ; i < listCon.length ; i++ ) {
+		listCon[i].innerHTML = ("+ " + window.conMod);
+	}
+	var listWis = document.getElementsByClassName("print-mod-wis");
+	for ( var i = 0 ; i < listWis.length ; i++ ) {
+		listWis[i].innerHTML = ("+ " + window.wisMod);
+	}
+	var listInt = document.getElementsByClassName("print-mod-int");
+	for ( var i = 0 ; i < listInt.length ; i++ ) {
+		listInt[i].innerHTML = ("+ " + window.intMod);
+	}
+	var listCha = document.getElementsByClassName("print-mod-cha");
+	for ( var i = 0 ; i < listCha.length ; i++ ) {
+		listCha[i].innerHTML = ("+ " + window.chaMod);
+	}
+
+
+
+
+	var listBab = document.getElementsByClassName("print-bab-one");
+	for ( var i = 0 ; i < listBab.length ; i++ ) {
+		listBab[i].innerHTML = ("+ " + window.baseAttackBonus);
+	}
+	
+
+
+
+	if (window.weaponFinesse === true) {
+		document.getElementById("melee-attack-mod-title").innerHTML = ( "DEX<br>MODIFIER") ;
+		document.getElementById("melee-attack-mod").innerHTML = window.dexMod ;
+		document.getElementById("print-attack-first-one").innerHTML = ( window.baseAttackBonus + window.dexMod ) ;
+	} else {
+		document.getElementById("print-attack-first-one").innerHTML = ( window.baseAttackBonus + window.strMod ) ;
+		document.getElementById("melee-attack-mod").innerHTML = window.strMod ;
+	}
+
+	document.getElementById("print-ranged-first-one").innerHTML = ( window.baseAttackBonus + window.dexMod ) ;
+	document.getElementById("print-grapple-tot").innerHTML = ( window.baseAttackBonus + window.strMod ) ;
+
+
+	if (window.improvedInitiative === true) {
+		window.iniMiscMod = 4; // This is so it can be modified later if need be. 
+		document.getElementById("print-ini-misc").innerHTML = window.iniMiscMod ;
+		document.getElementById("print-ini-tot").innerHTML = ( window.iniMiscMod + window.dexMod ) ;
+	} else {
+		document.getElementById("print-ini-tot").innerHTML = window.dexMod ;
+	}
+
+
+	// Now watch as I print all the skill totals
+	var skillsList = ["appr", "bala", "bluf", "clim", "conc", "craf", "deci", "dipl", "disa", "disg", "esca", "forg", "gath", "hand", "heal", "hide", "inti", "jump", "know", "list", "move", "open", "perf", "prof", "ride", "sear", "sens", "slei", "spel", "spot", "surv", "swim", "tumb", "usem", "user", "bla1", "bla2", "bla3" ];
+	var untrained =  [true, true, true, true, true, true, false, true, false, true, true, true, true, false, true, true, true, true, false, true, true, false, false, false, true, true, true, false, false, true, true, true, false, false, true, true, true, true ]
+	for ( i = 0 ; i < skillsList.length ; i++ ) {
+		if (untrained[i] === true) {
+			document.getElementById("pr-" + skillsList[i]).innerHTML = document.getElementById("t-" + skillsList[i]).innerHTML ;
+		} else if ( (window["in" + skillsList[i] ] ) > 0 ) {
+			document.getElementById("pr-" + skillsList[i]).innerHTML = document.getElementById("t-" + skillsList[i]).innerHTML ;
+		} else {
+			document.getElementById("pr-" + skillsList[i]).innerHTML = " " ;
+		}
+
+	}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
