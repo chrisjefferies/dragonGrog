@@ -1,5 +1,5 @@
-var updateSkillPoints = function(form) {
-	
+var calcPoints = function(form) {
+
 	window.inappr = form.in_appr.value;
 	window.inbala = form.in_bala.value;
 	window.inbluf = form.in_bluf.value;
@@ -40,8 +40,33 @@ var updateSkillPoints = function(form) {
 	window.inbla3 = form.in_bla3.value;
 
 	var skillsList = ["appr", "bala", "bluf", "clim", "conc", "craf", "deci", "dipl", "disa", "disg", "esca", "forg", "gath", "hand", "heal", "hide", "inti", "jump", "know", "list", "move", "open", "perf", "prof", "ride", "sear", "sens", "slei", "spel", "spot", "surv", "swim", "tumb", "usem", "user", "bla1", "bla2", "bla3" ];
-	var untrained =  [true, true, true, true, true, true, false, true, false, true, true, true, true, false, true, true, true, true, false, true, true, false, false, false, true, true, true, false, false, true, true, true, false, false, true, true, true, true ]
+	// DONT NEED THIS YET // var untrained =  [true, true, true, true, true, true, false, true, false, true, true, true, true, false, true, true, true, true, false, true, true, false, false, false, true, true, true, false, false, true, true, true, false, false, true, true, true, true ]
+	var whichModList = ["int", "dex", "cha", "str", "con", "int", "int", "cha", "int", "cha", "dex", "int", "cha", "cha", "wis", "dex", "cha", "str", "int", "wis", "wis", "dex", "dex", "cha", "wis", "dex", "int", "wis", "dex", "int", "wis", "wis", "str", "dex", "cha", "dex" ]
 	for ( i = 0 ; i < skillsList.length ; i++ ) {
+		switch (whichModList[i]) {
+			case "str": var mod = window.strMod; break;
+			case "dex": var mod = window.dexMod; break;
+			case "con": var mod = window.conMod; break;
+			case "wis": var mod = window.wisMod; break;
+			case "int": var mod = window.intMod; break;
+			case "cha": var mod = window.chaMod; break;
+		}
+		var misc = Number(document.getElementById("ms-" + skillsList[i] ));
+		document.getElementById("t-appr").innerHTML = ("+ " + mod + misc + window["in" + skillsList[i] ] ) ;
+	}
+}
+	
+		(window["in" + skillsList[i] ] )
+
+
+		if (apprInClass === "CLASS: 4") {			// If it is a class skill
+			var tappr = (window.intMod) + ( Number(inappr) ) + (apprMscMod);
+		} else {
+			var tappr = (window.intMod) + ( Number(inappr) / 2 ) + (apprMscMod);
+		}
+			document.getElementById("t-appr").innerHTML = ("+ " + (tappr)) ;
+
+
 		if (untrained[i] === true) {
 			document.getElementById("pr-" + skillsList[i]).innerHTML = document.getElementById("t-" + skillsList[i]).innerHTML ;
 		} else if ( (window["in" + skillsList[i] ] ) > 0 ) {
@@ -87,13 +112,18 @@ var updateSkillPoints = function(form) {
 		var tappr = (window.intMod) + ( Number(inappr) / 2 ) + (apprMscMod);
 	}
 	document.getElementById("t-appr").innerHTML = ("+ " + (tappr)) ;
+}
 
 
 
 
-
-
-
+var calculateSkillTotal = function(whichMod) {
+	if (window.allSkillsBool[i]) {
+		document.getElementById("t-appr").innerHTML = ("+ " + (Number(whichMod)) + (Number(document.getElementById("t-appr").innerHTML)) ;
+	} else {
+		
+	}
+}
 
 
 

@@ -40,7 +40,7 @@ h1, h2, h3, p
 	clear: right;
 	}
 
-#print, #print-page-two
+#print, #print-page-two, #print-page-three
 	{
 	/*
 	width: 100%;	
@@ -83,6 +83,12 @@ h1, h2, h3, p
 		{
 		width: 92%;
 		}
+	}
+
+.tenth
+	{
+	width: 10%;
+	float: left;
 	}
 	
 .twelfth
@@ -137,7 +143,7 @@ h1, h2, h3, p
 	clear: left;
 	}
 
-.fill-space-feats
+.fill-space-feats, .tall-weapon
 	{
 	height: 30px;
 	}
@@ -169,17 +175,43 @@ h1, h2, h3, p
 	float: left;
 	}
 
+.item-notes
+	{
+	.feat-name;
+	margin-right: 0;
+	}
+
 .feat-notes
 	{
 	width: 72%;
 	float: left;
 	}
 
+.item-name
+	{
+	.feat-notes;
+	margin-right: 1%;
+	}
+
+
 .print-text-center
 	{
 	font-family: @marker;
 	font-size: 19px;
 	text-align: center;
+	}
+
+.print-fill
+	{
+	font-family: @marker;
+	font-size: 14px;
+	}
+
+.print-fill-weapon
+	{
+	.print-fill;
+	font-size: 18px;
+	line-height: 35px;
 	}
 
 .box
@@ -245,6 +277,12 @@ h1, h2, h3, p
 	height: 25px;
 	}
 
+.weapon-box-sm
+	{
+	font-size: 14px;
+	line-height: 29px;
+	}
+
 .tallbox
 	{
 	height: 223px;
@@ -272,6 +310,17 @@ h1, h2, h3, p
 .dragongrog
 	{
 	width: 98%;
+	}
+
+.width-100
+	{
+	width: 100%;
+	border: none;
+	margin-bottom: 0;
+	h1
+		{
+		padding-top: 2px;
+		}
 	}
 
 .mini-title
@@ -338,10 +387,29 @@ h1, h2, h3, p
 	background-color: #f2f2f2;
 	}
 
+.text-left
+	{
+	text-align: left;
+	}
 
+.weapon
+	{
+	width: 100%;
+	border-bottom: 2px solid #999;
+	border-left: 2px solid #999;
+	border-right: 2px solid #999;
+	padding: 0 1%;
+	height: 110px;
+	margin: 0;
+	box-sizing:border-box;
+	  -moz-box-sizing:border-box;
+	  -webkit-box-sizing:border-box;
+	}
 
-
-
+.w-marg-bot
+	{
+	margin-bottom: 4px;
+	}
 
 
 

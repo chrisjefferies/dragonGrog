@@ -822,7 +822,9 @@
 				<p id="total-weight">0</p>
 			</div>
 			
-			
+			<h3 id="weapon-slot-one">
+				Weapon Slot 1
+			</h3>
 			
 			<div class="item-list equip-list-item">
 				
@@ -977,7 +979,7 @@
 				</div>
 				<div class="buy-item">
 					<p>Heavy Crossbow</p>
-					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Gauntlet', 200, 1 );">
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Heavy Crossbow', 5000, 8 );">
 				</div>
 				<div class="buy-item">
 					<p>Light Crossbow</p>
@@ -1012,29 +1014,29 @@
 						Martial Weapons
 					</h3>
 				</div>
-				<div class="buy-item">
+				<div class="buy-item"> <!-- weaponName, itemCost, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves -->
 					<p>Throwing Axe</p>
-					<input class="buy-item-button" type="button" value="800" onclick="buyItem( 'Throwing Axe', 800, 2 );">
+					<input class="buy-item-button" type="button" value="800" onclick="buyWeapon('Throwing Axe', 800, 2, '1d6', '20/x2', '10ft', 'slsh', 'MED', 'No', '-', '-', '-', true );"> 
 				</div>
 				<div class="buy-item">
 					<p>Light Hammer</p>
-					<input class="buy-item-button" type="button" value="100" onclick="buyItem( 'Light Hammer', 100, 2 );">
+					<input class="buy-item-button" type="button" value="100" onclick="buyWeapon( 'Light Hammer', 100, 2, '1d4', '20/x2', '20ft', 'bldg', 'MED', No', '-', '-', '-');">
 				</div>
 				<div class="buy-item">
 					<p>Handaxe</p>
-					<input class="buy-item-button" type="button" value="600" onclick="buyItem( 'Handaxe', 600, 3 );">
+					<input class="buy-item-button" type="button" value="600" onclick="buyWeapon( 'Handaxe', 600, 3, '1d6', '20', 'x3', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-');">
 				</div>
 				<div class="buy-item">
 					<p>Kukri</p>
-					<input class="buy-item-button" type="button" value="800" onclick="buyItem( 'Kukri', 800, 2 );">
+					<input class="buy-item-button" type="button" value="800" onclick="buyWeapon( 'Kukri', 800, 2, '1d4', '18+', 'x2', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-' );">
 				</div>
 				<div class="buy-item">
 					<p>Light Pick</p>
-					<input class="buy-item-button" type="button" value="400" onclick="buyItem( 'Light Pick', 400, 3 );">
+					<input class="buy-item-button" type="button" value="400" onclick="buyWeapon( 'Light Pick', 400, 3, '1d4', '20', 'x4', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-'  );">
 				</div>
 				<div class="buy-item">
 					<p>Sap</p>
-					<input class="buy-item-button" type="button" value="100" onclick="buyItem( 'Sap', 100, 2 );">
+					<input class="buy-item-button" type="button" value="100" onclick="buyWeapon( 'Sap', 100, 2, '1d6', '20', 'x2', '&mdash;', 'bldg', 'MED', 'No', '-', '-', '-'  );">
 				</div>
 				<div class="buy-item">
 					<p>Short Sword</p>
@@ -1050,7 +1052,7 @@
 				</div>
 				<div class="buy-item">
 					<p>Longsword</p>
-					<input class="buy-item-button" type="button" value="1500" onclick="buyItem( 'Longsword', 1500, 4 );">
+					<input class="buy-item-button" type="button" value="1500" onclick="buyWeapon( 'Longsword', 1500, 4, '1d8', '19+', 'x2', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-' );">
 				</div>
 				<div class="buy-item">
 					<p>Heavy Pick</p>
@@ -1058,7 +1060,7 @@
 				</div>
 				<div class="buy-item">
 					<p>Rapier</p>
-					<input class="buy-item-button" type="button" value="2000" onclick="buyItem( 'Rapier', 2000, 2 );">
+					<input class="buy-item-button" type="button" value="2000" onclick="buyWeapon( 'Rapier', 2000, 2, '1d6', '18+', 'x2', '&mdash;', 'pirc', 'MED', 'No', '-', '-', '-' );">
 				</div>
 				<div class="buy-item">
 					<p>Scimitar</p>
@@ -1104,7 +1106,7 @@
 				</div>
 				<div class="buy-item">
 					<p>Greatsword</p>
-					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Greatsword', 5000, 8 );">
+					<input class="buy-item-button" type="button" value="5000" onclick="buyWeapon( 'Greatsword', 5000, 8, '2d6', '19+', 'x2', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-' );">
 				</div>
 				<div class="buy-item">
 					<p>Guisarme</p>
@@ -1128,7 +1130,7 @@
 				</div>
 				<div class="buy-item">
 					<p>Longbow</p>
-					<input class="buy-item-button" type="button" value="7500" onclick="buyItem( 'Longbow', 7500, 3 );">
+					<input class="buy-item-button" type="button" value="7500" onclick="buyWeapon( 'Longbow', 7500, 3, '1d8', '20', 'x3', '100ft', 'pirc', 'MED', 'No', '-', '-', '-' );">
 				</div>
 				<div class="buy-item">
 					<p>Composite Longbow</p>
@@ -1136,7 +1138,7 @@
 				</div>
 				<div class="buy-item">
 					<p>Shortbow</p>
-					<input class="buy-item-button" type="button" value="3000" onclick="buyItem( 'Shortbow', 3000, 2 );">
+					<input class="buy-item-button" type="button" value="3000" onclick="buyWeapon( 'Shortbow', 3000, 2, '1d6', '19+', 'x2', '60ft', 'slsh', 'MED', 'No', '-', '-', '-' );">
 				</div>
 				<div class="buy-item">
 					<p>Composite Shortbow</p>
@@ -1177,7 +1179,7 @@
 				</div>
 				<div class="buy-item">
 					<p>Bastard Sword</p>
-					<input class="buy-item-button" type="button" value="3500" onclick="buyItem( 'Bastard Sword', 3500, 6 );">
+					<input class="buy-item-button" type="button" value="3500" onclick="buyWeapon( 'Bastard Sword', 3500, 6, '1d10', '19+/x2', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-' );">
 				</div>
 				<div class="buy-item">
 					<p>Dwarven Waraxe</p>
@@ -1385,7 +1387,7 @@
 				</div>
 				<div class="buy-item">
 					<p>Winter Blanket</p>
-					<input class="buy-item-button" type="button" value="50" onclick="buyItem( 'Winter Blanket', 50, 5 );">
+					<input class="buy-item-button" type="button" value="50" onclick="buyItem( 'Winter Blanket', 50, 3 );">
 				</div>
 				<div class="buy-item">
 					<p>Small Winter Blanket</p>
@@ -3813,10 +3815,533 @@
 			
 	</section>
 	
+	<div id="mondodevspacer"></div>
 	
+	<section id="print-page-three">
+		<div class="paper">
+			
+			<div class="width-100 tall-weapon">
+				<div class="quarter">
+					<div class="quarter">
+						<div class="print-fill fill-space half print-name">
+						
+						</div>
+						<p class="label">
+							NAME
+						</p>
+					</div>
+					<div class="quarter">
+						<div class="print-fill fill-space half print-player">
+						
+						</div>
+						<p class="label">
+							PLAYER
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="width-100 tall-weapon">
+			</div>
+		
+			<div class="box blackbox dragongrog width-100">
+				<h1> 
+					WEAPONS & ATTACKS
+				</h1>
+				<p>
+					 TOOLS OF THE TRADE. AND THAT THING YOU FLAIL AROUND LIKE A MORON. GOOD STUFF.
+				</p>
+			</div>
+
+			<div class="weapon">
+				<!-- Name and Bonus titles -->
+				<div class="quarter">
+					<div class="eighth">
+						<p class="mini-title text-left">
+							WEAPON SLOT 1
+						</p>
+					</div>
+				</div>
+				<!-- All box titles -->
+				<div class="quarter">
+					<div class="tenth">
+						<p class="mini-title">
+							DAMAGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							CRITICAL
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							RANGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							TYPE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SIZE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							REACH
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							WEIGHT
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HARDNESS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HP
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SAVES
+						</p>
+					</div>
+				</div>
+				<!-- Name and Bonus -->
+				<div class="quarter">
+					<div class="eighth">
+						<div id="pr-w-s1-name" class="print-fill-weapon fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							WEAPON
+						</p>
+					</div>
+					<div class="eighth">
+						
+						<div id="pr-w-s1-atkbonus" class="fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							ATTACK BONUS
+						</p>
+					</div>
+				</div>
+				<!-- 10 boxes -->
+				<div class="quarter">
+					<div class="tenth w-marg-bot">
+						<div id="pr-w-s1-dmg" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-crit" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-rang" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-type" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-size" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-reach" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-weight" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-hardn" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-hp" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-saves" class="box weapon-box-sm">		
+						</div>
+					</div>
+				</div>
+				<!-- Notes -->
+				<div class="quarter">
+					<div class="fill-space tall-weapon">
+
+					</div>
+					<p class="label">
+						NOTES
+					</p>
+				</div>
+				<!-- Ammo -->
+				<div class="quarter">
+					<div class="fill-space tall-weapon">
+
+					</div>
+					<p class="label full-width">
+						AMMUNITION & CHARGES
+					</p>
+				</div>
+			</div>
+
+			
+			<div class="weapon">
+				<!-- Name and Bonus titles -->
+				<div class="quarter">
+					<div class="eighth">
+						<p class="mini-title text-left">
+							WEAPON SLOT 2
+						</p>
+					</div>
+				</div>
+				<!-- All box titles -->
+				<div class="quarter">
+					<div class="tenth">
+						<p class="mini-title">
+							DAMAGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							CRITICAL
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							RANGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							TYPE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SIZE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							REACH
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							WEIGHT
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HARDNESS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HP
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SAVES
+						</p>
+					</div>
+				</div>
+				<!-- Name and Bonus -->
+				<div class="quarter">
+					<div class="eighth">
+						<div id="pr-w-s1-name" class="fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							WEAPON
+						</p>
+					</div>
+					<div class="eighth">
+						
+						<div id="pr-w-s1-atkbonus" class="fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							ATTACK BONUS
+						</p>
+					</div>
+				</div>
+				<!-- 10 boxes -->
+				<div class="quarter">
+					<div class="tenth w-marg-bot">
+						<div id="pr-w-s1-dmg" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-crit" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-rang" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-type" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-size" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-reach" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-weight" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-hardn" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-hp" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-saves" class="box">		
+						</div>
+					</div>
+				</div>
+				<!-- Notes -->
+				<div class="quarter">
+					<div class="fill-space tall-weapon">
+
+					</div>
+					<p class="label">
+						NOTES
+					</p>
+				</div>
+				<!-- Ammo -->
+				<div class="quarter">
+					<div class="fill-space tall-weapon">
+
+					</div>
+					<p class="label full-width">
+						AMMUNITION & CHARGES
+					</p>
+				</div>
+			</div>
+			<div class="weapon">
+				<!-- Name and Bonus titles -->
+				<div class="quarter">
+					<div class="eighth">
+						<p class="mini-title text-left">
+							WEAPON SLOT 3
+						</p>
+					</div>
+					
+				</div>
+				<!-- All box titles -->
+				<div class="quarter">
+					<div class="tenth">
+						<p class="mini-title">
+							DAMAGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							CRITICAL
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							RANGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							TYPE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SIZE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							REACH
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							WEIGHT
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HARDNESS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HP
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SAVES
+						</p>
+					</div>
+				</div>
+				<!-- Name and Bonus -->
+				<div class="quarter">
+					<div class="eighth">
+						<div id="pr-w-s1-name" class="fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							WEAPON
+						</p>
+					</div>
+					<div class="eighth">
+						
+						<div id="pr-w-s1-atkbonus" class="fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							ATTACK BONUS
+						</p>
+					</div>
+				</div>
+				<!-- 10 boxes -->
+				<div class="quarter">
+					<div class="tenth w-marg-bot">
+						<div id="pr-w-s1-dmg" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-crit" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-rang" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-type" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-size" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-reach" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-weight" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-hardn" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-hp" class="box">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-saves" class="box">		
+						</div>
+					</div>
+				</div>
+				<!-- Notes -->
+				<div class="quarter">
+					<div class="fill-space tall-weapon">
+
+					</div>
+					<p class="label">
+						NOTES
+					</p>
+				</div>
+				<!-- Ammo -->
+				<div class="quarter">
+					<div class="fill-space tall-weapon">
+
+					</div>
+					<p class="label full-width">
+						AMMUNITION & CHARGES
+					</p>
+				</div>
+			</div>
+
+			<div class="half">
+			
+				<div class="quarter">
+					<div class="print-fill fill-space half">
+					
+					</div>
+					<p class="label">
+						NAME
+					</p>
+				</div>
+				<div class="quarter">
+					<div class="print-fill fill-space half">
+					
+					</div>
+					<p class="label">
+						PLAYER
+					</p>
+				</div>
+			</div>
+
+			
+		
+			<!-- Equipment -->
+			<div class="half">
+				<div class="print-fill fill-space">
 				
+				</div>
+				<div class="box blackbox dragongrog">
+					<h1> 
+						Equipment
+					</h1>
+					<p>
+						 Pointy things, and other assorted heavy junk.
+					</p>
+				</div>
+			</div>
+			<div class="half">
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+			</div>
+		</div>
+	</section>			
 
-
+	
+	
+	
+	<div id="mondodevspacer"></div>
 
 
 

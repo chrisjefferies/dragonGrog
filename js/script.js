@@ -594,7 +594,7 @@ var calcPoints = function(form) {
 
 	var skillsList = 	["appr", 	"bala", 	"bluf", 	"clim", 	"conc", 	"craf", 	"deci", 	"dipl", 	"disa", 	"disg", 	"esca", 	"forg", 	"gath", 	"hand", 	"heal", 	"hide", 	"inti", 	"jump", 	"know", 	"list", 	"move", 	"open", 	"perf", 	"prof", 	"ride", 	"sear", 	"sens", 	"slei", 	"spel", 	"spot", 	"surv", 	"swim", 	"tumb", 	"usem", 	"user"]; // 	"bla1", 	"bla2", 	"bla3" 
 	var whichModList = 	["int", 	"dex", 		"cha", 		"str", 		"con", 		"int", 		"int", 		"cha", 		"int", 		"cha", 		"dex", 		"int", 		"cha", 		"cha", 		"wis", 		"dex", 		"cha", 		"str", 		"int", 		"wis", 		"dex", 		"dex", 		"cha", 		"wis", 		"dex", 		"int", 		"wis", 		"dex", 		"int", 		"wis", 		"wis", 		"str", 		"dex", 		"cha", 		"dex"];  // 	"none",		"none",		"none"
-	// var untrained = [true, true, true, true, true, true, false, true, false, true, true, true, true, false, true, true, true, true, false, true, true, false, false, false, true, true, true, false, false, true, true, true, false, false, true, true, true, true ]
+	// var untrained = [ true, 		true, 		true, 		true, 		true, 		true, 		false, 		true, 		false, 		true, 		true, 		true, 		true, 		false, 		true, 		true, 		true, 		true, 		false, 		true, 		true, 		false, 		false, 		false, 		true, 		true, 		true, 		false, 		false, 		true, 		true, 		true, 		false, 		false, 		true, 			true, 		true, 		true ]
 
 	window.skillPointsSpent = 0;
 
@@ -928,7 +928,9 @@ var featUpdateSkill = function(featName) {
 			case "Weapon Finesse":
 				alert("Melee Attack Modifier has been changed to DEX.");
 				window.weaponFinesse = true;
-
+			break;
+			case "Improved Initiative":
+				window.improvedInitiative = true;
 			break;
 
 		}
@@ -1094,19 +1096,60 @@ var buySpecialItem = function(itemName, itemNumber) {
 	}
 }
 
+var buyWeapon = function(weaponName, itemCost, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs) {
+	
+	buyItem(weaponName, itemCost, itemWeight);
 
-/*
-Global Variables
+	window.weaponSlotOne;
+	window.weaponSlotTwo;
+	window.weaponSlotThree;
 
-window.forSave
-window.refSave
-window.wilSave
-window.baseAttackBonus
+	if (window.weaponSlotOne === undefined) {
+		var confirmW = confirm("Do you want to equip this weapon in slot one?");
+	} else if (window.weaponSlotTwo === undefined) {
+		var confirmX = confirm("Do you want to equip this weapon in slot two?");
+	} else if (window.weaponSlotThree === undefined) {
+		var confirmY = confirm("Do you want to equip this weapon in slot three?");
+	} else {
+		alert("You have no more open weapon slots. User added weapon slots are not supported in this version.");
+	}
+
+	function weaponSlot(paramone, paramtwo, paramthr, paramfou, paramfiv, paramsix, paramsev, parameig, paramnin, paramten, paramele, paramtwe) {
+		this.wName = paramone;
+		this.iWeight = paramtwo;
+		this.damage = paramthr;
+		this.critical = paramfou;
+		this.range = paramfiv;
+		this.wType = paramsix;
+		this.wSize = paramsev;
+		this.wReach = parameig;
+		this.hardness = paramnin;
+		this.hitPoints = paramten;
+		this.wSaves = paramele;
+		this.wExists = paramtwe;
+	}
+	
+	if (confirmW) {
+		wSlotOne = new weaponSlot(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs);
+	}
+	if (confirmX) {
+		wSlotTwo = new weaponSlot(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs);
+	}
+	if (confirmY) {
+		wSlotThr = new weaponSlot(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs);
+	}
+
+}
 
 
 
 
-*/
+
+
+
+
+
+
 
 
 var populateCharacterSheet = function() {
@@ -1207,23 +1250,69 @@ var populateCharacterSheet = function() {
 		document.getElementById("print-ini-tot").innerHTML = window.dexMod ;
 	}
 
+	
+	
+	if (wSlotOne.wExists) {
+		document.getElementById("pr-w-s1-name").innerHTML = wSlotOne.wName;
+		document.getElementById("pr-w-s1-weight").innerHTML = wSlotOne.iWeight;
+		document.getElementById("pr-w-s1-dmg").innerHTML = wSlotOne.damage;
+		document.getElementById("pr-w-s1-crit").innerHTML = wSlotOne.critical;
+		document.getElementById("pr-w-s1-rang").innerHTML = wSlotOne.range;
+		document.getElementById("pr-w-s1-type").innerHTML = wSlotOne.wType;
+		document.getElementById("pr-w-s1-size").innerHTML = wSlotOne.wSize;
+		document.getElementById("pr-w-s1-reach").innerHTML = wSlotOne.wReach;
+		document.getElementById("pr-w-s1-hardn").innerHTML = wSlotOne.hardness;
+		document.getElementById("pr-w-s1-hp").innerHTML = wSlotOne.hitPoints;
+		document.getElementById("pr-w-s1-saves").innerHTML = wSlotOne.wSaves;
+	}
+
+	if (wSlotTwo.wExists) {
+		document.getElementById("pr-w-s2-name").innerHTML = wSlotTwo.wName;
+		document.getElementById("pr-w-s2-weight").innerHTML = wSlotTwo.iWeight;
+		document.getElementById("pr-w-s2-dmg").innerHTML = wSlotTwo.damage;
+		document.getElementById("pr-w-s2-crit").innerHTML = wSlotTwo.critical;
+		document.getElementById("pr-w-s2-rang").innerHTML = wSlotTwo.range;
+		document.getElementById("pr-w-s2-type").innerHTML = wSlotTwo.wType;
+		document.getElementById("pr-w-s2-size").innerHTML = wSlotTwo.wSize;
+		document.getElementById("pr-w-s2-reach").innerHTML = wSlotTwo.wReach;
+		document.getElementById("pr-w-s2-hardn").innerHTML = wSlotTwo.hardness;
+		document.getElementById("pr-w-s2-hp").innerHTML = wSlotTwo.hitPoints;
+		document.getElementById("pr-w-s2-saves").innerHTML = wSlotTwo.wSaves;
+	}
+	
+	if (wSlotThr.wExists) {
+		document.getElementById("pr-w-s3-name").innerHTML = wSlotThr.wName;
+		document.getElementById("pr-w-s3-weight").innerHTML = wSlotThr.iWeight;
+		document.getElementById("pr-w-s3-dmg").innerHTML = wSlotThr.damage;
+		document.getElementById("pr-w-s3-crit").innerHTML = wSlotThr.critical;
+		document.getElementById("pr-w-s3-rang").innerHTML = wSlotThr.range;
+		document.getElementById("pr-w-s3-type").innerHTML = wSlotThr.wType;
+		document.getElementById("pr-w-s3-size").innerHTML = wSlotThr.wSize;
+		document.getElementById("pr-w-s3-reach").innerHTML = wSlotThr.wReach;
+		document.getElementById("pr-w-s3-hardn").innerHTML = wSlotThr.hardness;
+		document.getElementById("pr-w-s3-hp").innerHTML = wSlotThr.hitPoints;
+		document.getElementById("pr-w-s3-saves").innerHTML = wSlotThr.wSaves;
+	}
 
 	// Now watch as I print all the skill totals
-	var skillsList = ["appr", "bala", "bluf", "clim", "conc", "craf", "deci", "dipl", "disa", "disg", "esca", "forg", "gath", "hand", "heal", "hide", "inti", "jump", "know", "list", "move", "open", "perf", "prof", "ride", "sear", "sens", "slei", "spel", "spot", "surv", "swim", "tumb", "usem", "user", "bla1", "bla2", "bla3" ];
-	var untrained =  [true, true, true, true, true, true, false, true, false, true, true, true, true, false, true, true, true, true, false, true, true, false, false, false, true, true, true, false, false, true, true, true, false, false, true, true, true, true ]
+	var skillsList = ["appr", "bala", "bluf", "clim", "conc", "craf", "deci", "dipl", "disa", "disg", "esca", "forg", "gath", "hand", "heal", "hide", "inti", "jump", "know", "list", "move", "open", "perf", "prof", "ride", "sear", "sens", "slei", "spel", "spot", "surv", "swim", "tumb", "usem", "user" ];
+	var untrained =  [true, true, true, true, true, true, false, true, false, true, true, true, true, false, true, true, true, true, false, true, true, false, false, false, true, true, true, false, false, true, true, true, false, false, true ];
 	for ( i = 0 ; i < skillsList.length ; i++ ) {
 		if (untrained[i] === true) {
-			document.getElementById("pr-" + skillsList[i]).innerHTML = document.getElementById("t-" + skillsList[i]).innerHTML ;
+			document.getElementById("pr-" + skillsList[i] ).innerHTML = document.getElementById("t-" + skillsList[i] ).innerHTML ;
 		} else if ( (window["in" + skillsList[i] ] ) > 0 ) {
-			document.getElementById("pr-" + skillsList[i]).innerHTML = document.getElementById("t-" + skillsList[i]).innerHTML ;
+			document.getElementById("pr-" + skillsList[i] ).innerHTML = document.getElementById("t-" + skillsList[i] ).innerHTML ;
 		} else {
-			document.getElementById("pr-" + skillsList[i]).innerHTML = " " ;
+			document.getElementById("pr-" + skillsList[i] ).innerHTML = " " ;
 		}
 
 	}
 
 
 
+
+	// window.weaponSlotOne = [weaponName, itemCost, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves];
+	
 }
 
 
