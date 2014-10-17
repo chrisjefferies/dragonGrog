@@ -270,11 +270,21 @@ var assignAttributes = function(form) {
 
 
 			
-			logAllModifiers();			// Calculates all Ability Modifiers and Logs in Global Variables
-			logMscSkModifiers();		// Shows all Racial Skill Misc Modifiers (and other racial bonuses) and re-calculates ability modifiers.
-			addAbModifiers();			// Displays all Ability Modifiers in Skills Section
-			showClassSkills();			// Shows all Class Skills
-			logAllSavingThrows();		// Calculate Saving Throws and Base Attack Bonus. They Don't Display immediately.
+			logAllModifiers();					// Calculates all Ability Modifiers and Logs in Global Variables
+			logMscSkModifiers();				// Shows all Racial Skill Misc Modifiers (and other racial bonuses) and re-calculates ability modifiers.
+			addAbModifiers();					// Displays all Ability Modifiers in Skills Section
+			showClassSkills();					// Shows all Class Skills
+			logAllSavingThrows();				// Calculate Saving Throws and Base Attack Bonus. They Don't Display immediately.
+			
+			
+			window.wSlotOne = { wExists: false};
+			window.wSlotTwo = { wExists: false};
+			window.wSlotThr = { wExists: false};
+			window.aSlotOne = { wExists: false};
+			window.aSlotTwo = { wExists: false};
+			window.aSlotThr = { wExists: false};	// Setting equal to false, so if the user buys no weapons, they don't throw a prase error. 
+			
+
 			
 			document.getElementById("apply-all").style.display = "none"; // disable to "prevent" cheating.
 		} else {
@@ -1104,6 +1114,7 @@ var buyWeapon = function(weaponName, itemCost, itemWeight, dmg, crit, rang, type
 	window.weaponSlotTwo;
 	window.weaponSlotThree;
 
+
 	if (window.weaponSlotOne === undefined) {
 		var confirmW = confirm("Do you want to equip this weapon in slot one?");
 	} else if (window.weaponSlotTwo === undefined) {
@@ -1130,14 +1141,17 @@ var buyWeapon = function(weaponName, itemCost, itemWeight, dmg, crit, rang, type
 	}
 	
 	if (confirmW) {
-		wSlotOne = new weaponSlot(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs);
-	}
+		window.wSlotOne = new weaponSlot(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs);
+		window.weaponSlotOne = true;
+	} 
 	if (confirmX) {
-		wSlotTwo = new weaponSlot(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs);
-	}
+		window.wSlotTwo = new weaponSlot(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs);
+		window.weaponSlotTwo = true;
+	} 
 	if (confirmY) {
-		wSlotThr = new weaponSlot(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs);
-	}
+		window.wSlotThr = new weaponSlot(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs);
+		window.weaponSlotThree = true;
+	} 
 
 }
 
@@ -1192,6 +1206,7 @@ var populateCharacterSheet = function() {
 
 	document.getElementById("hit-points").innerHTML = window.hitPoints;
 
+	
 	
 	var listStr = document.getElementsByClassName("print-mod-str");
 	for ( var i = 0 ; i < listStr.length ; i++ ) {
@@ -1249,50 +1264,10 @@ var populateCharacterSheet = function() {
 	} else {
 		document.getElementById("print-ini-tot").innerHTML = window.dexMod ;
 	}
+	
+
 
 	
-	
-	if (wSlotOne.wExists) {
-		document.getElementById("pr-w-s1-name").innerHTML = wSlotOne.wName;
-		document.getElementById("pr-w-s1-weight").innerHTML = wSlotOne.iWeight;
-		document.getElementById("pr-w-s1-dmg").innerHTML = wSlotOne.damage;
-		document.getElementById("pr-w-s1-crit").innerHTML = wSlotOne.critical;
-		document.getElementById("pr-w-s1-rang").innerHTML = wSlotOne.range;
-		document.getElementById("pr-w-s1-type").innerHTML = wSlotOne.wType;
-		document.getElementById("pr-w-s1-size").innerHTML = wSlotOne.wSize;
-		document.getElementById("pr-w-s1-reach").innerHTML = wSlotOne.wReach;
-		document.getElementById("pr-w-s1-hardn").innerHTML = wSlotOne.hardness;
-		document.getElementById("pr-w-s1-hp").innerHTML = wSlotOne.hitPoints;
-		document.getElementById("pr-w-s1-saves").innerHTML = wSlotOne.wSaves;
-	}
-
-	if (wSlotTwo.wExists) {
-		document.getElementById("pr-w-s2-name").innerHTML = wSlotTwo.wName;
-		document.getElementById("pr-w-s2-weight").innerHTML = wSlotTwo.iWeight;
-		document.getElementById("pr-w-s2-dmg").innerHTML = wSlotTwo.damage;
-		document.getElementById("pr-w-s2-crit").innerHTML = wSlotTwo.critical;
-		document.getElementById("pr-w-s2-rang").innerHTML = wSlotTwo.range;
-		document.getElementById("pr-w-s2-type").innerHTML = wSlotTwo.wType;
-		document.getElementById("pr-w-s2-size").innerHTML = wSlotTwo.wSize;
-		document.getElementById("pr-w-s2-reach").innerHTML = wSlotTwo.wReach;
-		document.getElementById("pr-w-s2-hardn").innerHTML = wSlotTwo.hardness;
-		document.getElementById("pr-w-s2-hp").innerHTML = wSlotTwo.hitPoints;
-		document.getElementById("pr-w-s2-saves").innerHTML = wSlotTwo.wSaves;
-	}
-	
-	if (wSlotThr.wExists) {
-		document.getElementById("pr-w-s3-name").innerHTML = wSlotThr.wName;
-		document.getElementById("pr-w-s3-weight").innerHTML = wSlotThr.iWeight;
-		document.getElementById("pr-w-s3-dmg").innerHTML = wSlotThr.damage;
-		document.getElementById("pr-w-s3-crit").innerHTML = wSlotThr.critical;
-		document.getElementById("pr-w-s3-rang").innerHTML = wSlotThr.range;
-		document.getElementById("pr-w-s3-type").innerHTML = wSlotThr.wType;
-		document.getElementById("pr-w-s3-size").innerHTML = wSlotThr.wSize;
-		document.getElementById("pr-w-s3-reach").innerHTML = wSlotThr.wReach;
-		document.getElementById("pr-w-s3-hardn").innerHTML = wSlotThr.hardness;
-		document.getElementById("pr-w-s3-hp").innerHTML = wSlotThr.hitPoints;
-		document.getElementById("pr-w-s3-saves").innerHTML = wSlotThr.wSaves;
-	}
 
 	// Now watch as I print all the skill totals
 	var skillsList = ["appr", "bala", "bluf", "clim", "conc", "craf", "deci", "dipl", "disa", "disg", "esca", "forg", "gath", "hand", "heal", "hide", "inti", "jump", "know", "list", "move", "open", "perf", "prof", "ride", "sear", "sens", "slei", "spel", "spot", "surv", "swim", "tumb", "usem", "user" ];
@@ -1309,14 +1284,101 @@ var populateCharacterSheet = function() {
 	}
 
 
+	// alert(window.strAttr);
 
+	// calculateCarryingCapacity(window.strAttr);
 
 	// window.weaponSlotOne = [weaponName, itemCost, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves];
 	
+	// alert("object value: " + window.wSlotOne.wExists);
+	
+	
+	if (window.wSlotOne.wExists) {
+		alert("it found it true");
+		document.getElementById("pr-w-s1-name").innerHTML = window.wSlotOne.wName;
+		document.getElementById("pr-w-s1-weight").innerHTML = window.wSlotOne.iWeight;
+		document.getElementById("pr-w-s1-dmg").innerHTML = window.wSlotOne.damage;
+		document.getElementById("pr-w-s1-crit").innerHTML = window.wSlotOne.critical;
+		document.getElementById("pr-w-s1-rang").innerHTML = window.wSlotOne.range;
+		document.getElementById("pr-w-s1-type").innerHTML = window.wSlotOne.wType;
+		document.getElementById("pr-w-s1-size").innerHTML = window.wSlotOne.wSize;
+		document.getElementById("pr-w-s1-reach").innerHTML = window.wSlotOne.wReach;
+		document.getElementById("pr-w-s1-hardn").innerHTML = window.wSlotOne.hardness;
+		document.getElementById("pr-w-s1-hp").innerHTML = window.wSlotOne.hitPoints;
+		document.getElementById("pr-w-s1-saves").innerHTML = window.wSlotOne.wSaves;
+	}
+	
+	if (window.wSlotTwo.wExists) {
+		alert("it found TWO true");
+		document.getElementById("weapon-slot-two").style.display = "block";
+		document.getElementById("pr-w-s2-name").innerHTML = window.wSlotTwo.wName;
+		document.getElementById("pr-w-s2-weight").innerHTML = window.wSlotTwo.iWeight;
+		document.getElementById("pr-w-s2-dmg").innerHTML = window.wSlotTwo.damage;
+		document.getElementById("pr-w-s2-crit").innerHTML = window.wSlotTwo.critical;
+		document.getElementById("pr-w-s2-rang").innerHTML = window.wSlotTwo.range;
+		document.getElementById("pr-w-s2-type").innerHTML = window.wSlotTwo.wType;
+		document.getElementById("pr-w-s2-size").innerHTML = window.wSlotTwo.wSize;
+		document.getElementById("pr-w-s2-reach").innerHTML = window.wSlotTwo.wReach;
+		document.getElementById("pr-w-s2-hardn").innerHTML = window.wSlotTwo.hardness;
+		document.getElementById("pr-w-s2-hp").innerHTML = window.wSlotTwo.hitPoints;
+		document.getElementById("pr-w-s2-saves").innerHTML = window.wSlotTwo.wSaves;
+	}
+	
+	if (window.wSlotThr.wExists) {
+		alert("it found Three true");
+		document.getElementById("weapon-slot-thr").style.display = "block";
+		document.getElementById("pr-w-s3-name").innerHTML = window.wSlotThr.wName;
+		document.getElementById("pr-w-s3-weight").innerHTML = window.wSlotThr.iWeight;
+		document.getElementById("pr-w-s3-dmg").innerHTML = window.wSlotThr.damage;
+		document.getElementById("pr-w-s3-crit").innerHTML = window.wSlotThr.critical;
+		document.getElementById("pr-w-s3-rang").innerHTML = window.wSlotThr.range;
+		document.getElementById("pr-w-s3-type").innerHTML = window.wSlotThr.wType;
+		document.getElementById("pr-w-s3-size").innerHTML = window.wSlotThr.wSize;
+		document.getElementById("pr-w-s3-reach").innerHTML = window.wSlotThr.wReach;
+		document.getElementById("pr-w-s3-hardn").innerHTML = window.wSlotThr.hardness;
+		document.getElementById("pr-w-s3-hp").innerHTML = window.wSlotThr.hitPoints;
+		document.getElementById("pr-w-s3-saves").innerHTML = window.wSlotThr.wSaves;
+	}
+	
+	alert("it got through them all.");
+
 }
 
 
+var calculateCarryingCapacity = function(strengthScore) {
+	/*
 
+	Carrying Capacity (for a human):
+	If your Strength score is 10 or less, your heavy load limit is 10 lbs. * Strength.
+	If your Strength score is 10 or greater, your heavy load limit is 25 lbs. * 2^(0.2 * Strength).
+
+	(Both formulas give the same result for a Strength of 10.)
+
+	Your light load limit is 1/3 your heavy load limit.
+	Your medium load limit is 2/3 your heavy load limit.
+	Apply appropriate multipliers for different sizes, body types, etc
+	
+	*/
+	
+	if (strengthScore <= 10) {
+		window.heavyLoad = Math.floor(strengthScore * 10);
+	} else if (strengthScore <= 20) {
+		window.heavyLoad = Math.floor(25 * Math.pow(2, (0.2 * strengthScore) ) ) ;
+	} else {
+		alert("The code for this strength condition has not been written.");
+		window.heavyLoad = 6;
+	}
+	window.mediumLoad = Math.floor((2 * heavyLoad) / 3);
+	window.lightLoad =  Math.floor(heavyLoad / 3);
+
+	document.getElementById("print-weight-total").innerHTML = document.getElementById("total-weight").innerHTML;
+	document.getElementById("print-heavy-load").innerHTML = window.heavyLoad;
+	document.getElementById("print-medium-load").innerHTML = window.mediumLoad;
+	document.getElementById("print-light-load").innerHTML = window.lightLoad;
+	document.getElementById("print-lift-load").innerHTML = ( window.heavyLoad * 2 );
+	document.getElementById("print-push-load").innerHTML = ( window.heavyLoad * 5 );
+
+}
 
 
 

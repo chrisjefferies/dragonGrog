@@ -67,30 +67,36 @@
 				Feat counter, class feats and bonus feats (race and class)
 			</li>
 			<li>
-				Combat Feats selection.
+				ONLY Combat Feats selection.
 			</li>
 			<li>
-				Skill bonus feats update MISC Modifiers (after pressing "update skills"). Total calculations also work.
+				ONLY Skill bonus feats section. They update MISC Modifiers (must press "update skills" manually - working on fix). Total calculations also work.
 			</li>
 			<li>
-				All other feat categories print "ACROBATIC" and do nothing.
+				Total skill point calculation.
 			</li>
 			<li>
 				Roll starting gold (based on class)
 			</li>
 			<li>
-				Select some equipment. Martial & Exotic Weapons, Armor, and half of Gear are in. Weights update
-				automatically to total weight carried. 
+				Select some equipment. "Throwing Axe" works, can be applied to a weapon slot and prints on character sheet.
+			</li>
+			<li>
+				Up to three weapon slots will add automatically if the slots are filled when weapons are purchased.
+			</li>
+			<li>
+				Some other equipment and gear works, but only displaying in creator mode. No character sheet population yet. Coming. 
 			</li>
 			<li>
 				Input character name and information.
 			</li>
 			<li>
-				Populate printable sheet with much of the math taken care of. Still working on Skills (only totals work), and a handful
-				of MISC modifiers. Except for the title block, no written information prints. 
+				Populate printable sheet with much of the math taken care of. Still working on Skills (only totals print), and a handful
+				of MISC modifiers.
 			</li>
 		</ul>
 		
+
 		<h2>
 			Select your Class
 		</h2>
@@ -822,9 +828,6 @@
 				<p id="total-weight">0</p>
 			</div>
 			
-			<h3 id="weapon-slot-one">
-				Weapon Slot 1
-			</h3>
 			
 			<div class="item-list equip-list-item">
 				
@@ -3549,7 +3552,7 @@
 						FEATS
 					</h1>
 					<p>
-						 SKILL FOCUS: SPEAK LANGUAGE, AND OTHER USEFUL THINGS TO KNOW
+						 A BAG OF RATS SLAYS THE DRAGON!
 					</p>
 				</div>
 			</div>
@@ -3852,7 +3855,7 @@
 				</p>
 			</div>
 
-			<div class="weapon">
+			<div id="weapon-slot-one" class="slot">
 				<!-- Name and Bonus titles -->
 				<div class="quarter">
 					<div class="eighth">
@@ -3996,14 +3999,12 @@
 					</p>
 				</div>
 			</div>
-
-			
-			<div class="weapon">
+			<div id="weapon-slot-two" class="slot">
 				<!-- Name and Bonus titles -->
 				<div class="quarter">
 					<div class="eighth">
 						<p class="mini-title text-left">
-							WEAPON SLOT 2
+							WEAPON SLOT 1
 						</p>
 					</div>
 				</div>
@@ -4063,7 +4064,7 @@
 				<!-- Name and Bonus -->
 				<div class="quarter">
 					<div class="eighth">
-						<div id="pr-w-s1-name" class="fill-space tall-weapon">
+						<div id="pr-w-s2-name" class="print-fill-weapon fill-space tall-weapon">
 
 						</div>
 						<p class="label">
@@ -4072,7 +4073,7 @@
 					</div>
 					<div class="eighth">
 						
-						<div id="pr-w-s1-atkbonus" class="fill-space tall-weapon">
+						<div id="pr-w-s2-atkbonus" class="fill-space tall-weapon">
 
 						</div>
 						<p class="label">
@@ -4083,43 +4084,43 @@
 				<!-- 10 boxes -->
 				<div class="quarter">
 					<div class="tenth w-marg-bot">
-						<div id="pr-w-s1-dmg" class="box">		
+						<div id="pr-w-s2-dmg" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-crit" class="box">		
+						<div id="pr-w-s2-crit" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-rang" class="box">		
+						<div id="pr-w-s2-rang" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-type" class="box">		
+						<div id="pr-w-s2-type" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-size" class="box">		
+						<div id="pr-w-s2-size" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-reach" class="box">		
+						<div id="pr-w-s2-reach" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-weight" class="box">		
+						<div id="pr-w-s2-weight" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-hardn" class="box">		
+						<div id="pr-w-s2-hardn" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-hp" class="box">		
+						<div id="pr-w-s2-hp" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-saves" class="box">		
+						<div id="pr-w-s2-saves" class="box weapon-box-sm">		
 						</div>
 					</div>
 				</div>
@@ -4142,15 +4143,14 @@
 					</p>
 				</div>
 			</div>
-			<div class="weapon">
+			<div id="weapon-slot-thr" class="slot">
 				<!-- Name and Bonus titles -->
 				<div class="quarter">
 					<div class="eighth">
 						<p class="mini-title text-left">
-							WEAPON SLOT 3
+							WEAPON SLOT 1
 						</p>
 					</div>
-					
 				</div>
 				<!-- All box titles -->
 				<div class="quarter">
@@ -4208,7 +4208,7 @@
 				<!-- Name and Bonus -->
 				<div class="quarter">
 					<div class="eighth">
-						<div id="pr-w-s1-name" class="fill-space tall-weapon">
+						<div id="pr-w-s3-name" class="print-fill-weapon fill-space tall-weapon">
 
 						</div>
 						<p class="label">
@@ -4217,7 +4217,7 @@
 					</div>
 					<div class="eighth">
 						
-						<div id="pr-w-s1-atkbonus" class="fill-space tall-weapon">
+						<div id="pr-w-s3-atkbonus" class="fill-space tall-weapon">
 
 						</div>
 						<p class="label">
@@ -4228,43 +4228,43 @@
 				<!-- 10 boxes -->
 				<div class="quarter">
 					<div class="tenth w-marg-bot">
-						<div id="pr-w-s1-dmg" class="box">		
+						<div id="pr-w-s3-dmg" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-crit" class="box">		
+						<div id="pr-w-s3-crit" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-rang" class="box">		
+						<div id="pr-w-s3-rang" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-type" class="box">		
+						<div id="pr-w-s3-type" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-size" class="box">		
+						<div id="pr-w-s3-size" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-reach" class="box">		
+						<div id="pr-w-s3-reach" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-weight" class="box">		
+						<div id="pr-w-s3-weight" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-hardn" class="box">		
+						<div id="pr-w-s3-hardn" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-hp" class="box">		
+						<div id="pr-w-s3-hp" class="box weapon-box-sm">		
 						</div>
 					</div>
 					<div class="tenth">
-						<div id="pr-w-s1-saves" class="box">		
+						<div id="pr-w-s3-saves" class="box weapon-box-sm">		
 						</div>
 					</div>
 				</div>
@@ -4287,23 +4287,283 @@
 					</p>
 				</div>
 			</div>
-
-			<div class="half">
 			
+
+			<div class="print-fill fill-space">
+				
+			</div>
+
+			<div class="box blackbox dragongrog width-100">
+				<h1> 
+					ARMOR AND PROTECTIVE ITEMS
+				</h1>
+				<p>
+					KEEPING THE GUSHY PARTS IN
+				</p>
+			</div>
+
+			
+
+			<div id="armor-slot-one" class="slot">
+				<!-- Name and Bonus titles -->
 				<div class="quarter">
-					<div class="print-fill fill-space half">
-					
+					<div class="eighth">
+						<p class="mini-title text-left">
+							ARMOR SLOT 1
+						</p>
 					</div>
-					<p class="label">
-						NAME
+				</div>
+				<!-- All box titles -->
+				<div class="quarter">
+					<div class="tenth">
+						<p class="mini-title">
+							ARMOR BONUS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							MAX DEX BONUS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							CHECK PENALTY
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SPELL FAILURE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							MAX <br>SPEED
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>WEIGHT
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>HARDNESS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>HP
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>SAVES
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							DONNING N/H/R
+						</p>
+					</div>
+				</div>
+				<!-- Name and Bonus -->
+				<div class="quarter">
+					<div class="eighth">
+						<div id="pr-w-s1-name" class="print-fill-weapon fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							ITEM
+						</p>
+					</div>
+					<div class="eighth">
+						<div id="pr-w-s1-atkbonus" class="fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							WEIGHT CATEGORY
+						</p>
+					</div>
+				</div>
+				<!-- 10 boxes -->
+				<div class="quarter">
+					<div class="tenth w-marg-bot">
+						<div id="pr-w-s1-dmg" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-crit" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-rang" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-type" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-size" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-reach" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-weight" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-hardn" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-hp" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-saves" class="box weapon-box-sm">		
+						</div>
+					</div>
+				</div>
+				<!-- Notes -->
+				<div class="quarter">
+					<p class="mini-title text-left">
+						NOTES
 					</p>
 				</div>
+			</div>
+
+			<div id="armor-slot-two" class="slot">
+				<!-- Name and Bonus titles -->
 				<div class="quarter">
-					<div class="print-fill fill-space half">
-					
+					<div class="eighth">
+						<p class="mini-title text-left">
+							ARMOR SLOT 2
+						</p>
 					</div>
-					<p class="label">
-						PLAYER
+				</div>
+				<!-- All box titles -->
+				<div class="quarter">
+					<div class="tenth">
+						<p class="mini-title">
+							ARMOR BONUS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							MAX DEX BONUS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							CHECK PENALTY
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SPELL FAILURE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							MAX <br>SPEED
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>WEIGHT
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>HARDNESS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>HP
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>SAVES
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							DONNING N/H/R
+						</p>
+					</div>
+				</div>
+				<!-- Name and Bonus -->
+				<div class="quarter">
+					<div class="eighth">
+						<div id="pr-w-s1-name" class="print-fill-weapon fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							ITEM
+						</p>
+					</div>
+					<div class="eighth">
+						<div id="pr-w-s1-atkbonus" class="fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							WEIGHT CATEGORY
+						</p>
+					</div>
+				</div>
+				<!-- 10 boxes -->
+				<div class="quarter">
+					<div class="tenth w-marg-bot">
+						<div id="pr-w-s1-dmg" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-crit" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-rang" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-type" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-size" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-reach" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-weight" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-hardn" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-hp" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-saves" class="box weapon-box-sm">		
+						</div>
+					</div>
+				</div>
+				<!-- Notes -->
+				<div class="quarter">
+					<p class="mini-title text-left">
+						NOTES
 					</p>
 				</div>
 			</div>
@@ -4311,29 +4571,342 @@
 			
 		
 			<!-- Equipment -->
-			<div class="half">
-				<div class="print-fill fill-space">
+			<div class="fill-space">
 				
-				</div>
-				<div class="box blackbox dragongrog">
-					<h1> 
-						Equipment
-					</h1>
-					<p>
-						 Pointy things, and other assorted heavy junk.
-					</p>
-				</div>
 			</div>
-			<div class="half">
-				<div class="print-fill fill-space print-fill fill-space-feats">
+			<div class="box blackbox dragongrog width-100">
+				<h1> 
+					GEAR
+				</h1>
+				<p>
+					 VALUABLE LOOT, AND OTHER ASSORTED HEAVY JUNK.
+				</p>
+			</div>
+
+			<!-- Gear List Left Column -->
+			<div class="gear-left">
 				
-				</div>
+				<div class="print-fill fill-space fill-space-gear"></div>
 				<p class="label item-name">
 					ITEM
 				</p>
 				<p class="label item-notes">
 					LOCATION ON PERSON
 				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>	
+
+			</div>
+				
+			<!-- Gear List Right Column WITH ENCUMBERANCE TABLE and COIN TABLE -->
+			<div class="gear-right">
+				
+				<div class="encumberance">
+
+					
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							ENCUMBERANCE / CARRYING CAPACITY
+						</h1>
+						<p>
+							 YEAH, WE'RE DOING THAT
+						</p>
+					</div>
+
+					<div class="quarter">
+						<div class="quarter">
+							<p class="mini-title">
+								<br>TOTAL WEIGHT
+							</p>
+						</div>
+						<div class="quarter">
+							<p class="mini-title">
+								<br>LIGHT LOAD
+							</p>
+						</div>
+					</div>
+
+					<div class="quarter">
+						<div class="quarter">
+							<div class="quarter">
+								<p class="mini-title">
+									MEDIUM <br>LOAD
+								</p>
+							</div>
+							<div class="quarter">
+								<p class="mini-title">
+									HEAVY LOAD<br> LIFT OVER HEAD 
+								</p>
+							</div>
+						</div>
+						<div class="quarter">
+							<div class="quarter">
+								<p class="mini-title">
+									LIFT OFF <br>GROUND 
+								</p>
+							</div>
+							<div class="quarter">
+								<p class="mini-title">
+									PUSH <br>OR DRAG
+								</p>
+							</div>
+						</div>
+					</div>
+					
+					<div class="quarter">
+						<div class="quarter">
+							<div id="print-total-weight" class="box encumberance-box">
+
+							</div>
+						</div>
+						<div class="quarter">
+							<div id="print-light-load" class="box encumberance-box">
+
+							</div>
+						</div>
+					</div>
+					<div class="quarter">
+						<div class="quarter">
+							<div class="quarter">
+								<div id="print-medium-load" class="box encumberance-box">
+
+								</div>
+							</div>
+							<div class="quarter">
+								<div id="print-heavy-load" class="box encumberance-box">
+
+								</div>
+							</div>
+						</div>
+						<div class="quarter">
+							<div class="quarter">
+								<div id="print-lift-load" class="box encumberance-box">
+
+								</div>
+							</div>
+							<div class="quarter">
+								<div id="print-push-load" class="box encumberance-box">
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="encumberance">
+					
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							MONEY
+						</h1>
+						<p>
+							THIS T-SHIRT BROUGHT TO YOU BY CAPITALISM
+						</p>
+					</div>
+
+					<div class="quarter">
+						<div class="quarter">
+							<p class="mini-title">
+								<br>COPPER PIECES
+							</p>
+						</div>
+						<div class="quarter">
+							<p class="mini-title">
+								<br>SILVER PIECES
+							</p>
+						</div>
+					</div>
+
+					<div class="quarter">
+						<div class="quarter">
+							<p class="mini-title">
+								<br>GOLD PIECES
+							</p>
+						</div>
+						<div class="quarter">
+							<p class="mini-title">
+								<br>PLATINUM PIECES
+							</p>
+						</div>
+					</div>
+
+					
+					
+					<div class="quarter">
+						<div class="quarter">
+							<div id="print-total-weight" class="box encumberance-box">
+
+							</div>
+						</div>
+						<div class="quarter">
+							<div id="print-light-load" class="box encumberance-box">
+
+							</div>
+						</div>
+					</div>
+					<div class="quarter">
+						<div class="quarter">
+							<div id="print-total-weight" class="box encumberance-box">
+
+							</div>
+						</div>
+						<div class="quarter">
+							<div id="print-light-load" class="box encumberance-box">
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				
+				
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				
 			</div>
 		</div>
 	</section>			
