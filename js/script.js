@@ -1284,13 +1284,8 @@ var populateCharacterSheet = function() {
 	}
 
 
-	// alert(window.strAttr);
 
-	// calculateCarryingCapacity(window.strAttr);
-
-	// window.weaponSlotOne = [weaponName, itemCost, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves];
-	
-	// alert("object value: " + window.wSlotOne.wExists);
+	calculateCarryingCapacity(window.strAttr);
 	
 	
 	if (window.wSlotOne.wExists) {
