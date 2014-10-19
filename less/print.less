@@ -3,7 +3,7 @@
 @walter: 'Walter Turncoat', serif;
 @ubuntu: 'ubuntu', 'helvetica neue', 'helvetica', 'arial', sans-serif;
 @sintony: 'sintony', 'times', 'times new roman', serif;
-
+@backgroundcolor: #fff;
 
 body
 	{
@@ -40,7 +40,7 @@ h1, h2, h3, p
 	clear: right;
 	}
 
-#print, #print-page-two, #print-page-three
+#print, #print-page-two, #print-page-three, #print-page-four
 	{
 	/*
 	width: 100%;	
@@ -146,6 +146,11 @@ h1, h2, h3, p
 .fill-space-feats, .tall-weapon
 	{
 	height: 30px;
+	}
+
+.tall-namebox
+	{
+	height: 45px;
 	}
 
 .sm-fill-space
@@ -335,6 +340,11 @@ h1, h2, h3, p
 		}
 	}
 
+.label-width-100
+	{
+	width: 100%;
+	}
+
 .mini-title
 	{
 	.label;
@@ -392,6 +402,7 @@ h1, h2, h3, p
 	font-size: 11px;
 	padding: 5px 6px;
 	text-transform: uppercase;
+	width: 200%;
 	}
 
 .faint-background
@@ -470,6 +481,158 @@ h1, h2, h3, p
 	{
 	.fill-space-feats;
 	}
+
+.picture-area
+	{
+	width: 50%;
+	float: left;
+	clear: left;
+	height: 675px;
+	/* background-image: url('../images/devyrwryn.png'); */
+	background-position: top center;
+	background-size: 100% auto;
+	}
+
+.pad-top
+	{
+	padding-top: 30px;
+	}
+
+.print-text-area
+	{
+	height: 675px;
+	background-color: @backgroundcolor;
+	}
+
+.character-content
+	{
+	padding: 5px 20px 0 20px;
+	font-family: @marker;
+	font-size: 17px;
+	line-height: 28px;
+	height: 1px;
+	float: left;
+	}
+
+.text-area-line
+	{
+	border-bottom: 2px solid black;
+	height: 26px;
+	margin: 0 17px;
+	}
+
+.the-top-one
+	{
+	height: 30px;
+	}
+
+.left-text-areas
+	{
+	width: 49%;
+	}
+
+.right-text-areas
+	{
+	width: 49%;
+	float: right;
+	clear: right;
+	}
+
+.float-left
+	{
+	float: left;
+	}
+
+.print-text-area-sm
+	{
+	height: 116px;
+	background-color: @backgroundcolor;
+	}
+
+.print-text-area-quote
+	{
+	height: 60px;
+	background-color: @backgroundcolor;
+	}
+
+.print-text-area-personality
+	{
+	height: 172px;
+	background-color: @backgroundcolor;
+	}
+
+.print-text-area-home
+	{
+	height: 200px;
+	background-color: @backgroundcolor;
+	}
+
+.right-label
+	{
+	margin-left: 4%;
+	}
+
+.print-race, .print-class
+	{
+	padding-left: 12px;
+	}
+
+.print-list
+	{
+	font-size: 16px;
+	line-height: 42px;
+	}
+
+.page-space
+	{
+	width: 100%;
+	display: block;
+	height: 30px;
+	}
+	
+@media print 
+{
+.page-space
+	{
+	height: 10px;
+	}
+
+body
+	{
+	background-color: #fff;
+	}
+	
+#build, #roll-playing, #mondodevspacer
+	{
+	display: none;
+	}
+
+
+}
+
+
+#wrin-craft-1
+	{
+	display: none;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

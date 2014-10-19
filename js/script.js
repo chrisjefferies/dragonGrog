@@ -1,5 +1,58 @@
 
+function weaponSlot(paramone, paramtwo, paramthr, paramfou, paramfiv, paramsix, paramsev, parameig, paramnin, paramten, paramele, paramtwe) {
+	this.wName = paramone;
+	this.iWeight = paramtwo;
+	this.damage = paramthr;
+	this.critical = paramfou;
+	this.range = paramfiv;
+	this.wType = paramsix;
+	this.wSize = paramsev;
+	this.wReach = parameig;
+	this.hardness = paramnin;
+	this.hitPoints = paramten;
+	this.wSaves = paramele;
+	this.wExists = paramtwe;
+}
 
+function armor(paramone, paramtwo, paramthr, paramfou, paramfiv, paramsix, paramsev, parameig, paramnin, paramten, paramele, paramtwe) {
+	this.aName = paramone;
+	this.iWeight = paramtwo;
+	this.arBonus = paramthr;
+	this.mDex = paramfou;
+	this.check = paramfiv;
+	this.spFail = paramsix;
+	this.maxSp = paramsev;
+	this.hardness = parameig;
+	this.hitPoints = paramnin;
+	this.aSaves = paramten;
+	this.donning = paramele;
+	this.aExists = paramtwe;
+}
+
+function shield(paramone, paramtwo, paramthr, paramfou, paramfiv, paramsix, paramsev, parameig, paramnin, paramten, paramele, paramtwe) {
+	this.shieldName = paramone;
+	this.iWeight = paramtwo;
+	this.arBonus = paramthr;
+	this.mDex = paramfou;
+	this.check = paramfiv;
+	this.spFail = paramsix;
+	this.maxSp = paramsev;
+	this.hardness = parameig;
+	this.hitPoints = paramnin;
+	this.shieldSaves = paramten;
+	this.donning = paramele;
+}
+
+window.itemPurchaseNo = 0;
+window.numOfFeats = 0;
+window.blankCounter = 0;
+window.blankCraftCounter = 0;
+
+
+
+var skillsList = 	["appr", 	"bala", 	"bluf", 	"clim", 	"conc", 	"craf", 	"deci", 	"dipl", 	"disa", 	"disg", 	"esca", 	"forg", 	"gath", 	"hand", 	"heal", 	"hide", 	"inti", 	"jump", 	"know", 	"list", 	"move", 	"open", 	"perf", 	"prof", 	"ride", 	"sear", 	"sens", 	"slei", 	"spel", 	"spot", 	"surv", 	"swim", 	"tumb", 	"usem", 	"user",		"bla1" ]; // 	, 	"bla2", 	"bla3" 
+var whichModList = 	["int", 	"dex", 		"cha", 		"str", 		"con", 		"int", 		"int", 		"cha", 		"int", 		"cha", 		"dex", 		"int", 		"cha", 		"cha", 		"wis", 		"dex", 		"cha", 		"str", 		"int", 		"wis", 		"dex", 		"dex", 		"cha", 		"wis", 		"dex", 		"int", 		"wis", 		"dex", 		"int", 		"wis", 		"wis", 		"str", 		"dex", 		"cha", 		"dex",		"none" ];  // 	,		"none",		"none"
+// var untrained = [ true, 		true, 		true, 		true, 		true, 		true, 		false, 		true, 		false, 		true, 		true, 		true, 		true, 		false, 		true, 		true, 		true, 		true, 		false, 		true, 		true, 		false, 		false, 		false, 		true, 		true, 		true, 		false, 		false, 		true, 		true, 		true, 		false, 		false, 		true, 			true, 		true, 		true ]
 
 
 
@@ -273,16 +326,8 @@ var assignAttributes = function(form) {
 			logAllModifiers();					// Calculates all Ability Modifiers and Logs in Global Variables
 			logMscSkModifiers();				// Shows all Racial Skill Misc Modifiers (and other racial bonuses) and re-calculates ability modifiers.
 			addAbModifiers();					// Displays all Ability Modifiers in Skills Section
-			showClassSkills();					// Shows all Class Skills
+			showClassSkills();					// Calculates Skill Points. Shows all Class Skills
 			logAllSavingThrows();				// Calculate Saving Throws and Base Attack Bonus. They Don't Display immediately.
-			
-			
-			window.wSlotOne = { wExists: false};
-			window.wSlotTwo = { wExists: false};
-			window.wSlotThr = { wExists: false};
-			window.aSlotOne = { wExists: false};
-			window.aSlotTwo = { wExists: false};
-			window.aSlotThr = { wExists: false};	// Setting equal to false, so if the user buys no weapons, they don't throw a prase error. 
 			
 
 			
@@ -560,6 +605,41 @@ var logAllSavingThrows = function() {
 
 }
 
+var addSkill = function() {
+	window.blankCounter += 1;
+	switch (document.getElementById("wrin-skill-select-" + window.blankCounter).value) {
+		case "craft":
+			window.blankCraftCounter += 1;
+			document.getElementById("wrin-craft-" + window.blankCraftCounter).style.display = "block" ;
+			document.getElementById("print-wrin-craft-" + window.blankCraftCounter).innerHTML = "Craft: " + document.getElementById("blank-subtype-" + window.blankCounter).value ;
+			if (document.getElementById("wrin-inclass-" + window.blankCounter).value === "true") {
+
+				var rankPoints = Number(document.getElementById("bla" + Number(35 + window.blankCounter) ).value );
+				// alert("defined rankpoiunts okay");
+			} else {
+				var rankPoints = Number(document.getElementById("bla" + Number(35 + window.blankCounter) ).value ) / 2;
+			}
+			document.getElementById("print-wrin-craft-total-" + window.blankCraftCounter).innerHTML = "+ " + Number(rankPoints + Number(document.getElementById("wrin-skill-abmod-" + window.blankCounter).value ) + Number(document.getElementById("wrin-skill-misc-" + window.blankCounter).value ) ) ; 
+			
+		break;
+		case "knowledge":
+									alert("Only Craft: [subtype] skills work at this point. Pending update.");
+		break;
+		case "perform":
+									alert("Only Craft: [subtype] skills work at this point. Pending update.");
+		break;
+		case "profession":
+									alert("Only Craft: [subtype] skills work at this point. Pending update.");
+		break;
+		case "writein":
+									alert("Only Craft: [subtype] skills work at this point. Pending update.");
+		break;
+
+	}
+
+	document.getElementById("wrin-skill-submit-" + window.blankCounter).style.display = "none" ;
+
+}
 
 var calcPoints = function(form) {
 
@@ -598,12 +678,12 @@ var calcPoints = function(form) {
 	window.intumb = form.in_tumb.value;
 	window.inusem = form.in_usem.value;
 	window.inuser = form.in_user.value;
-	window.inbla1 = form.in_bla1.value;
-	window.inbla2 = form.in_bla2.value;
-	window.inbla3 = form.in_bla3.value;
+	window.inbla1 = Number(document.getElementById("bla36").value );
+	// window.inbla2 = form.in_bla2.value;
+	// window.inbla3 = form.in_bla3.value;
 
-	var skillsList = 	["appr", 	"bala", 	"bluf", 	"clim", 	"conc", 	"craf", 	"deci", 	"dipl", 	"disa", 	"disg", 	"esca", 	"forg", 	"gath", 	"hand", 	"heal", 	"hide", 	"inti", 	"jump", 	"know", 	"list", 	"move", 	"open", 	"perf", 	"prof", 	"ride", 	"sear", 	"sens", 	"slei", 	"spel", 	"spot", 	"surv", 	"swim", 	"tumb", 	"usem", 	"user"]; // 	"bla1", 	"bla2", 	"bla3" 
-	var whichModList = 	["int", 	"dex", 		"cha", 		"str", 		"con", 		"int", 		"int", 		"cha", 		"int", 		"cha", 		"dex", 		"int", 		"cha", 		"cha", 		"wis", 		"dex", 		"cha", 		"str", 		"int", 		"wis", 		"dex", 		"dex", 		"cha", 		"wis", 		"dex", 		"int", 		"wis", 		"dex", 		"int", 		"wis", 		"wis", 		"str", 		"dex", 		"cha", 		"dex"];  // 	"none",		"none",		"none"
+	// var skillsList = 	["appr", 	"bala", 	"bluf", 	"clim", 	"conc", 	"craf", 	"deci", 	"dipl", 	"disa", 	"disg", 	"esca", 	"forg", 	"gath", 	"hand", 	"heal", 	"hide", 	"inti", 	"jump", 	"know", 	"list", 	"move", 	"open", 	"perf", 	"prof", 	"ride", 	"sear", 	"sens", 	"slei", 	"spel", 	"spot", 	"surv", 	"swim", 	"tumb", 	"usem", 	"user"]; // 	"bla1", 	"bla2", 	"bla3" 
+	// var whichModList = 	["int", 	"dex", 		"cha", 		"str", 		"con", 		"int", 		"int", 		"cha", 		"int", 		"cha", 		"dex", 		"int", 		"cha", 		"cha", 		"wis", 		"dex", 		"cha", 		"str", 		"int", 		"wis", 		"dex", 		"dex", 		"cha", 		"wis", 		"dex", 		"int", 		"wis", 		"dex", 		"int", 		"wis", 		"wis", 		"str", 		"dex", 		"cha", 		"dex"];  // 	"none",		"none",		"none"
 	// var untrained = [ true, 		true, 		true, 		true, 		true, 		true, 		false, 		true, 		false, 		true, 		true, 		true, 		true, 		false, 		true, 		true, 		true, 		true, 		false, 		true, 		true, 		false, 		false, 		false, 		true, 		true, 		true, 		false, 		false, 		true, 		true, 		true, 		false, 		false, 		true, 			true, 		true, 		true ]
 
 	window.skillPointsSpent = 0;
@@ -629,26 +709,29 @@ var calcPoints = function(form) {
 				var mod = window.chaMod; 
 			break;
 			case "none":
-				var mod = 0;
+				var mod = "none";
 			break;
 		}
 
-		
-		if (document.getElementById("ms-" + skillsList[i] ).innerHTML === "-") {
-			var misc = 0;
-		} else {
-			var misc = Number(document.getElementById("ms-" + skillsList[i] ).innerHTML ) ;
-		}
+		if (mod != "none") {
+			if (document.getElementById("ms-" + skillsList[i] ).innerHTML === "-") {
+				var misc = 0;
+			} else {
+				var misc = Number(document.getElementById("ms-" + skillsList[i] ).innerHTML ) ;
+			}
 
-		if (window.allSkillsBool[i]) {
-			var maths = Number(mod) + Number(misc) + Number(window["in" + skillsList[i] ] );
-			document.getElementById("t-" + skillsList[i] ).innerHTML = ("+ " + maths ) ;
-		} else {
-			var maths = Number(mod) + Number(misc) + ( (Number(window["in" + skillsList[i] ] ) ) / 2 ) ;
-			document.getElementById("t-" + skillsList[i] ).innerHTML = ("+ " + maths ) ;
-		}
+			if (window.allSkillsBool[i]) {
+				var maths = Number(mod) + Number(misc) + Number(window["in" + skillsList[i] ] );
+				document.getElementById("t-" + skillsList[i] ).innerHTML = ("+ " + maths ) ;
+			} else {
+				var maths = Number(mod) + Number(misc) + ( (Number(window["in" + skillsList[i] ] ) ) / 2 ) ;
+				document.getElementById("t-" + skillsList[i] ).innerHTML = ("+ " + maths ) ;
+			}
 
-		window.skillPointsSpent += Number(window["in" + skillsList[i] ] ) ;
+			window.skillPointsSpent += Number(window["in" + skillsList[i] ] ) ;
+		} else {
+			window.skillPointsSpent += Number(document.getElementById("bla" + (i + 1) ).value ) ;
+		}
 
 		// alert("SPENT/Window.skPts: " + window.skillPointsSpent + " " + window.skPts );
 
@@ -716,18 +799,16 @@ var acceptSkills = function() {
 	}
 	
 	if (confirmAccSk) {
-		// document.getElementById("build").style.display = "none";
+		// Move on to next section.
 	}
 }
 
 
-var featHandler = function() {
-	window.numOfFeats;
-	if (window.numOfFeats === undefined) {
-		window.numOfFeats = 0;
-	}
-	window.numOfFeats += 1;
-}
+
+
+
+
+
 
 var selectFeat = function(featName) {
 	var confirmF = confirm("Select " + featName + "?");
@@ -737,14 +818,14 @@ var selectFeat = function(featName) {
 		if ( featsRemaining > 0) {
 			featsRemaining -= 1;
 			document.getElementById("feats-remaining").innerHTML = featsRemaining;
-			featHandler();
+			window.numOfFeats += 1;
 			document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = featName ;
 		} else {
 			var confirmR = confirm("You have no more feats available. Suffer the wrath of your DM and continue anyway?");
 			if (confirmR) {
 				featsRemaining -= 1;
 				document.getElementById("feats-remaining").innerHTML = featsRemaining;
-				featHandler();
+				window.numOfFeats += 1;
 				document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = featName ;
 			}
 		}			
@@ -760,7 +841,7 @@ var weaponFeat = function(featName) {
 		if ( featsRemaining > 0) {
 			featsRemaining -= 1;
 			document.getElementById("feats-remaining").innerHTML = featsRemaining;
-			featHandler();
+			window.numOfFeats += 1;
 			var featTarget = prompt("Which weapon will this feat affect?");
 			document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = ( featName + " (" + featTarget + ") " ) ;
 		} else {
@@ -768,7 +849,7 @@ var weaponFeat = function(featName) {
 			if (confirmR) {
 				featsRemaining -= 1;
 				document.getElementById("feats-remaining").innerHTML = featsRemaining;
-				featHandler();
+				window.numOfFeats += 1;
 				var featTarget = prompt("Which weapon will this feat affect?");
 				document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = ( featName + " (" + featTarget + ") " ) ;
 			}
@@ -786,7 +867,7 @@ var skillFocus = function(featName) {
 		if ( featsRemaining > 0) {
 			featsRemaining -= 1;
 			document.getElementById("feats-remaining").innerHTML = featsRemaining;
-			featHandler();
+			window.numOfFeats += 1;
 			alert("In order for the skills calculation to update properly, \n enter the skill name without spaces \n Example: UseRope");
 			var featTarget = prompt("Which skill will this feat affect?");
 			document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = ( featName + " (" + featTarget + ") " ) ;
@@ -796,7 +877,7 @@ var skillFocus = function(featName) {
 			if (confirmR) {
 				featsRemaining -= 1;
 				document.getElementById("feats-remaining").innerHTML = featsRemaining;
-				featHandler();
+				window.numOfFeats += 1;
 				alert("In order for the skills calculation to update properly, \n enter the skill name without spaces \n Example: UseRope");
 				var featTarget = prompt("Which skill will this feat affect?");
 
@@ -850,7 +931,6 @@ var decodeSkillFocus = function(featTarget) {
 
 var featUpdateSkill = function(featName) {
 
-
 	var confirmF = confirm("Select " + featName + "?");
 	if (confirmF) {
 		var featsRemaining = document.getElementById("feats-remaining").innerHTML ;
@@ -859,14 +939,14 @@ var featUpdateSkill = function(featName) {
 			featsRemaining -= 1;
 			var confirmR = true;
 			document.getElementById("feats-remaining").innerHTML = featsRemaining;
-			featHandler();
+			window.numOfFeats += 1;
 			document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = featName ;
 		} else {
 			var confirmR = confirm("You have no more feats available. Suffer the wrath of your DM and continue anyway?");
 			if (confirmR) {
 				featsRemaining -= 1;
 				document.getElementById("feats-remaining").innerHTML = featsRemaining;
-				featHandler();
+				window.numOfFeats += 1;
 				document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = featName ;
 			}
 		}			
@@ -1030,30 +1110,17 @@ var buyItem = function(itemName, itemCost, itemWeight) {
 		goldRemaining = goldRemaining - itemCost ;
 		document.getElementById("copper-remaining").innerHTML = goldRemaining ;
 
-		window.itemPurchaseNo;
-
-		if (window.itemPurchaseNo === undefined) {
-			window.itemPurchaseNo = 1;
-			document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = itemName ;
-			document.getElementById("item-purchase-no-" + window.itemPurchaseNo).style.display = "block" ;
-			
-			var totalWeight = Number(document.getElementById("total-weight").innerHTML);
-			totalWeight += itemWeight;
-			document.getElementById("total-weight").innerHTML = totalWeight;
-						
-			buySpecialItem(itemName, window.itemPurchaseNo);
-
-		} else {
-			window.itemPurchaseNo += 1;
-			document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = itemName ;
-			document.getElementById("item-purchase-no-" + window.itemPurchaseNo).style.display = "block" ;
-			
-			var totalWeight = Number(document.getElementById("total-weight").innerHTML);
-			totalWeight += itemWeight;
-			document.getElementById("total-weight").innerHTML = totalWeight;
-			
-			buySpecialItem(itemName, window.itemPurchaseNo);
-		}		
+		window.itemPurchaseNo += 1;
+		document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = itemName ;
+		document.getElementById("item-purchase-no-" + window.itemPurchaseNo).style.display = "block" ;
+		
+		var totalWeight = Number(document.getElementById("total-weight").innerHTML);
+		totalWeight += itemWeight;
+		document.getElementById("total-weight").innerHTML = totalWeight;
+		
+		buySpecialItem(itemName, window.itemPurchaseNo);
+		
+		
 	} else {
 		alert("You cannot afford this item.") ;
 	}
@@ -1108,57 +1175,134 @@ var buySpecialItem = function(itemName, itemNumber) {
 
 var buyWeapon = function(weaponName, itemCost, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs) {
 	
-	buyItem(weaponName, itemCost, itemWeight);
+	var goldRemaining = Number( document.getElementById("copper-remaining").innerHTML ) ;
 
-	window.weaponSlotOne;
-	window.weaponSlotTwo;
-	window.weaponSlotThree;
+	if (itemCost <= goldRemaining) {
+		goldRemaining = goldRemaining - itemCost ;
+		document.getElementById("copper-remaining").innerHTML = goldRemaining ;
 
-
-	if (window.weaponSlotOne === undefined) {
-		var confirmW = confirm("Do you want to equip this weapon in slot one?");
-	} else if (window.weaponSlotTwo === undefined) {
-		var confirmX = confirm("Do you want to equip this weapon in slot two?");
-	} else if (window.weaponSlotThree === undefined) {
-		var confirmY = confirm("Do you want to equip this weapon in slot three?");
-	} else {
-		alert("You have no more open weapon slots. User added weapon slots are not supported in this version.");
-	}
-
-	function weaponSlot(paramone, paramtwo, paramthr, paramfou, paramfiv, paramsix, paramsev, parameig, paramnin, paramten, paramele, paramtwe) {
-		this.wName = paramone;
-		this.iWeight = paramtwo;
-		this.damage = paramthr;
-		this.critical = paramfou;
-		this.range = paramfiv;
-		this.wType = paramsix;
-		this.wSize = paramsev;
-		this.wReach = parameig;
-		this.hardness = paramnin;
-		this.hitPoints = paramten;
-		this.wSaves = paramele;
-		this.wExists = paramtwe;
-	}
+		window.itemPurchaseNo += 1;
+		document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = weaponName ;
+		document.getElementById("item-purchase-no-" + window.itemPurchaseNo).style.display = "block" ;
+		
+		var totalWeight = Number(document.getElementById("total-weight").innerHTML);
+		totalWeight += itemWeight;
+		document.getElementById("total-weight").innerHTML = totalWeight;
 	
-	if (confirmW) {
-		window.wSlotOne = new weaponSlot(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs);
-		window.weaponSlotOne = true;
-	} 
-	if (confirmX) {
-		window.wSlotTwo = new weaponSlot(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs);
-		window.weaponSlotTwo = true;
-	} 
-	if (confirmY) {
-		window.wSlotThr = new weaponSlot(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs);
-		window.weaponSlotThree = true;
-	} 
 
+		if (window.weaponSlotOne === undefined) {
+			var confirmWa = confirm("Do you want to equip this weapon in slot one?");
+		} else if (window.weaponSlotTwo === undefined) {
+			var confirmWb = confirm("Do you want to equip this weapon in slot two?");
+		} else if (window.weaponSlotThree === undefined) {
+			var confirmWc = confirm("Do you want to equip this weapon in slot three?");
+		} else {
+			alert("You have no more open weapon slots. User-added weapon slots are not supported in this version.");
+		}
+
+		if (confirmWa) {
+			window.wSlotOne = new weaponSlot(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs);
+			window.weaponSlotOne = true;
+		} 
+		if (confirmWb) {
+			window.wSlotTwo = new weaponSlot(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs);
+			window.weaponSlotTwo = true;
+		} 
+		if (confirmWc) {
+			window.wSlotThr = new weaponSlot(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs);
+			window.weaponSlotThree = true;
+		} 
+	} else {
+		alert("You cannot afford this item.") ;
+	}
+
+}
+
+
+var buyArmor = function(armorName, itemCost, itemWeight, armorBonus, maxDex, check, spFail, maxSp, hardn, hp, saves, donning, exs ) {
+
+	var goldRemaining = Number( document.getElementById("copper-remaining").innerHTML ) ;
+
+	if (itemCost <= goldRemaining) {
+		goldRemaining = goldRemaining - itemCost ;
+		document.getElementById("copper-remaining").innerHTML = goldRemaining ;
+
+		window.itemPurchaseNo += 1;
+		document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = armorName ;
+		document.getElementById("item-purchase-no-" + window.itemPurchaseNo).style.display = "block" ;
+		
+		var totalWeight = Number(document.getElementById("total-weight").innerHTML);
+		totalWeight += itemWeight;
+		document.getElementById("total-weight").innerHTML = totalWeight;
+
+		if (window.armorSlot) {
+			var changeArmor = confirm("You already have armor equipped. Replace " + window.aSlot.armorName + " with this?");
+			if (changeArmor) {
+				window.aSlot = new armor(armorName, itemWeight, armorBonus, maxDex, check, spFail, maxSp, hardn, hp, saves, donning, exs);
+			}
+		} else if (window.armorSlot === undefined) {
+			var confirmAr = confirm("Do you want to equip this armor?");
+		}
+
+		if (confirmAr) {
+			window.aSlot = new armor(armorName, itemWeight, armorBonus, maxDex, check, spFail, maxSp, hardn, hp, saves, donning);
+			window.armorSlot = true;
+		} 
+
+		if (window.armorSlot) {
+			document.getElementById("print-armor-bonus").innerHTML = window.aSlot.arBonus;
+			// Update AC on character sheet. So it ca be relied upon later for calculations during population. 
+		}	
+	} else {
+		alert("You cannot afford this item.") ;
+	}
 }
 
 
 
 
+var buyShield = function(shieldName, itemCost, itemWeight, armorBonus, maxDex, check, spFail, maxSp, hardn, hp, saves, donning ) {
 
+	var goldRemaining = Number( document.getElementById("copper-remaining").innerHTML ) ;
+
+	if (itemCost <= goldRemaining) {
+		goldRemaining = goldRemaining - itemCost ;
+		document.getElementById("copper-remaining").innerHTML = goldRemaining ;
+
+		window.itemPurchaseNo += 1;
+		document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = shieldName ;
+		document.getElementById("item-purchase-no-" + window.itemPurchaseNo).style.display = "block" ;
+		
+		var totalWeight = Number(document.getElementById("total-weight").innerHTML);
+		totalWeight += itemWeight;
+		document.getElementById("total-weight").innerHTML = totalWeight;
+		
+		if (window.shieldSlot) {
+			var changeArmor = confirm("You already have a shield equipped. Replace " + window.sSlot.shieldName + " with this?");
+			if (changeArmor) {
+				window.sSlot = new shield(shieldName, itemWeight, armorBonus, maxDex, check, spFail, maxSp, hardn, hp, saves, donning);
+			}
+		}
+
+		if (window.shieldSlot === undefined) {
+			var confirmSh = confirm("Do you want to equip this shield?");
+		}
+
+		if (confirmSh) {
+			window.sSlot = new shield(shieldName, itemWeight, armorBonus, maxDex, check, spFail, maxSp, hardn, hp, saves, donning);
+			window.shieldSlot = true;
+		} 
+
+		if (window.sSlot) {
+			document.getElementById("print-shield-bonus").innerHTML = window.sSlot.arBonus;
+			// Update AC on character sheet.
+		}
+		
+	} else {
+		alert("You cannot afford this item.") ;
+	}
+
+}
 
 
 
@@ -1172,13 +1316,69 @@ var populateCharacterSheet = function() {
 	var formPlayer = document.getElementById("form-player").value;
 	var formAlignment = document.getElementById("form-alignment").value;
 	
-	var formAppearance = document.getElementById("form-appearance").value;
+	document.getElementById("print-eyes").innerHTML = document.getElementById("form-eyes").value;
+	document.getElementById("print-hair").innerHTML = document.getElementById("form-hair").value;
+	document.getElementById("print-height").innerHTML = document.getElementById("form-height").value;
+	document.getElementById("print-weight").innerHTML = document.getElementById("form-weight").value;
+	document.getElementById("print-skin").innerHTML = document.getElementById("form-skin").value;
+	document.getElementById("print-handedness").innerHTML = document.getElementById("form-handedness").value;
+	document.getElementById("print-age").innerHTML = document.getElementById("form-age").value;
+	document.getElementById("print-gender").innerHTML = document.getElementById("form-gender").value;
+	
+	
+	
+	document.getElementById("print-appearance").innerHTML = document.getElementById("form-appearance").value;
+	document.getElementById("print-personality").innerHTML = document.getElementById("form-personality").value;
+	document.getElementById("print-quote").innerHTML = document.getElementById("form-quote").value;
+	document.getElementById("print-objective").innerHTML = document.getElementById("form-objective").value;
+	document.getElementById("print-history").innerHTML = document.getElementById("form-history").value;
+	document.getElementById("print-allies-enemies").innerHTML = document.getElementById("form-allies-enemies").value;
+	document.getElementById("print-ancestry").innerHTML = document.getElementById("form-ancestry").value;
+	document.getElementById("print-other-info").innerHTML = document.getElementById("form-other-info").value;
+	
+	
+	
+	
+	if (window.numOfFeats > 0) {
+		for (i = 1 ; i < (window.numOfFeats + 1) ; i++ ) {
+			document.getElementById("print-feat-" + i ).innerHTML = document.getElementById("feat-name-" + i ).innerHTML ;
+		}
+	}
+	
+	if (window.itemPurchaseNo > 0) {
+		for (i = 1 ; i < (window.itemPurchaseNo + 1) ; i++ ) {
+			document.getElementById("print-item-" + i ).innerHTML = document.getElementById("item-purchase-no-" + i ).innerHTML ;
+		}
+	}
+	
 	
 	
 	// document.getElementById("print-appearance").innerHTML = formAppearance ;
 	
-	document.getElementById("print-name").innerHTML = formName ;
-	document.getElementById("print-player").innerHTML = formPlayer ;
+	// document.getElementById("print-name").innerHTML = formName ;
+	// document.getElementById("print-player").innerHTML = formPlayer ;
+	
+	var list = document.getElementsByClassName("print-name");
+	for ( var i = 0 ; i < list.length ; i++ ) {
+		list[i].innerHTML = (formName); 
+	}
+	
+	var list = document.getElementsByClassName("print-player");
+	for ( var i = 0 ; i < list.length ; i++ ) {
+		list[i].innerHTML = (formPlayer); 
+	}
+	
+	var list = document.getElementsByClassName("print-race");
+	for ( var i = 0 ; i < list.length ; i++ ) {
+		list[i].innerHTML = (window.selRace); 
+	}
+	
+	var list = document.getElementsByClassName("print-class");
+	for ( var i = 0 ; i < list.length ; i++ ) {
+		list[i].innerHTML = (window.selClass); 
+	}
+	
+
 	document.getElementById("print-alignment").innerHTML = formAlignment ;
 	document.getElementById("print-class").innerHTML = window.selClass ;
 	document.getElementById("print-level").innerHTML = 1 ;
@@ -1266,7 +1466,6 @@ var populateCharacterSheet = function() {
 	}
 	
 
-
 	
 
 	// Now watch as I print all the skill totals
@@ -1283,13 +1482,26 @@ var populateCharacterSheet = function() {
 
 	}
 
+	if ( document.getElementById("in_craf").value != 0) {
+		document.getElementById("print-craft-title").innerHTML = ( "Craft: " + document.getElementById("wrin-craft").value ); 
+	}
+	if ( document.getElementById("in_know").value != 0) {
+		document.getElementById("print-knowledge-title").innerHTML = ( "Knowledge: " + document.getElementById("wrin-knowledge").value ); 
+	}
+	if ( document.getElementById("in_perf").value != 0) {
+		document.getElementById("print-perform-title").innerHTML = ( "Perform: " + document.getElementById("wrin-perform").value ); 
+	}
+	if ( document.getElementById("in_prof").value != 0) {
+		document.getElementById("print-profession-title").innerHTML = ( "Profession: " + document.getElementById("wrin-profession").value ); 
+	}
+
 
 
 	calculateCarryingCapacity(window.strAttr);
 	
 	
-	if (window.wSlotOne.wExists) {
-		alert("it found it true");
+	if (window.weaponSlotOne) {
+		// alert("it found it true");
 		document.getElementById("pr-w-s1-name").innerHTML = window.wSlotOne.wName;
 		document.getElementById("pr-w-s1-weight").innerHTML = window.wSlotOne.iWeight;
 		document.getElementById("pr-w-s1-dmg").innerHTML = window.wSlotOne.damage;
@@ -1303,8 +1515,8 @@ var populateCharacterSheet = function() {
 		document.getElementById("pr-w-s1-saves").innerHTML = window.wSlotOne.wSaves;
 	}
 	
-	if (window.wSlotTwo.wExists) {
-		alert("it found TWO true");
+	if (window.weaponSlotTwo) {
+		// alert("it found TWO true");
 		document.getElementById("weapon-slot-two").style.display = "block";
 		document.getElementById("pr-w-s2-name").innerHTML = window.wSlotTwo.wName;
 		document.getElementById("pr-w-s2-weight").innerHTML = window.wSlotTwo.iWeight;
@@ -1319,8 +1531,8 @@ var populateCharacterSheet = function() {
 		document.getElementById("pr-w-s2-saves").innerHTML = window.wSlotTwo.wSaves;
 	}
 	
-	if (window.wSlotThr.wExists) {
-		alert("it found Three true");
+	if (window.weaponSlotThree) {
+		// alert("it found Three true");
 		document.getElementById("weapon-slot-thr").style.display = "block";
 		document.getElementById("pr-w-s3-name").innerHTML = window.wSlotThr.wName;
 		document.getElementById("pr-w-s3-weight").innerHTML = window.wSlotThr.iWeight;
@@ -1335,25 +1547,45 @@ var populateCharacterSheet = function() {
 		document.getElementById("pr-w-s3-saves").innerHTML = window.wSlotThr.wSaves;
 	}
 	
-	alert("it got through them all.");
+
+	if (window.armorSlot) {
+		document.getElementById("pr-armor-name").innerHTML = window.aSlot.aName;
+		document.getElementById("pr-armor-weight").innerHTML = window.aSlot.iWeight;
+		document.getElementById("pr-armor-ar-bonus").innerHTML = window.aSlot.arBonus;
+		document.getElementById("pr-armor-m-dex").innerHTML = window.aSlot.mDex;
+		document.getElementById("pr-armor-check").innerHTML = window.aSlot.check;
+		document.getElementById("pr-armor-sp-fail").innerHTML = window.aSlot.spFail;
+		document.getElementById("pr-armor-max-sp").innerHTML = window.aSlot.maxSp;
+		document.getElementById("pr-armor-hardness").innerHTML = window.aSlot.hardness;
+		document.getElementById("pr-armor-hit-points").innerHTML = window.aSlot.hitPoints;
+		document.getElementById("pr-armor-a-saves").innerHTML = window.aSlot.aSaves;
+		document.getElementById("pr-armor-donning").innerHTML = window.aSlot.donning;
+	}
+
+	if (window.sSlot) {
+		document.getElementById("armor-slot-two").style.display = "block";
+		document.getElementById("pr-shield-name").innerHTML = window.sSlot.shieldName;
+		document.getElementById("pr-shield-weight").innerHTML = window.sSlot.iWeight;
+		document.getElementById("pr-shield-ar-bonus").innerHTML = window.sSlot.arBonus;
+		document.getElementById("pr-shield-m-dex").innerHTML = window.sSlot.mDex;
+		document.getElementById("pr-shield-check").innerHTML = window.sSlot.check;
+		document.getElementById("pr-shield-sp-fail").innerHTML = window.sSlot.spFail;
+		document.getElementById("pr-shield-max-sp").innerHTML = window.sSlot.maxSp;
+		document.getElementById("pr-shield-hardness").innerHTML = window.sSlot.hardness;
+		document.getElementById("pr-shield-hit-points").innerHTML = window.sSlot.hitPoints;
+		document.getElementById("pr-shield-saves").innerHTML = window.sSlot.shieldSaves;
+		document.getElementById("pr-shield-donning").innerHTML = window.sSlot.donning;
+	}
+
+	printLeftoverMoney();
+	calculateArmorClass();
+
+	alert("Character Sheet successfully populated.");
 
 }
 
 
 var calculateCarryingCapacity = function(strengthScore) {
-	/*
-
-	Carrying Capacity (for a human):
-	If your Strength score is 10 or less, your heavy load limit is 10 lbs. * Strength.
-	If your Strength score is 10 or greater, your heavy load limit is 25 lbs. * 2^(0.2 * Strength).
-
-	(Both formulas give the same result for a Strength of 10.)
-
-	Your light load limit is 1/3 your heavy load limit.
-	Your medium load limit is 2/3 your heavy load limit.
-	Apply appropriate multipliers for different sizes, body types, etc
-	
-	*/
 	
 	if (strengthScore <= 10) {
 		window.heavyLoad = Math.floor(strengthScore * 10);
@@ -1366,7 +1598,7 @@ var calculateCarryingCapacity = function(strengthScore) {
 	window.mediumLoad = Math.floor((2 * heavyLoad) / 3);
 	window.lightLoad =  Math.floor(heavyLoad / 3);
 
-	document.getElementById("print-weight-total").innerHTML = document.getElementById("total-weight").innerHTML;
+	document.getElementById("print-total-weight").innerHTML = document.getElementById("total-weight").innerHTML;
 	document.getElementById("print-heavy-load").innerHTML = window.heavyLoad;
 	document.getElementById("print-medium-load").innerHTML = window.mediumLoad;
 	document.getElementById("print-light-load").innerHTML = window.lightLoad;
@@ -1376,13 +1608,37 @@ var calculateCarryingCapacity = function(strengthScore) {
 }
 
 
+var printLeftoverMoney = function() {
+	var money = document.getElementById("copper-remaining").innerHTML ;
+	var gold = Math.floor(money * 0.01) ;
+	var silver = (Math.floor(money * 0.1) ) - ( gold * 10 ) ;
+	var copper = (money) - (gold * 100) - (silver * 10) ;
+	document.getElementById("print-coins-gold").innerHTML = gold;
+	document.getElementById("print-coins-silver").innerHTML = silver;
+	document.getElementById("print-coins-copper").innerHTML = copper;
+}
+
+var calculateArmorClass = function() {
+	var armor = Number(document.getElementById("print-armor-bonus").innerHTML);
+	var shield = Number(document.getElementById("print-shield-bonus").innerHTML);
+	// add other variables as natural armor, misc, etc become available. 
+	var natural = 0;
+	var size = 0;
+	var defl = 0;
+	var misc = 0;
+
+	document.getElementById("print-ac-tot").innerHTML = 10 + window.dexMod + armor + shield + natural + size + defl + misc;
+	document.getElementById("print-ff-tot").innerHTML = 10 + armor + shield + natural + size + defl + misc;
+	document.getElementById("print-to-tot").innerHTML = 10 + window.dexMod + size + defl + misc;
+}
 
 
 
-
-
-
-
+var testWriteInSkills = function() {
+	if ( document.getElementById("in_craf").value != 0) {
+		document.getElementById("print-craft-title").innerHTML = ( "Craft: " + document.getElementById("wrin-craft").value ); 
+	}
+}
 
 
 
