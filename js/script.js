@@ -47,6 +47,9 @@ window.itemPurchaseNo = 0;
 window.numOfFeats = 0;
 window.blankCounter = 0;
 window.blankCraftCounter = 0;
+window.blankKnowledgeCounter = 0;
+window.blankPerformCounter = 0;
+window.blankProfessionCounter = 0;
 
 
 
@@ -111,30 +114,13 @@ var raceSelect = function(userRace) {
 	
 	if (confirmRace) {
 		window.selRace = userRace.toUpperCase();
-	} else {
-		//exit function. Reset on next call.
 	}
-	
 	if (window.selRace != 0) {
-		
 		document.getElementById("show-race").innerHTML = "Current Race: " + window.selRace;
-		
 		document.getElementById("race-select").style.display="none";
-		
 		document.getElementById("dice-sys").style.display="block";
-		
-		document.getElementById("race-bonus-" + (window.selRace.toLowerCase()) ).style.display="block"; // Display information block for this Race.
-		
-		if (window.selRace === "HUMAN") {
-			var bonusFeat = document.getElementById("feats-remaining").innerHTML;
-			var bonusFeatHolder = Number(bonusFeat);
-			bonusFeatHolder += 1;
-			document.getElementById("feats-remaining").innerHTML = bonusFeatHolder;
-		}
-	
-	} else {
-		// exit function. Reset on next call.
-	}
+		// document.getElementById("race-bonus-" + (window.selRace.toLowerCase()) ).style.display="block"; // Display information block for this Race.
+	} 
 }
 
 
@@ -345,13 +331,14 @@ var logMscSkModifiers = function() {
 	
 	switch (window.selRace) {
 	case "HUMAN":
-		// Humans have no innate misc skill modifiers
+		document.getElementById("feats-remaining").innerHTML = 2;
 	break;
 	case "DWARF":
 		alert("CON + 2 (Dwarven Racial Trait)\nCHA - 2 (Dwarven Racial Trait)");
 		window.conAttr += 2;
 		window.chaAttr -= 2;
 		logAllModifiers();
+		window.darkVision = true;
 	break;
 	case "ELF":
 		alert("DEX + 2 (Elven Racial Trait)\nCON - 2 (Elven Racial Trait)");
@@ -361,6 +348,7 @@ var logMscSkModifiers = function() {
 		document.getElementById("ms-list").innerHTML = 2;
 		document.getElementById("ms-sear").innerHTML = 2;
 		document.getElementById("ms-spot").innerHTML = 2;
+		window.lowLight = true;
 	break;
 	case "GNOME":
 		alert("CON + 2 (Gnome Racial Trait)\nSTR - 2 (Gnome Racial Trait)");
@@ -369,6 +357,9 @@ var logMscSkModifiers = function() {
 		logAllModifiers();
 		document.getElementById("ms-list").innerHTML = 2;
 		document.getElementById("ms-craf").innerHTML = 2;
+		document.getElementById("ms-hide").innerHTML = 4;
+		window.small = true;
+		window.lowLight = true;
 	break;
 	case "HALF-ELF":
 		alert("DEX + 1 (Elven Racial Trait)\nCON - 1 (Elven Racial Trait)");
@@ -377,6 +368,7 @@ var logMscSkModifiers = function() {
 		document.getElementById("ms-spot").innerHTML = 1;
 		document.getElementById("ms-dipl").innerHTML = 2;
 		document.getElementById("ms-gath").innerHTML = 2;
+		window.lowLight = true;
 	break;
 	case "HALF-ORC":
 		alert("STR + 2 (Orcish Racial Trait)\nINT - 2 (Orcish Racial Trait)\nCHA - 2 (Orcish Racial Trait)");
@@ -384,6 +376,7 @@ var logMscSkModifiers = function() {
 		window.intAttr -= 2;
 		window.chaAttr -= 2;
 		logAllModifiers();
+		window.darkVision = true;
 	break;
 	case "HALFLING":
 		alert("DEX + 2 (Halfling Racial Trait)\nSTR - 2 (Halfling Racial Trait)");
@@ -394,6 +387,8 @@ var logMscSkModifiers = function() {
 		document.getElementById("ms-jump").innerHTML = 2;
 		document.getElementById("ms-move").innerHTML = 2;
 		document.getElementById("ms-list").innerHTML = 2;
+		document.getElementById("ms-hide").innerHTML = 4;
+		window.small = true;
 	break;
 	case "NewBlankRace":
 		// A placeholder for future racial additions. 
@@ -607,6 +602,12 @@ var logAllSavingThrows = function() {
 
 var addSkill = function() {
 	window.blankCounter += 1;
+	//
+	//
+	// functionality that references the input relies on window.blankcounter. 
+	// functionality that defines the output relies on window.blank[whatever]counter
+	//
+	//
 	switch (document.getElementById("wrin-skill-select-" + window.blankCounter).value) {
 		case "craft":
 			window.blankCraftCounter += 1;
@@ -615,7 +616,7 @@ var addSkill = function() {
 			if (document.getElementById("wrin-inclass-" + window.blankCounter).value === "true") {
 
 				var rankPoints = Number(document.getElementById("bla" + Number(35 + window.blankCounter) ).value );
-				// alert("defined rankpoiunts okay");
+				
 			} else {
 				var rankPoints = Number(document.getElementById("bla" + Number(35 + window.blankCounter) ).value ) / 2;
 			}
@@ -623,22 +624,74 @@ var addSkill = function() {
 			
 		break;
 		case "knowledge":
-									alert("Only Craft: [subtype] skills work at this point. Pending update.");
+			window.blankKnowledgeCounter += 1;
+			document.getElementById("wrin-knowledge-" + window.blankKnowledgeCounter).style.display = "block" ;
+			document.getElementById("print-wrin-knowledge-" + window.blankKnowledgeCounter).innerHTML = "Knowledge: " + document.getElementById("blank-subtype-" + window.blankCounter).value ;
+			if (document.getElementById("wrin-inclass-" + window.blankCounter).value === "true") {
+				var rankPoints = Number(document.getElementById("bla" + Number(35 + window.blankCounter) ).value );
+			} else {
+				var rankPoints = Number(document.getElementById("bla" + Number(35 + window.blankCounter) ).value ) / 2;
+			}
+			document.getElementById("print-wrin-knowledge-total-" + window.blankKnowledgeCounter).innerHTML = "+ " + Number(rankPoints + Number(document.getElementById("wrin-skill-abmod-" + window.blankCounter).value ) + Number(document.getElementById("wrin-skill-misc-" + window.blankCounter).value ) ) ; 
 		break;
 		case "perform":
-									alert("Only Craft: [subtype] skills work at this point. Pending update.");
+			window.blankPerformCounter += 1;
+			document.getElementById("wrin-perform-" + window.blankPerformCounter).style.display = "block" ;
+			document.getElementById("print-wrin-perform-" + window.blankPerformCounter).innerHTML = "Perform: " + document.getElementById("blank-subtype-" + window.blankCounter).value ;
+			if (document.getElementById("wrin-inclass-" + window.blankCounter).value === "true") {
+				var rankPoints = Number(document.getElementById("bla" + Number(35 + window.blankCounter) ).value );
+			} else {
+				var rankPoints = Number(document.getElementById("bla" + Number(35 + window.blankCounter) ).value ) / 2;
+			}
+			document.getElementById("print-wrin-perform-total-" + window.blankPerformCounter).innerHTML = "+ " + Number(rankPoints + Number(document.getElementById("wrin-skill-abmod-" + window.blankCounter).value ) + Number(document.getElementById("wrin-skill-misc-" + window.blankCounter).value ) ) ; 
 		break;
 		case "profession":
-									alert("Only Craft: [subtype] skills work at this point. Pending update.");
+			window.blankProfessionCounter += 1;
+			document.getElementById("wrin-profession-" + window.blankProfessionCounter).style.display = "block" ;
+			document.getElementById("print-wrin-profession-" + window.blankProfessionCounter).innerHTML = "Profession: " + document.getElementById("blank-subtype-" + window.blankCounter).value ;
+			if (document.getElementById("wrin-inclass-" + window.blankCounter).value === "true") {
+				var rankPoints = Number(document.getElementById("bla" + Number(35 + window.blankCounter) ).value );
+			} else {
+				var rankPoints = Number(document.getElementById("bla" + Number(35 + window.blankCounter) ).value ) / 2;
+			}
+			document.getElementById("print-wrin-profession-total-" + window.blankProfessionCounter).innerHTML = "+ " + Number(rankPoints + Number(document.getElementById("wrin-skill-abmod-" + window.blankCounter).value ) + Number(document.getElementById("wrin-skill-misc-" + window.blankCounter).value ) ) ; 
 		break;
 		case "writein":
 									alert("Only Craft: [subtype] skills work at this point. Pending update.");
 		break;
 
 	}
+	if (window.blankCraftCounter === 4) {
+		// Remove Craft as an option, all further crafts must be completely write-in, at the bottom. 
+		var list = document.getElementsByClassName("all-wrin-craft");
+		for ( var i = 0 ; i < list.length ; i++ ) {
+			list[i].style.display = "none" ;
+		}
+	}
+	if (window.blankKnowledgeCounter === 4) {
+		// Remove Craft as an option, all further crafts must be completely write-in, at the bottom. 
+		var list = document.getElementsByClassName("all-wrin-knowledge");
+		for ( var i = 0 ; i < list.length ; i++ ) {
+			list[i].style.display = "none" ;
+		}
+	}
+	if (window.blankPerformCounter === 4) {
+		// Remove Craft as an option, all further crafts must be completely write-in, at the bottom. 
+		var list = document.getElementsByClassName("all-wrin-perform");
+		for ( var i = 0 ; i < list.length ; i++ ) {
+			list[i].style.display = "none" ;
+		}
+	}
+	if (window.blankProfessionCounter === 1) {
+		// Remove Craft as an option, all further crafts must be completely write-in, at the bottom. 
+		var list = document.getElementsByClassName("all-wrin-profession");
+		for ( var i = 0 ; i < list.length ; i++ ) {
+			list[i].style.display = "none" ;
+		}
+	}
 
 	document.getElementById("wrin-skill-submit-" + window.blankCounter).style.display = "none" ;
-
+	document.getElementById("wrin-" + (window.blankCounter + 1) ).style.display = "block" ; // This will ultimately fail to execute if the user exhausts the forms. 
 }
 
 var calcPoints = function(form) {
@@ -1181,7 +1234,7 @@ var buySpecialItem = function(itemName, itemNumber) {
 		goldRemaining = goldRemaining - ( Number(confirmBow) * 7500 ) ;
 		document.getElementById("item-purchase-no-" + itemNumber ).innerHTML = itemName + " (+" + confirmBow + ")" ;		
 		document.getElementById("copper-remaining").innerHTML = goldRemaining ;
-	break;	
+	break;
 	}
 }
 
@@ -1337,8 +1390,6 @@ var populateCharacterSheet = function() {
 	document.getElementById("print-age").innerHTML = document.getElementById("form-age").value;
 	document.getElementById("print-gender").innerHTML = document.getElementById("form-gender").value;
 	
-	
-	
 	document.getElementById("print-appearance").innerHTML = document.getElementById("form-appearance").value;
 	document.getElementById("print-personality").innerHTML = document.getElementById("form-personality").value;
 	document.getElementById("print-quote").innerHTML = document.getElementById("form-quote").value;
@@ -1347,9 +1398,6 @@ var populateCharacterSheet = function() {
 	document.getElementById("print-allies-enemies").innerHTML = document.getElementById("form-allies-enemies").value;
 	document.getElementById("print-ancestry").innerHTML = document.getElementById("form-ancestry").value;
 	document.getElementById("print-other-info").innerHTML = document.getElementById("form-other-info").value;
-	
-	
-	
 	
 	if (window.numOfFeats > 0) {
 		for (i = 1 ; i < (window.numOfFeats + 1) ; i++ ) {
@@ -1363,15 +1411,11 @@ var populateCharacterSheet = function() {
 		}
 	}
 	
-
-	
-
-
-
-
+	if (window.small) {
+		document.getElementById("print-size-bonus").innerHTML = "+1" ;
+	}
 	
 	// document.getElementById("print-appearance").innerHTML = formAppearance ;
-	
 	// document.getElementById("print-name").innerHTML = formName ;
 	// document.getElementById("print-player").innerHTML = formPlayer ;
 	
@@ -1673,42 +1717,6 @@ var populateCharacterSheet = function() {
 	}
 
 
-
-		/*
-		
-		if ( Number(document.getElementById("qty-Caltrops").innerHTML) > 0 ) {
-			// Print trail ration and qty in cons slot i.
-			document.getElementById("pr-cons-name-" + i ).innerHTML = "Caltrops";
-			document.getElementById("pr-cons-qty-" + i ).innerHTML = Number(document.getElementById("qty-Caltrops").innerHTML) + "Bag";
-		}
-		if ( Number(document.getElementById("qty-Canvas").innerHTML) > 0 ) {
-			// Print trail ration and qty in cons slot i.
-			document.getElementById("pr-cons-name-" + i ).innerHTML = "Canvas";
-			document.getElementById("pr-cons-qty-" + i ).innerHTML = Number(document.getElementById("qty-Canvas").innerHTML) + "Sqyd";
-		}
-		if ( Number(document.getElementById("qty-Firewood").innerHTML) > 0 ) {
-			// Print trail ration and qty in cons slot i.
-			document.getElementById("pr-cons-name-" + i ).innerHTML = "Firewood";
-			document.getElementById("pr-cons-qty-" + i ).innerHTML = Number(document.getElementById("qty-Firewood").innerHTML) + "lb";
-		}
-		if ( Number(document.getElementById("qty-Rope-Hemp").innerHTML) > 0 ) {
-			// Print trail ration and qty in cons slot i.
-			document.getElementById("pr-cons-name-" + i ).innerHTML = "Hemp Rope";
-			document.getElementById("pr-cons-qty-" + i ).innerHTML = Number(document.getElementById("qty-Rope (Hemp)").innerHTML) + "ft";
-		}
-		if ( Number(document.getElementById("qty-Rope-Silk").innerHTML) > 0 ) {
-			// Print trail ration and qty in cons slot i.
-			document.getElementById("pr-cons-name-" + i ).innerHTML = "Hemp Rope";
-			document.getElementById("pr-cons-qty-" + i ).innerHTML = Number(document.getElementById("qty-Rope (Silk)").innerHTML) + "ft";
-		}
-		alert("Got to end of ifs");
-		*/
-	
-	
-
-
-
-
 	printLeftoverMoney();
 	calculateArmorClass();
 
@@ -1755,13 +1763,18 @@ var calculateArmorClass = function() {
 	var shield = Number(document.getElementById("print-shield-bonus").innerHTML);
 	// add other variables as natural armor, misc, etc become available. 
 	var natural = 0;
-	var size = 0;
+	if (window.small) {
+		var size = 1;
+	} else {
+		var size = 0;
+	}
 	var defl = 0;
 	var misc = 0;
 
 	document.getElementById("print-ac-tot").innerHTML = 10 + window.dexMod + armor + shield + natural + size + defl + misc;
 	document.getElementById("print-ff-tot").innerHTML = 10 + armor + shield + natural + size + defl + misc;
 	document.getElementById("print-to-tot").innerHTML = 10 + window.dexMod + size + defl + misc;
+
 }
 
 

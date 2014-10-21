@@ -63,22 +63,23 @@
 			</h2>
 			<ul>
 				<li>
-					Select Race, Class, Roll Ability Scores, Allot Skill Points, all Feats, some Weapons, some Armor, some Equipment.
+					Select Race & Class, Roll Ability Scores, Allot Skill Points, and all Feats WORK.
 				</li>
 				<li>
-					Functionality to Add weapon/armor slots on print pages works with some weapons/armor (longsword, longbow, greatsword and bastard sword. and a few others for weapons... All the light Armors, buckler and light wooden shield for armor).
+					Functionality for equipment, weapons and armor works, unless otherwise noted (by an &mdash;).
 				</li>
 				<li>
 					Calculates leftover gold and encumberance values.
 				</li>
 				<li>
-					Write in skill module for Craft: [whatever] works. Others don't.  
+					Write in skill module for Craft: [whatever] works. Others don't.
 				</li>
 				<li>
 					Input character name and information.
 				</li>
 				<li>
-					Printable Character sheets populate! Print settings for Chrome and Safari work. FF works, but prints with margins. 
+					Printable Character sheets populate! Character sheets print well for Up-to-date Chrome, Firefox and Safari on OSX. 
+					Chrome works on windows, others are untested. 
 				</li>
 				<li>
 					Image uploader works! 
@@ -603,19 +604,19 @@
 						<p>Misc. Modifier</p><br>
 					</div>
 					<select id="wrin-inclass-1" class="user-added-skill" value="">
-						<option selected="selected" disabled="disabled" value="false"> - select - </option>
+						<option selected="selected" disabled="disabled" value="blank"> - select - </option>
 						<option value="true">Yes</option>
 						<option value="false">No</option>
 					</select>
 					<select id="wrin-skill-select-1" class="user-added-skill">
 						<option selected="selected" disabled="disabled" value="blank"> - select - </option>
-						<option value="craft">Craft: </option>
-						<option value="knowledge">Knowledge: </option>
-						<option value="perform">Perform: </option>
-						<option value="profession">Profession: </option> 
-						<option value="writein">Write In</option> 
+						<option class="all-wrin-craft" value="craft">Craft: </option>
+						<option class="all-wrin-knowledge" value="knowledge">Knowledge: </option>
+						<option class="all-wrin-perform" value="perform">Perform: </option>
+						<option class="all-wrin-profession" value="profession">Profession: </option> 
+						<option class="all-wrin-writein" value="writein">Write In</option>
 					</select>
-					<input id="blank-subtype-1" type="text" class="user-added-skill" value="" placeholder="Subtype">
+					<input id="blank-subtype-1" type="text" class="user-added-skill" value="" placeholder="Name">
 					<input id="bla36" type="number" class="user-added-skill" value="" placeholder="0" min="0">
 					<input id="wrin-skill-abmod-1" type="number" class="user-added-skill" value="" placeholder="0" min="0">
 					<input id="wrin-skill-misc-1" type="number" class="user-added-skill" value="" placeholder="0" min="0">
@@ -623,7 +624,101 @@
 					
 					<input id="wrin-skill-submit-1" type="button" value="Submit" onclick="addSkill();">
 					
-
+				</form>
+				<form id="wrin-2">
+					<p>
+						Add Additional Craft, Knowledge, Perform, and Profession skills here.
+					</p>
+					<div class="add-skill-labels">
+						<p>Class Skill</p>
+						<p>Skill Type</p>
+						<p>Name/Subtype</p>
+						<p>Skill Points</p>
+						<p>Ability Modifier</p>
+						<p>Misc. Modifier</p><br>
+					</div>
+					<select id="wrin-inclass-2" class="user-added-skill" value="">
+						<option selected="selected" disabled="disabled" value="blank"> - select - </option>
+						<option value="true">Yes</option>
+						<option value="false">No</option>
+					</select>
+					<select id="wrin-skill-select-2" class="user-added-skill">
+						<option selected="selected" disabled="disabled" value="blank"> - select - </option>
+						<option class="all-wrin-craft" value="craft">Craft: </option>
+						<option class="all-wrin-knowledge" value="knowledge">Knowledge: </option>
+						<option class="all-wrin-perform" value="perform">Perform: </option>
+						<option class="all-wrin-profession" value="profession">Profession: </option> 
+						<option class="all-wrin-writein" value="writein">Write In</option>
+					</select>
+					<input id="blank-subtype-2" type="text" class="user-added-skill" value="" placeholder="Name">
+					<input id="bla37" type="number" class="user-added-skill" value="" placeholder="0" min="0">
+					<input id="wrin-skill-abmod-2" type="number" class="user-added-skill" value="" placeholder="0" min="0">
+					<input id="wrin-skill-misc-2" type="number" class="user-added-skill" value="" placeholder="0" min="0">
+					
+					
+					<input id="wrin-skill-submit-2" type="button" value="Submit" onclick="addSkill();">
+				</form>
+				<form id="wrin-3">
+					<p>
+						Add Additional Craft, Knowledge, Perform, and Profession skills here.
+					</p>
+					<div class="add-skill-labels">
+						<p>Class Skill</p>
+						<p>Skill Type</p>
+						<p>Name/Subtype</p>
+						<p>Skill Points</p>
+						<p>Ability Modifier</p>
+						<p>Misc. Modifier</p><br>
+					</div>
+					<select id="wrin-inclass-3" class="user-added-skill" value="">
+						<option selected="selected" disabled="disabled" value="blank"> - select - </option>
+						<option value="true">Yes</option>
+						<option value="false">No</option>
+					</select>
+					<select id="wrin-skill-select-3" class="user-added-skill">
+						<option selected="selected" disabled="disabled" value="blank"> - select - </option>
+						<option class="all-wrin-craft" value="craft">Craft: </option>
+						<option class="all-wrin-knowledge" value="knowledge">Knowledge: </option>
+						<option class="all-wrin-perform" value="perform">Perform: </option>
+						<option class="all-wrin-profession" value="profession">Profession: </option> 
+						<option class="all-wrin-writein" value="writein">Write In</option>
+					</select>
+					<input id="blank-subtype-3" type="text" class="user-added-skill" value="" placeholder="Name">
+					<input id="bla38" type="number" class="user-added-skill" value="" placeholder="0" min="0">
+					<input id="wrin-skill-abmod-3" type="number" class="user-added-skill" value="" placeholder="0" min="0">
+					<input id="wrin-skill-misc-3" type="number" class="user-added-skill" value="" placeholder="0" min="0">
+					<input id="wrin-skill-submit-3" type="button" value="Submit" onclick="addSkill();">
+				</form>
+				<form id="wrin-4">
+					<p>
+						Add Additional Craft, Knowledge, Perform, and Profession skills here.
+					</p>
+					<div class="add-skill-labels">
+						<p>Class Skill</p>
+						<p>Skill Type</p>
+						<p>Name/Subtype</p>
+						<p>Skill Points</p>
+						<p>Ability Modifier</p>
+						<p>Misc. Modifier</p><br>
+					</div>
+					<select id="wrin-inclass-4" class="user-added-skill" value="">
+						<option selected="selected" disabled="disabled" value="blank"> - select - </option>
+						<option value="true">Yes</option>
+						<option value="false">No</option>
+					</select>
+					<select id="wrin-skill-select-4" class="user-added-skill">
+						<option selected="selected" disabled="disabled" value="blank"> - select - </option>
+						<option class="all-wrin-craft" value="craft">Craft: </option>
+						<option class="all-wrin-knowledge" value="knowledge">Knowledge: </option>
+						<option class="all-wrin-perform" value="perform">Perform: </option>
+						<option class="all-wrin-profession" value="profession">Profession: </option> 
+						<option class="all-wrin-writein" value="writein">Write In</option> 
+					</select>
+					<input id="blank-subtype-4" type="text" class="user-added-skill" value="" placeholder="Name">
+					<input id="bla39" type="number" class="user-added-skill" value="" placeholder="0" min="0">
+					<input id="wrin-skill-abmod-4" type="number" class="user-added-skill" value="" placeholder="0" min="0">
+					<input id="wrin-skill-misc-4" type="number" class="user-added-skill" value="" placeholder="0" min="0">
+					<input id="wrin-skill-submit-4" type="button" value="Submit" onclick="addSkill();">
 				</form>
 			</div>
 
@@ -970,15 +1065,15 @@
 				</div>
 				<div class="buy-item">
 					<p>Gauntlet</p>
-					<input class="buy-item-button" type="button" value="200" onclick="buyWeapon( 'Gauntlet', 200, 1, '1d3', 'x2', '&mdash;', 'bldg', 'MED', 'No', '10', '-', '-', true );">
+					<input class="buy-item-button" type="button" value="200" onclick="buyWeapon( 'Gauntlet', 200, 1, '1d3', 'x2', '&mdash;', 'bldg', 'MED', 'No', '10', '-', '-' );">
 				</div>
 				<div class="buy-item">
 					<p>Dagger</p>
-					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+					<input class="buy-item-button" type="button" value="200" onclick="buyWeapon( 'Dagger', 200, 1, '1d4', '19+/x2', '10ft', 'P or S', 'MED', 'No', '10', '2', '-' );">
 				</div>
 				<div class="buy-item">
 					<p>Punching Dagger</p>
-					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+					<input class="buy-item-button" type="button" value="200" onclick="buyWeapon( 'Punching Dagger', 200, 1, '1d4', 'x3', '&mdash;', 'pirc', 'MED', 'No', '10', '2', '-' );">
 				</div>
 				<div class="buy-item">
 					<p>Spiked Gauntlet</p>
@@ -1022,11 +1117,11 @@
 				</div>
 				<div class="buy-item">
 					<p>Heavy Crossbow</p>
-					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Heavy Crossbow', 5000, 8 );">
+					<input class="buy-item-button" type="button" value="5000" onclick="buyWeapon( 'Heavy Crossbow', 5000, 8, '1d10', '19+/x2', '120ft', 'pirc', 'MED', 'No', '5', '5', '-' );">
 				</div>
 				<div class="buy-item">
 					<p>Light Crossbow</p>
-					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+					<input class="buy-item-button" type="button" value="2500" onclick="buyWeapon( 'Light Crossbow', 2500, 4, '1d8', '19+/x2', '80ft', 'pirc', 'MED', 'No', '5', '5', '-' );">
 				</div>
 				<div class="buy-item">
 					<p class="consumables">20 Bolts</p>
@@ -1042,7 +1137,7 @@
 				</div>
 				<div class="buy-item">
 					<p>Sling</p>
-					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+					<input class="buy-item-button" type="button" value="1" onclick="buyWeapon( 'Sling', 1, 0, '1d4', 'x2', '50ft', 'bldg', 'MED', 'No', '-', '-', '-' );">
 				</div>
 				<div class="buy-item">
 					<p class="consumables">10 Sling Bullets</p>
@@ -1063,7 +1158,7 @@
 				</div>
 				<div class="buy-item">
 					<p>Light Hammer</p>
-					<input class="buy-item-button" type="button" value="100" onclick="buyWeapon( 'Light Hammer', 100, 2, '1d4', '20/x2', '20ft', 'bldg', 'MED', No', '-', '-', '-' );">
+					<input class="buy-item-button" type="button" value="100" onclick="buyWeapon('Light Hammer', 100, 2, '1d4', '20/x2', '20ft', 'bldg', 'MED', 'No', '-', '-', '-' );">
 				</div>
 				<div class="buy-item">
 					<p>Handaxe</p>
@@ -1312,35 +1407,35 @@
 				</div>
 				<div class="buy-item">
 					<p>Med Hide Armor</p>
-					<input class="buy-item-button" type="button" value="&mdash;1500" onclick="buyItem( 'Med Hide Armor', 1500, 0 );">
+					<input class="buy-item-button" type="button" value="1500" onclick="buyArmor( 'Med Hide Armor', 1500, 25, 3, 4, -3, 0.2, 20, '-', '-', '-', '1/5/1' );">
 				</div>
 				<div class="buy-item">
 					<p>Med Scale Mail</p>
-					<input class="buy-item-button" type="button" value="&mdash;5000" onclick="buyItem( 'Med Scale Mail', 5000, 0 );">
+					<input class="buy-item-button" type="button" value="5000" onclick="buyArmor( 'Med Scale Mail', 5000, 30, 4, 3, -4, 0.25, 20, '-', '-', '-', '4/1/1' );">
 				</div>
 				<div class="buy-item">
 					<p>Med Chain Mail</p>
-					<input class="buy-item-button" type="button" value="&mdash;15000" onclick="buyItem( 'Med Chain Mail', 15000, 0 );">
+					<input class="buy-item-button" type="button" value="15000" onclick="buyArmor( 'Med Chain Mail', 15000, 40, 5, 2, -5, 0.3, 20, '-', '-', '-', '4/1/1' );">
 				</div>
 				<div class="buy-item">
 					<p>Med Breastplate</p>
-					<input class="buy-item-button" type="button" value="&mdash;20000" onclick="buyItem( 'Med Breastplate', 20000, 0 );">
+					<input class="buy-item-button" type="button" value="20000" onclick="buyArmor( 'Med Breastplate', 20000, 30, 5, 3, -4, 0.25, 20, '-', '-', '-', '4/1/1' );">
 				</div>
 				<div class="buy-item">
 					<p>Heavy Splint Mail</p>
-					<input class="buy-item-button" type="button" value="&mdash;20000" onclick="buyItem( 'Heavy Splint Mail', 20000, 0 );">
+					<input class="buy-item-button" type="button" value="20000" onclick="buyArmor( 'Heavy Splint Mail', 20000, 45, 6, 0, -7, 0.4, 20, '-', '-', '-', '4/1/1' );">
 				</div>
 				<div class="buy-item">
 					<p>Heavy Banded Mail</p>
-					<input class="buy-item-button" type="button" value="&mdash;25000" onclick="buyItem( 'Heavy Banded Mail', 25000, 0 );">
+					<input class="buy-item-button" type="button" value="25000" onclick="buyArmor( 'Heavy Banded Mail', 25000, 35, 6, 1, -6, 0.35, 20, '-', '-', '-', '4/1/1' );">
 				</div>
 				<div class="buy-item">
 					<p>Heavy Half-Plate</p>
-					<input class="buy-item-button" type="button" value="&mdash;60000" onclick="buyItem( 'Heavy Half-Plate', 60000, 0 );">
+					<input class="buy-item-button" type="button" value="60000" onclick="buyArmor( 'Heavy Half-Plate', 60000, 50, 7, 0, -7, 0.4, 20, '-', '-', '-', '4/4/*' );">
 				</div>
 				<div class="buy-item">
 					<p>Heavy Full-Plate</p>
-					<input class="buy-item-button" type="button" value="&mdash;150000" onclick="buyItem( 'Heavy Full-Plate', 150000, 0 );">
+					<input class="buy-item-button" type="button" value="150000" onclick="buyArmor( 'Heavy Full-Plate', 150000, 50, 8, 1, -6, 0.35, 20, '-', '-', '-', '4/4/*' );">
 				</div>
 				<div class="buy-item">
 					<p>Buckler</p>
@@ -1352,27 +1447,27 @@
 				</div>
 				<div class="buy-item">
 					<p>Light Steel Shield</p>
-					<input class="buy-item-button" type="button" value="&mdash;900" onclick="buyItem( 'Light Steel Shield', 900, 6 );">
+					<input class="buy-item-button" type="button" value="900" onclick="buyShield( 'Light Steel Shield', 900, 6, 1, '-', -1, 0.05, '-', '-', '-', '-', '1ma' );">
 				</div>
 				<div class="buy-item">
 					<p>Heavy Wooden Shield</p>
-					<input class="buy-item-button" type="button" value="&mdash;700" onclick="buyItem( 'Heavy Wooden Shield', 700, 10 );">
+					<input class="buy-item-button" type="button" value="700" onclick="buyShield( 'Heavy Wooden Shield', 700, 10, 2, '-', -2, 0.15, '-', '-', '-', '-', '1ma' );">
 				</div>
 				<div class="buy-item">
 					<p>Heavy Steel Shield</p>
-					<input class="buy-item-button" type="button" value="&mdash;2000" onclick="buyItem( 'Heavy Steel Shield', 2000, 15 );">
+					<input class="buy-item-button" type="button" value="2000" onclick="buyShield( 'Heavy Steel Shield', 2000, 15, 2, '-', -2, 0.15, '-', '-', '-', '-', '1ma' );">
 				</div>
 				<div class="buy-item">
 					<p>Tower Shield</p>
-					<input class="buy-item-button" type="button" value="&mdash;3000" onclick="buyItem( 'Tower Shield', 3000, 45 );">
+					<input class="buy-item-button" type="button" value="3000" onclick="buyShield( 'Tower Shield', 3000, 45, 4, '2', -10, 0.5, '-', '-', '-', '-', '1ma' );">
 				</div>
 				<div class="buy-item">
 					<p>Armor Spikes</p>
-					<input class="buy-item-button" type="button" value="&mdash;5000" onclick="buyItem( 'Armor Spikes', 5000, 10 );">
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Armor Spikes', 5000, 10 );">
 				</div>
 				<div class="buy-item">
 					<p>Locked Gauntlet</p>
-					<input class="buy-item-button" type="button" value="&mdash;800" onclick="buyItem( 'Locked Gauntlet', 800, 5 );">
+					<input class="buy-item-button" type="button" value="800" onclick="buyItem( 'Locked Gauntlet', 800, 5 );">
 				</div>
 			
 			</div>
@@ -1386,7 +1481,7 @@
 
 				<div class="buy-item">
 					<p>Shield Spikes</p>
-					<input class="buy-item-button" type="button" value="&mdash;1000" onclick="buyItem( 'Shield Spikes', 1000, 5 );">
+					<input class="buy-item-button" type="button" value="1000" onclick="buyItem( 'Shield Spikes', 1000, 5 );">
 				</div>
 				
 				<div class="buy-item-float-19"></div>
@@ -1940,13 +2035,13 @@
 				<input type='file' id="picture-upload" />
 		
 			</form>
-			
+			<div class="hard-break-space"></div>
 		</section>
 	</section>
 
 
 
-	<div class="page-space"></div>
+	
 	
 	<section id="print-page-four">
 		<div class="paper">
@@ -2446,10 +2541,46 @@
 				<div id="wrin-craft-1">
 					<div class="twelfth">
 						<p id="print-wrin-craft-1" class="form-skill-form">
-							
+							craft: Successful Public Policy
 						</p>
 					</div>
 					<div class="sixteenth"><div id="print-wrin-craft-total-1" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-craft-2">
+					<div class="twelfth">
+						<p id="print-wrin-craft-2" class="form-skill-form">
+							craft: Successful Public Policy
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-craft-total-2" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-craft-3">
+					<div class="twelfth">
+						<p id="print-wrin-craft-3" class="form-skill-form">
+							craft: Successful Public Policy
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-craft-total-3" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-craft-4">
+					<div class="twelfth">
+						<p id="print-wrin-craft-4" class="form-skill-form">
+							craft: Successful Public Policy
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-craft-total-4" class="box skill-box"></div></div>
 					<div class="sixteenth"><div class="box skill-box"></div></div>
 					<div class="sixteenth"><div class="box skill-box"></div></div>
 					<div class="sixteenth"><div class="box skill-box"></div></div>
@@ -2601,6 +2732,57 @@
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
 				
+				<div id="wrin-knowledge-1">
+					<div class="twelfth">
+						<p id="print-wrin-knowledge-1" class="form-skill-form">
+							Knowledge: Star Trek Trivia
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-knowledge-total-1" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-knowledge-2">
+					<div class="twelfth">
+						<p id="print-wrin-knowledge-2" class="form-skill-form">
+							Knowledge: Star Trek Trivia
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-knowledge-total-2" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-knowledge-3">
+					<div class="twelfth">
+						<p id="print-wrin-knowledge-3" class="form-skill-form">
+							Knowledge: Star Trek Trivia
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-knowledge-total-3" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-knowledge-4">
+					<div class="twelfth">
+						<p id="print-wrin-knowledge-4" class="form-skill-form">
+							Knowledge: Star Trek Trivia
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-knowledge-total-4" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+
+
+
 				<div class="twelfth">
 					<p class="form-skill-form">
 						listen
@@ -2645,6 +2827,58 @@
 				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
 				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
 				
+				<div id="wrin-perform-1">
+					<div class="twelfth">
+						<p id="print-wrin-perform-1" class="form-skill-form">
+							Perform: Homer Simpson Impression
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-perform-total-1" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-perform-2">
+					<div class="twelfth">
+						<p id="print-wrin-perform-2" class="form-skill-form">
+							Perform: Homer Simpson Impression
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-perform-total-2" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-perform-3">
+					<div class="twelfth">
+						<p id="print-wrin-perform-3" class="form-skill-form">
+							Perform: Homer Simpson Impression
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-perform-total-3" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-perform-4">
+					<div class="twelfth">
+						<p id="print-wrin-perform-4" class="form-skill-form">
+							Perform: Homer Simpson Impression
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-perform-total-4" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+
+
+
+
 				<div class="twelfth">
 					<p id="print-profession-title" class="form-skill-form">
 						profession
@@ -2656,6 +2890,20 @@
 				<div class="sixteenth"><div class="box skill-box"></div></div>
 				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
 				
+				<div id="wrin-profession-1">
+					<div class="twelfth">
+						<p id="print-wrin-profession-1" class="form-skill-form">
+							Profession: TV Personality
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-profession-total-1" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+
+
 				<div class="twelfth">
 					<p class="form-skill-form faint-background">
 						ride
@@ -3036,7 +3284,7 @@
 
 		<!-- SAVING THROWS -->
 			<div class="half">
-				<div class="print-fill fill-space"></div>
+				<div class="print-fill med-fill-space"></div>
 				
 				<div class="quarter">
 					<div class="twelfth">
@@ -3185,7 +3433,6 @@
 			
 		<!-- ARMOR CLASS MINI TITLES-->
 			<div class="half">
-				<div class="print-fill fill-space"></div>
 				<div class="twentieth-blackbox">
 					<p class="mini-title">
 						ARMOR<br>CLASS
@@ -3271,7 +3518,7 @@
 					<div class="box"></div>
 				</div>
 				<div class="twentieth">
-					<div class="box"></div>
+					<div id="print-size-bonus" class="box"></div>
 				</div>
 				<div class="twentieth">
 					<div class="box"></div>
@@ -3574,7 +3821,7 @@
 		
 		<!-- RANGED ATTACK MINI TITLES -->
 			<div class="half">
-				<div class="print-fill fill-space"></div>
+				<div class="print-fill med-fill-space"></div>
 				
 				<div class="sixteenth-blackbox">
 					<p class="mini-title">
