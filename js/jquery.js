@@ -33,12 +33,8 @@ $(document).ready(function() {
 });
 
 
-$( ".sk-input" ).change(function() {
+$( '.sk-input' ).change(function() {
 	alert( "Handler for .change() called.");
 });
 
-
-var loadSkills = function() {
-	window.skPts = 60;
-}
 

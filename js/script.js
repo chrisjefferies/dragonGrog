@@ -1,3 +1,47 @@
+//
+//		Lovingly hand coded by Chris Jefferies
+//				  www.cjefferies.com
+//					   Hire Me!
+//
+//				Inspired by superheros
+//
+//
+//
+//                     Tb.          Tb.                                
+//                     :$$b.        $$$b.                              
+//                     :$$$$b.      :$$$$b.                            
+//                     :$$$$$$b     :$$$$$$b                           
+//                      $$$$$$$b     $$$$$$$b                          
+//                      $$$$$$$$b    :$$$$$$$b                         
+//                      :$$$$$$$$b---^$$$$$$$$b                        
+//                      :$$$$$$$$$b        ""^Tb                       
+//                       $$$$$$$$$$b    __...__`.                      
+//                       $$$$$$$$$$$b.g$$$$$$$$$pb                     
+//                       $$$$$$$$$$$$$$$$$$$$$$$$$b                    
+//                       $$$$$$$$$$$$$$$$$$$$$$$$$$b                   
+//                       :$$$$$$$$$$$$$$$$$$$$$$$$$$;                  
+//                       :$$$$$$$$$$$$$^T$$$$$$$$$$P;                  
+//                       :$$$$$$$$$$$$$b  "^T$$$$P' :           
+//                       :$$$$$$$$$$$$$$b._.g$$$$$p.db                 
+//                       :$$$$$$$$$$$$$$$$$$$$$$$$$$$$;                
+//                       :$$$$$$$$"""^^T$$$$$$$$$$$$P^;           Alright       
+//                       :$$$$$$$$       ""^^T$$$P^'  ;          Let's do      
+//                       :$$$$$$$$    .'       `"     ;            This!    
+//                       $$$$$$$$;   /                :                
+//                       $$$$$$$$;           .----,   :                
+//                       $$$$$$$$;         ,"          ;               
+//                       $$$$$$$$$p.                   |        ...Baaaaaaaaat...       
+//                      :$$$$$$$$$$$$p.                :               
+//                      :$$$$$$$$$$$$$$$p.            .'          hmgrfmaaaaaaan...
+//                      :$$$$$$$$$$$$$$$$$$p...___..-"                 
+//                      $$$$$$$$$$$$$$$$$$$$$$$$$;                     
+//   .db.          bug  $$$$$$$$$$$$$$$$$$$$$$$$$$                     
+//  d$$$$bp.            $$$$$$$$$$$$$$$$$$$$$$$$$$;                    
+// d$$$$$$$$$$pp..__..gg$$$$$$$$$$$$$$$$$$$$$$$$$$$                    
+//d$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$p._            .gp. 
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$p._.cuz._.batman
+
+
 
 function weaponSlot(paramone, paramtwo, paramthr, paramfou, paramfiv, paramsix, paramsev, parameig, paramnin, paramten, paramele, paramtwe) {
 	this.wName = paramone;
@@ -50,6 +94,7 @@ window.blankCraftCounter = 0;
 window.blankKnowledgeCounter = 0;
 window.blankPerformCounter = 0;
 window.blankProfessionCounter = 0;
+window.startingFeats = 1;
 
 
 
@@ -62,7 +107,7 @@ var whichModList = 	["int", 	"dex", 		"cha", 		"str", 		"con", 		"int", 		"int",
 var classSelect = function(userClass) {
 	// Second if statement isn't entered until selection is made.
 	window.selClass = 0;
-	var confirmClass = confirm("Are you sure you want to be a " + userClass + "?");
+	var confirmClass = true ; // confirm("Are you sure you want to be a " + userClass + "?");
 	
 	if (confirmClass) {
 		window.selClass = userClass.toUpperCase();
@@ -73,35 +118,12 @@ var classSelect = function(userClass) {
 	if (window.selClass != 0) {
 	
 	document.getElementById("show-class").innerHTML = "Current Class: " + selClass; // turn on display of Choice.
+	document.getElementById("show-class-2").innerHTML = "Current Class: " + selClass;
 
-	if (window.selClass === "MONK") {
-
-		var confirmMonk = confirm("Monks get either Improved Grapple or Stunning Fist as a bonus feat. Do you want Improved Grapple?");
-		if (confirmMonk) {
-			selectFeat("Improved Grapple");
-			document.getElementById("feats-remaining").innerHTML = 1;
-		} else {
-			selectFeat("Stunning Fist");
-			document.getElementById("feats-remaining").innerHTML = 1;
-		}
-	}
+	// document.getElementById("class-select").style.display="none"; // hide select Class buttons.
+	document.getElementById("dice-sys").style.display="block";
 	
-	if (window.selClass === "RANGER") {
-		alert("Rangers get Track as a bonus feat.");
-		selectFeat("Track");
-		document.getElementById("feats-remaining").innerHTML = 1;
-	}
-
-	if (window.selClass === "FIGHTER") {
-		var bonusFeat = document.getElementById("feats-remaining").innerHTML;
-		var bonusFeatHolder = Number(bonusFeat);
-		bonusFeatHolder += 1;
-		document.getElementById("feats-remaining").innerHTML = bonusFeatHolder;
-	}
-
-	document.getElementById("class-select").style.display="none"; // hide select Class buttons.
-	
-	document.getElementById("race-select").style.display="block"; // show next block -- select race. 
+	// document.getElementById("race-select").style.display="block"; // show next block -- select race. 
 	} else {
 		// exit function. Reset on next call.
 	}
@@ -110,34 +132,224 @@ var classSelect = function(userClass) {
 var raceSelect = function(userRace) {
 	// See comments of classSelect function
 	window.selRace = 0;
-	var confirmRace = confirm("Are you sure you want to be " + userRace + "?");
+	var confirmRace = true; // confirm("Are you sure you want to be " + userRace + "?");
 	
 	if (confirmRace) {
 		window.selRace = userRace.toUpperCase();
 	}
 	if (window.selRace != 0) {
 		document.getElementById("show-race").innerHTML = "Current Race: " + window.selRace;
-		document.getElementById("race-select").style.display="none";
-		document.getElementById("dice-sys").style.display="block";
+		document.getElementById("show-race-2").innerHTML = "Current Race: " + window.selRace;
+		// document.getElementById("race-select").style.display="none";
+		document.getElementById("class-source").style.display="block";
 		// document.getElementById("race-bonus-" + (window.selRace.toLowerCase()) ).style.display="block"; // Display information block for this Race.
 	} 
 }
 
+var specialCases = function(value) {
+	switch (value) {
+		case "none":
+			window.grapple = false;
+			window.fighterBonusFeat = false;
+			window.stunningFist = false;
+			window.track = false;
+		break;
+		case "monk-option":
+			document.getElementById("class-monk").style.display = "block" ;
+		break;
+		case "monk-close":
+			document.getElementById("class-monk").style.display = "none" ;
+		break;
+		case "fighter-bf":
+			window.fighterBonusFeat = true;
+			window.grapple = false;
+			window.stunningFist = false;
+			window.track = false;
+			
+		break;
+		case "grapple":
+			window.grapple = true;
+			window.fighterBonusFeat = false;
+			window.stunningFist = false;
+			window.track = false;
+			
+		break;
+		case "stunningFist":
+			window.stunningFist = true;
+			window.grapple = false;
+			window.fighterBonusFeat = false;
+			window.track = false;
+			
+		break;
+		case "track":
+			window.track = true ;
+			window.fighterBonusFeat = false;
+			window.grapple = false;
+			window.stunningFist = false;
+			
+		break;
+	}
+}
+
+var rulesSelect = function(whichRules) {
+	switch (whichRules) {
+		case "baseRace":
+			document.getElementById("race-select").style.display = "block" ;
+			document.getElementById("race-source").style.display = "none" ;
+			document.getElementById("instructions").style.display = "none" ;
+		break;
+		case "baseClass":
+			document.getElementById("class-source").style.display = "none" ;
+			document.getElementById("class-select").style.display = "block" ;
+		break;
+	}
+}
+
+var navigate = function(idCalled) {
+	switch (idCalled) {
+		case "race-source":
+			document.getElementById(idCalled).style.display = "block" ;
+			document.getElementById("race-select").style.display = "none" ; // instructions
+		break;
+		case "class-source":
+			document.getElementById(idCalled).style.display = "block" ;
+			document.getElementById("class-select").style.display = "none" ;
+		break;
+		case "select-feats":
+			document.getElementById(idCalled).style.display = "block" ;
+			document.getElementById("select-skills").style.display = "none" ;
+			document.getElementById("equipment").style.display = "none" ;
+			equipSubMenu("all-off");
+
+		break;
+		case "select-skills":
+			document.getElementById(idCalled).style.display = "block" ;
+			document.getElementById("select-feats").style.display = "none" ;
+			featsSubMenu("all-off");
+		break;
+		case "equipment":
+			document.getElementById(idCalled).style.display = "block" ;
+			document.getElementById("inventory").style.display = "block" ;
+			document.getElementById("select-feats").style.display = "none" ;
+			document.getElementById("roll-playing").style.display = "none" ;
+			featsSubMenu("all-off");
+		break;
+		case "roll-playing":
+			document.getElementById(idCalled).style.display = "block" ;
+			document.getElementById("equipment").style.display = "none" ;
+			equipSubMenu("all-off");
+			
+		break;
+		case "print-sheets":
+			document.getElementById("nav-controls").style.display = "block" ;
+			document.getElementById("print-page-four").style.display = "block" ;
+			document.getElementById("print-page-three").style.display = "block" ;
+			document.getElementById("print-page-two").style.display = "block" ;
+			document.getElementById("print").style.display = "block" ;
+			document.getElementById("build").style.display = "none" ;
+			document.getElementById("roll-playing").style.display = "none" ;
+			document.getElementsByTagName("body")[0].style.backgroundImage = "none" ;
+			document.getElementsByTagName("body")[0].style.backgroundColor = "#444" ;
+			var list = document.getElementsByClassName("page-space") ;
+			for ( i = 0 ; i < list.length ; i++ ) {
+				list[i].style.display = "block" ;
+			}
+			window.scrollTo(0,0) ;
+		break;
+		case "back-to-build":
+			document.getElementById("print-page-four").style.display = "none" ;
+			document.getElementById("print-page-three").style.display = "none" ;
+			document.getElementById("print-page-two").style.display = "none" ;
+			document.getElementById("print").style.display = "none" ;
+			document.getElementById("nav-controls").style.display = "none" ;
+			document.getElementsByTagName("body")[0].style.backgroundImage = "url('images/dnd-wp.jpg')" ;
+
+			document.getElementById("roll-playing").style.display = "block" ;
+			document.getElementById("build").style.display = "block" ;
+
+			var list = document.getElementsByClassName("page-space") ;
+			for ( i = 0 ; i < list.length ; i++ ) {
+				list[i].style.display = "none" ;
+			}
+		break;
+		case "start-over":
+			// Reset all Ability Score variables to zero. 
+			// turn roll buttons and other elements back on. 
+		break;
+	}
+}
 
 
+var equipSubMenu = function(whichSubMenu) {
+	var allSubMenus = ["simpweap", "martweap", "exotweap", "armor", "gear", "substances", "tools"] ;
+	for ( i = 0 ; i < allSubMenus.length ; i++ ) {
+		if (allSubMenus[i] === whichSubMenu ) {
+			document.getElementById("equip-" + whichSubMenu).style.display = "block" ;
+		} else {
+			document.getElementById("equip-" + allSubMenus[i] ).style.display = "none" ;
+		}
+	}
+	window.scrollTo(0,0);
+}
+ 
 
 
-
-
-var rollAttribute = function() {	
+var rollHeroic = function() {	
 	var statValue = [0, 0, 0, 0, 0, 0];
-	var totalPoints = 0;
+	window.totalPoints = 0;
 	
 	for( var i = 0 ; i < 6 ; i++ ) {
-		statValue[i] = Math.floor(Math.random() * 16 + 3);
-		document.getElementById("stat-val-" + (i + 1) ).innerHTML = statValue[i];
+		statValue[i] = Math.floor(Math.random() * 10 + 9);
+		// document.getElementById("stat-val-" + (i + 1) ).innerHTML = statValue[i];
 		document.getElementById("stat-label-" + (i + 1) ).innerHTML = statValue[i];
-		totalPoints += statValue[i];
+		window.totalPoints += statValue[i];
+	}
+	window.attrOne = statValue[0];
+	window.attrTwo = statValue[1];
+	window.attrThr = statValue[2];
+	window.attrFou = statValue[3];
+	window.attrFiv = statValue[4];
+	window.attrSix = statValue[5];
+
+	document.getElementById("total-points").innerHTML = window.totalPoints;
+	if (totalPoints > 90) {
+		document.getElementById("playability").innerHTML = "Jedi";
+	} else if (totalPoints > 72) {
+		document.getElementById("playability").innerHTML = "Strong";
+	} else if (totalPoints > 54) {
+		document.getElementById("playability").innerHTML = "Average";
+	} else if (totalPoints > 36) {
+		document.getElementById("playability").innerHTML = "Weak";
+	} else {
+		document.getElementById("playability").innerHTML = "Useless as Dirt";
+	}
+	removeDieRollButtons();
+}
+
+
+
+var rollStandard = function() {	
+	var statValue = [0, 0, 0, 0, 0, 0];
+	window.totalPoints = 0;
+	
+	for ( var i = 0 ; i < 6 ; i++ ) {
+		var firstDie = Math.floor(Math.random() * 6 + 1 );
+		var seconDie = Math.floor(Math.random() * 6 + 1 );
+		var thirdDie = Math.floor(Math.random() * 6 + 1 );
+		var fourtDie = Math.floor(Math.random() * 6 + 1 );
+		if ( (fourtDie <= thirdDie ) && ( fourtDie <= seconDie ) && ( fourtDie <= firstDie ) ) {
+ 			statValue[i] = ( firstDie + seconDie + thirdDie ) ;
+ 		} else if ( ( thirdDie <= fourtDie ) && ( thirdDie <= seconDie ) && ( thirdDie <= firstDie ) ) {
+ 			statValue[i] = ( firstDie + seconDie + fourtDie ) ; 
+ 		} else if ( ( seconDie <= fourtDie ) && ( seconDie <= seconDie ) && ( seconDie <= firstDie ) ) {
+ 			statValue[i] = ( firstDie + thirdDie + fourtDie ) ;
+ 		} else {
+ 			statValue[i] = ( seconDie + thirdDie + fourtDie ) ;
+ 		}
+
+		// document.getElementById("stat-val-" + (i + 1) ).innerHTML = statValue[i];
+		document.getElementById("stat-label-" + (i + 1) ).innerHTML = statValue[i];
+		window.totalPoints += statValue[i];
 	}
 	
 	window.attrOne = statValue[0];
@@ -146,11 +358,45 @@ var rollAttribute = function() {
 	window.attrFou = statValue[3];
 	window.attrFiv = statValue[4];
 	window.attrSix = statValue[5];
+
+	document.getElementById("total-points").innerHTML = window.totalPoints;
+	if (totalPoints > 90) {
+		document.getElementById("playability").innerHTML = "Jedi";
+	} else if (totalPoints > 72) {
+		document.getElementById("playability").innerHTML = "Strong";
+	} else if (totalPoints > 54) {
+		document.getElementById("playability").innerHTML = "Average";
+	} else if (totalPoints > 36) {
+		document.getElementById("playability").innerHTML = "Weak";
+	} else {
+		document.getElementById("playability").innerHTML = "Useless as Dirt";
+	}
+	removeDieRollButtons();
+}
+
+
+var rollClassic = function() {	
+	var statValue = [0, 0, 0, 0, 0, 0];
+	window.totalPoints = 0;
 	
+	for( var i = 0 ; i < 6 ; i++ ) {
+		statValue[i] = Math.floor(Math.random() * 16 + 3);
+		// document.getElementById("stat-val-" + (i + 1) ).innerHTML = statValue[i];
+		document.getElementById("stat-label-" + (i + 1) ).innerHTML = statValue[i];
+		window.totalPoints += statValue[i];
+	}
+
+	window.attrOne = statValue[0];
+	window.attrTwo = statValue[1];
+	window.attrThr = statValue[2];
+	window.attrFou = statValue[3];
+	window.attrFiv = statValue[4];
+	window.attrSix = statValue[5];
+
 	
 	
 	// Displays total points
-	document.getElementById("total-points").innerHTML = totalPoints;
+	document.getElementById("total-points").innerHTML = window.totalPoints;
 	// Evaluates total points, assigns a value string and displays.
 	if (totalPoints > 90) {
 		document.getElementById("playability").innerHTML = "Jedi";
@@ -163,37 +409,43 @@ var rollAttribute = function() {
 	} else {
 		document.getElementById("playability").innerHTML = "Useless as Dirt";
 	}
+	removeDieRollButtons();
 	
-	document.getElementById("roll-all").style.display = "none"; // disable to "prevent" cheating.
 	
 	// window.attrClicks = 0; // Declare variable for next function.
 }
+
+var removeDieRollButtons = function() {
+	var list = document.getElementsByClassName("roll-attribute");
+	for ( var i = 0 ; i < list.length ; i++ ) {
+		list[i].style.display = "none";
+	}
+	document.getElementById("roll-allocate").style.display = "block" ;
+
+}	
 	
-		
-// FUNCTION NAMES USED THUS FAR
 
-// Navigation comments 1/1
+var rollManual = function() {
+	document.getElementById("gener-ability-scores").style.display = "none" ;
+	document.getElementById("input-ability-scores").style.display = "block" ;
+}
 
-// classSelect    : stores character class as an All Uppercase String in [---> window.selClass <---]
-// raceSelect     : same as above, except for Race choice, stored in     [---> selRace <---]
-// buildAttribute : part 1 of an attribute rolling system. Variables:    [---> strVal <---]
-//																		 [---> dexVal <---]
-//																		 [---> conVal <---]
-//																		 [---> wisVal <---]
-//																		 [---> intVal <---]
-//																		 [---> chaVal <---]
-// rollAttribute  : generates six random numbers 3-18. Variables:		 [---> attrOne <---]
-//																		 [---> attrTwo <---]
-//																		 [---> attrThree <---]
-//																		 [---> attrFour <---]
-//																		 [---> attrFive <---]
-//																		 [---> attrSix <---]
-/*
-var testResults = function(form) {
-	var TestVar = form.attributeOne.value;
-    alert ("You typed: " + TestVar);
-} */
-
+var assignAttribMan = function(form) {
+	window.strAttr = Number(form.inpstrAttr.value);
+	window.dexAttr = Number(form.inpdexAttr.value);
+	window.conAttr = Number(form.inpconAttr.value);
+	window.wisAttr = Number(form.inpwisAttr.value);
+	window.intAttr = Number(form.inpintAttr.value);
+	window.chaAttr = Number(form.inpchaAttr.value);
+	
+	logAllModifiers();					// Calculates all Ability Modifiers and Logs in Global Variables
+	logMscSkModifiers();				// Shows all Racial Skill Misc Modifiers (and other racial bonuses) and re-calculates ability modifiers.
+	addAbModifiers();					// Displays all Ability Modifiers in Skills Section
+	showClassSkills();					// Calculates Skill Points. Shows all Class Skills
+	logAllSavingThrows();				// Calculate Saving Throws and Base Attack Bonus. They Don't Display immediately.
+	
+	initiatePhaseTwo();
+}
 
 // -------------------------------------------------------------------
 // ASSIGNING YOUR CHARACTER'S BASE ATTRIBUTES TO ROLLED ABILITY SCORES
@@ -269,61 +521,154 @@ var assignAttributes = function(form) {
 	// Reject Errors, and prompt for confirm, else, throw out of the function to restart. 
 	
 	if (strAttr != 0 && dexAttr != 0 && conAttr != 0 && wisAttr != 0 && intAttr != 0 && chaAttr != 0) {
-		var confAttr = confirm("Are you Sure?\nSTR: " + strAttr + "\nDEX: " + dexAttr + "\nCON: " + conAttr + "\nWIS: " + wisAttr + "\nINT: " + intAttr + "\nCHA: " + chaAttr);
-		if (confAttr) {
-
-
-//                     Tb.          Tb.                                
-//                     :$$b.        $$$b.                              
-//                     :$$$$b.      :$$$$b.                            
-//                     :$$$$$$b     :$$$$$$b                           
-//                      $$$$$$$b     $$$$$$$b                          
-//                      $$$$$$$$b    :$$$$$$$b                         
-//                      :$$$$$$$$b---^$$$$$$$$b                        
-//                      :$$$$$$$$$b        ""^Tb                       
-//                       $$$$$$$$$$b    __...__`.                      
-//                       $$$$$$$$$$$b.g$$$$$$$$$pb                     
-//                       $$$$$$$$$$$$$$$$$$$$$$$$$b                    
-//                       $$$$$$$$$$$$$$$$$$$$$$$$$$b                   
-//                       :$$$$$$$$$$$$$$$$$$$$$$$$$$;                  
-//                       :$$$$$$$$$$$$$^T$$$$$$$$$$P;                  
-//                       :$$$$$$$$$$$$$b  "^T$$$$P' :           
-//                       :$$$$$$$$$$$$$$b._.g$$$$$p.db                 
-//                       :$$$$$$$$$$$$$$$$$$$$$$$$$$$$;                
-//                       :$$$$$$$$"""^^T$$$$$$$$$$$$P^;            Pay attention.       
-//                       :$$$$$$$$       ""^^T$$$P^'  ;         A massive calamity is       
-//                       :$$$$$$$$    .'       `"     ;            about to trans-    
-//                       $$$$$$$$;   /                :                pire!
-//                       $$$$$$$$;           .----,   :                
-//                       $$$$$$$$;         ,"          ;               
-//                       $$$$$$$$$p.                   |               
-//                      :$$$$$$$$$$$$p.                :               
-//                      :$$$$$$$$$$$$$$$p.            .'               
-//                      :$$$$$$$$$$$$$$$$$$p...___..-"                 
-//                      $$$$$$$$$$$$$$$$$$$$$$$$$;                     
-//   .db.          bug  $$$$$$$$$$$$$$$$$$$$$$$$$$                     
-//  d$$$$bp.            $$$$$$$$$$$$$$$$$$$$$$$$$$;                    
-// d$$$$$$$$$$pp..__..gg$$$$$$$$$$$$$$$$$$$$$$$$$$$                    
-//d$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$p._            .gp. 
-//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$p._.cuz._.batman
-
-
+				
+		logAllModifiers();					// Calculates all Ability Modifiers and Logs in Global Variables
+		logMscSkModifiers();				// Shows all Racial Skill Misc Modifiers (and other racial bonuses) and re-calculates ability modifiers.
+		addAbModifiers();					// Displays all Ability Modifiers in Skills Section
+		showClassSkills();					// Calculates Skill Points. Shows all Class Skills
+		logAllSavingThrows();				// Calculate Saving Throws and Base Attack Bonus. They Don't Display immediately.
 			
-			logAllModifiers();					// Calculates all Ability Modifiers and Logs in Global Variables
-			logMscSkModifiers();				// Shows all Racial Skill Misc Modifiers (and other racial bonuses) and re-calculates ability modifiers.
-			addAbModifiers();					// Displays all Ability Modifiers in Skills Section
-			showClassSkills();					// Calculates Skill Points. Shows all Class Skills
-			logAllSavingThrows();				// Calculate Saving Throws and Base Attack Bonus. They Don't Display immediately.
-			
-
-			
-			document.getElementById("apply-all").style.display = "none"; // disable to "prevent" cheating.
-		} else {
-			// Allow for further changes. Exit function.
-		}
+		initiatePhaseTwo();
+		
 	} else {
 		alert("An error occured. Verify that no Attributes are Duplicated.");
 	}
+}
+
+var initiatePhaseTwo = function() {
+
+	if (window.fighterBonusFeat) {
+		window.startingFeats += 1;
+	 	// var bonusFeat = document.getElementById("feats-remaining").innerHTML;
+		// document.getElementById("feats-remaining").innerHTML = ( 1 + Number(bonusFeat) );
+	}
+	if (window.grapple) {
+		window.numOfFeats += 1;
+		document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = "Imp. Grapple" ;
+	}
+	if (window.stunningFist) {
+		window.numOfFeats += 1;
+		document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = "Stunning Fist" ;
+	}
+	if (window.track) {
+		window.numOfFeats += 1;
+		document.getElementById("feat-name-" + window.numOfFeats ).innerHTML = "Track" ;
+	}
+	
+	document.getElementById("apply-all").style.display = "none"; // disable to "prevent" cheating.
+	document.getElementById("race-select").style.display = "none";
+	document.getElementById("class-select").style.display = "none";
+	document.getElementById("dice-sys").style.display = "none";
+	if (window.levelAdvance === 1) {
+		document.getElementById("final-base-attributes").style.display = "block";
+		document.getElementById("select-skills").style.display = "block";
+	} else {
+		window.levelAdvance =  Number(document.getElementById("level-input").value) ;
+		document.getElementById("final-base-attributes").style.display = "block";
+		document.getElementById("handle-level-adv").style.display = "block";
+
+		var list = document.getElementsByClassName("sk-input");
+		for ( i = 0 ; i < list.length ; i++ ) {
+			list[i].setAttribute("max", (window.levelAdvance + 3) ); 
+		}
+
+		// This for loop handles everthing, and iterates at each 4 level intervals, when ability score increases can affect results. 
+		// So heads up. 
+		//
+		//
+
+		for ( i = 2 ; i < window.levelAdvance ; i++ ) {
+			var lvlAS = i / 4 ;
+			if ( lvlAS === 1 || lvlAS === 2 || lvlAS === 3 || lvlAS === 4 || lvlAS === 5 ) {
+				document.getElementById("handle-ability-score-" + lvlAS ).style.display = "block" ;
+			}
+			if ( i <= 3 ) { // Only levels unaffected by 1st ability score increase
+				
+				var adtlHitPoints = ( Math.floor(Math.random() * window.hitDie) + 1 ) + window.conMod ;
+				if (adtlHitPoints <= 0 ) {
+					window.hitPoints += 1;
+				} else {
+					window.hitPoints += adtlHitPoints;
+				}
+				levelSkillPointIncrease();
+			}
+			
+			if ( ( i / 3 ) === Math.floor( i / 3 ) ) {
+				window.startingFeats += 1;
+			}
+
+
+
+		}
+
+
+	}
+}
+
+var levelSkillPointIncrease = function() {
+	var points = window.baseSkillPoints + window.intMod;
+	if (window.selRace === "HUMAN") {
+		points += 1;
+	}
+	if (points <= 0 ) {
+		window.skPts += 1;
+	} else {
+		window.skPts += points;
+	}
+	
+	document.getElementById("sk-points-starting").innerHTML = "Skill Points Remaining: " + window.skPts
+
+}
+
+
+var addAbilityScore = function(whichLevel) {
+	var whichAbility = document.getElementById("select-ability-score-" + Number(whichLevel) ).value ;
+
+	switch (whichAbility) {
+		case "str":
+			window.strAttr += 1;
+		break;
+		case "dex":
+			window.dexAttr += 1;
+		break;
+		case "con":
+			window.conAttr += 1;
+		break;
+		case "wis":
+			window.wisAttr += 1;
+		break;
+		case "int":
+			window.intAttr += 1;
+		break;
+		case "cha":
+			window.chaAttr += 1;
+		break;
+	}
+
+	for ( i = ( whichLevel * 4 ) ; i < window.levelAdvance ; i++ ) {
+		
+		if ( i <= ( whichLevel * 4 + 3 ) ) { // Only levels unaffected by THIS (but not SUBSEQUENT) ability score increase
+			var adtlHitPoints = ( Math.floor(Math.random() * window.hitDie) + 1 ) + window.conMod ;
+			if (adtlHitPoints <= 0 ) {
+				window.hitPoints += 1 ;
+			} else {
+				window.hitPoints += adtlHitPoints;
+			}
+			levelSkillPointIncrease();
+		}
+		
+	}
+
+	document.getElementById( "final-" + whichAbility ).innerHTML = window[ whichAbility + "Attr"] ;
+	logAllModifiers();
+	document.getElementById( "final-" + whichAbility + "-mod" ).innerHTML = "+ " + window[ whichAbility + "Mod" ] ;
+	var whichAbility = document.getElementById("handle-ability-score-" + Number(whichLevel) ).style.display = "none" ;
+}
+
+var doneAdvLvl = function() {
+	document.getElementById("handle-level-adv").style.display = "none";
+	document.getElementById("select-skills").style.display = "block";
+	document.getElementById("feats-remaining").innerHTML = window.startingFeats;
 }
 
 // here the selRace function calls on logMscSkModifiers to update Misc Modifiers (and other variables) with Racial Bonuses
@@ -331,17 +676,19 @@ var logMscSkModifiers = function() {
 	
 	switch (window.selRace) {
 	case "HUMAN":
-		document.getElementById("feats-remaining").innerHTML = 2;
+		window.startingFeats += 1;
+		// var bonusFeat = document.getElementById("feats-remaining").innerHTML;
+		// document.getElementById("feats-remaining").innerHTML = ( 1 + Number(bonusFeat) );
 	break;
 	case "DWARF":
-		alert("CON + 2 (Dwarven Racial Trait)\nCHA - 2 (Dwarven Racial Trait)");
+		// alert("CON + 2 (Dwarven Racial Trait)\nCHA - 2 (Dwarven Racial Trait)");
 		window.conAttr += 2;
 		window.chaAttr -= 2;
 		logAllModifiers();
 		window.darkVision = true;
 	break;
 	case "ELF":
-		alert("DEX + 2 (Elven Racial Trait)\nCON - 2 (Elven Racial Trait)");
+		// alert("DEX + 2 (Elven Racial Trait)\nCON - 2 (Elven Racial Trait)");
 		window.dexAttr += 2;
 		window.conAttr -= 2;
 		logAllModifiers();
@@ -351,7 +698,7 @@ var logMscSkModifiers = function() {
 		window.lowLight = true;
 	break;
 	case "GNOME":
-		alert("CON + 2 (Gnome Racial Trait)\nSTR - 2 (Gnome Racial Trait)");
+		// alert("CON + 2 (Gnome Racial Trait)\nSTR - 2 (Gnome Racial Trait)");
 		window.conAttr += 2;
 		window.strAttr -= 2;
 		logAllModifiers();
@@ -362,7 +709,7 @@ var logMscSkModifiers = function() {
 		window.lowLight = true;
 	break;
 	case "HALF-ELF":
-		alert("DEX + 1 (Elven Racial Trait)\nCON - 1 (Elven Racial Trait)");
+		// alert("DEX + 1 (Elven Racial Trait)\nCON - 1 (Elven Racial Trait)");
 		document.getElementById("ms-list").innerHTML = 1;
 		document.getElementById("ms-sear").innerHTML = 1;
 		document.getElementById("ms-spot").innerHTML = 1;
@@ -371,7 +718,7 @@ var logMscSkModifiers = function() {
 		window.lowLight = true;
 	break;
 	case "HALF-ORC":
-		alert("STR + 2 (Orcish Racial Trait)\nINT - 2 (Orcish Racial Trait)\nCHA - 2 (Orcish Racial Trait)");
+		// alert("STR + 2 (Orcish Racial Trait)\nINT - 2 (Orcish Racial Trait)\nCHA - 2 (Orcish Racial Trait)");
 		window.strAttr += 2;
 		window.intAttr -= 2;
 		window.chaAttr -= 2;
@@ -379,7 +726,7 @@ var logMscSkModifiers = function() {
 		window.darkVision = true;
 	break;
 	case "HALFLING":
-		alert("DEX + 2 (Halfling Racial Trait)\nSTR - 2 (Halfling Racial Trait)");
+		// alert("DEX + 2 (Halfling Racial Trait)\nSTR - 2 (Halfling Racial Trait)");
 		window.dexAttr += 2;
 		window.strAttr -= 2;
 		logAllModifiers();
@@ -424,6 +771,7 @@ var logMscSkModifiers = function() {
 // ---
 
 var whichSkillFunction = function(basePoints) {
+	window.baseSkillPoints = basePoints;
 	if (window.intMod > 0) {
 		var skillPoints = ( (basePoints + window.intMod) * 4);
 	} else {
@@ -445,7 +793,7 @@ var whichSkillFunction = function(basePoints) {
 	
 	document.getElementById("sk-points-starting").innerHTML = ("Total Skill Points: " + totalSkillPoints); 
 	window.skPts = totalSkillPoints;
-	alert("Total Skill Points Calculated: " + window.skPts);
+	// alert("Total BASE Skill Points Calculated: " + window.skPts);
 }
 	
 	
@@ -541,7 +889,7 @@ var showClassSkills = function() {
 }	
 
 
-var updateSavingThrows = function(fortSave, reflSave, willSave, baseAttack, hitPoints) {
+var updateSavingThrows = function(fortSave, reflSave, willSave, baseAttack, hitDie) {
 	/*
 	window.forSave = (fortSave + window.conMod);
 	window.refSave = (reflSave + window.dexMod);
@@ -551,9 +899,13 @@ var updateSavingThrows = function(fortSave, reflSave, willSave, baseAttack, hitP
 	window.refSave = (reflSave);
 	window.wilSave = (willSave);
 	window.baseAttackBonus = baseAttack; 
-	window.hitPoints = hitPoints + window.conMod;
+	window.hitPoints = hitDie + window.conMod;
+	if (window.hitpoints <= 0) {
+		window.hitPoints = 1;
+	}
+	window.hitDie = hitDie;
 
-	alert( "Base Attack Bonus: +" + window.baseAttackBonus + "\nBase Saving Thows: \nFOR: +" + window.forSave + "\nREF: +" + window.refSave + "\nWIL: +" + window.wilSave + "\nHit Points: " + window.hitPoints );
+	// alert( "Base Attack Bonus: +" + window.baseAttackBonus + "\nBase Saving Thows: \nFOR: +" + window.forSave + "\nREF: +" + window.refSave + "\nWIL: +" + window.wilSave + "\nHit Points: " + window.hitPoints );
 }
 
 
@@ -694,43 +1046,43 @@ var addSkill = function() {
 	document.getElementById("wrin-" + (window.blankCounter + 1) ).style.display = "block" ; // This will ultimately fail to execute if the user exhausts the forms. 
 }
 
-var calcPoints = function(form) {
+var calcPoints = function() {
 
-	window.inappr = form.in_appr.value;
-	window.inbala = form.in_bala.value;
-	window.inbluf = form.in_bluf.value;
-	window.inclim = form.in_clim.value;
-	window.inconc = form.in_conc.value;
-	window.incraf = form.in_craf.value;
-	window.indeci = form.in_deci.value;
-	window.indipl = form.in_dipl.value;
-	window.indisa = form.in_disa.value;
-	window.indisg = form.in_disg.value;
-	window.inesca = form.in_esca.value;
-	window.inforg = form.in_forg.value;
-	window.ingath = form.in_gath.value;
-	window.inhand = form.in_hand.value;
-	window.inheal = form.in_heal.value;
-	window.inhide = form.in_hide.value;
-	window.ininti = form.in_inti.value;
-	window.injump = form.in_jump.value;
-	window.inknow = form.in_know.value;
-	window.inlist = form.in_list.value;
-	window.inmove = form.in_move.value;
-	window.inopen = form.in_open.value;
-	window.inperf = form.in_perf.value;
-	window.inprof = form.in_prof.value;
-	window.inride = form.in_ride.value;
-	window.insear = form.in_sear.value;
-	window.insens = form.in_sens.value;
-	window.inslei = form.in_slei.value;
-	window.inspel = form.in_spel.value;
-	window.inspot = form.in_spot.value;
-	window.insurv = form.in_surv.value;
-	window.inswim = form.in_swim.value;
-	window.intumb = form.in_tumb.value;
-	window.inusem = form.in_usem.value;
-	window.inuser = form.in_user.value;
+	window.inappr = Number(document.getElementById("in_appr").value );
+	window.inbala = Number(document.getElementById("in_bala").value );
+	window.inbluf = Number(document.getElementById("in_bluf").value );
+	window.inclim = Number(document.getElementById("in_clim").value );
+	window.inconc = Number(document.getElementById("in_conc").value );
+	window.incraf = Number(document.getElementById("in_craf").value );
+	window.indeci = Number(document.getElementById("in_deci").value );
+	window.indipl = Number(document.getElementById("in_dipl").value );
+	window.indisa = Number(document.getElementById("in_disa").value );
+	window.indisg = Number(document.getElementById("in_disg").value );
+	window.inesca = Number(document.getElementById("in_esca").value );
+	window.inforg = Number(document.getElementById("in_forg").value );
+	window.ingath = Number(document.getElementById("in_gath").value );
+	window.inhand = Number(document.getElementById("in_hand").value );
+	window.inheal = Number(document.getElementById("in_heal").value );
+	window.inhide = Number(document.getElementById("in_hide").value );
+	window.ininti = Number(document.getElementById("in_inti").value );
+	window.injump = Number(document.getElementById("in_jump").value );
+	window.inknow = Number(document.getElementById("in_know").value );
+	window.inlist = Number(document.getElementById("in_list").value );
+	window.inmove = Number(document.getElementById("in_move").value );
+	window.inopen = Number(document.getElementById("in_open").value );
+	window.inperf = Number(document.getElementById("in_perf").value );
+	window.inprof = Number(document.getElementById("in_prof").value );
+	window.inride = Number(document.getElementById("in_ride").value );
+	window.insear = Number(document.getElementById("in_sear").value );
+	window.insens = Number(document.getElementById("in_sens").value );
+	window.inslei = Number(document.getElementById("in_slei").value );
+	window.inspel = Number(document.getElementById("in_spel").value );
+	window.inspot = Number(document.getElementById("in_spot").value );
+	window.insurv = Number(document.getElementById("in_surv").value );
+	window.inswim = Number(document.getElementById("in_swim").value );
+	window.intumb = Number(document.getElementById("in_tumb").value );
+	window.inusem = Number(document.getElementById("in_usem").value );
+	window.inuser = Number(document.getElementById("in_user").value );
 	window.inbla1 = Number(document.getElementById("bla36").value );
 	// window.inbla2 = form.in_bla2.value;
 	// window.inbla3 = form.in_bla3.value;
@@ -774,11 +1126,21 @@ var calcPoints = function(form) {
 			}
 
 			if (window.allSkillsBool[i]) {
+
 				var maths = Number(mod) + Number(misc) + Number(window["in" + skillsList[i] ] );
-				document.getElementById("t-" + skillsList[i] ).innerHTML = ("+ " + maths ) ;
+				
+				if (maths > 0) {
+					document.getElementById("t-" + skillsList[i] ).innerHTML = ("+" + maths ) ;
+				} else {
+					document.getElementById("t-" + skillsList[i] ).innerHTML =  maths ;
+				}
 			} else {
 				var maths = Number(mod) + Number(misc) + ( (Number(window["in" + skillsList[i] ] ) ) / 2 ) ;
-				document.getElementById("t-" + skillsList[i] ).innerHTML = ("+ " + maths ) ;
+				if (maths > 0) {
+					document.getElementById("t-" + skillsList[i] ).innerHTML = ("+" + maths ) ;
+				} else {
+					document.getElementById("t-" + skillsList[i] ).innerHTML =  maths ;
+				}
 			}
 
 			window.skillPointsSpent += Number(window["in" + skillsList[i] ] ) ;
@@ -857,7 +1219,17 @@ var acceptSkills = function() {
 }
 
 
-
+var featsSubMenu = function(whichSubMenu) {
+	var allSubMenus = ["combat", "skill", "other", "proficiency", "creation", "casting", "metamagic"] ;
+	for ( i = 0 ; i < allSubMenus.length ; i++ ) {
+		if (allSubMenus[i] === whichSubMenu ) {
+			document.getElementById("feats-" + whichSubMenu).style.display = "block" ;
+		} else {
+			document.getElementById("feats-" + allSubMenus[i] ).style.display = "none" ;
+		}
+	}
+	window.scrollTo(0,0);
+}
 
 
 
@@ -1122,6 +1494,7 @@ var calculateGold = function(mxFactor, fMonks) {
 	}
 	document.getElementById("copper-remaining").innerHTML = startingGold; // Display.
 	document.getElementById("roll-starting-gold").style.display = "none" ; // Remove button to prevent repeats. 
+	document.getElementById("equip-variable-buffer").style.display = "block" ;
 }
 
 
@@ -1164,6 +1537,22 @@ var rollStartingGold = function () {
 	}
 }
 
+var invDisplay = function() {
+	if (window.itemPurchaseNo < 26 ) {
+		document.getElementById("equip-variable-buffer").style.height = ( 300 - (window.itemPurchaseNo * 11 ) ).toString() + "px" ;
+		if (window.itemPurchaseNo === 25 ) {
+			document.getElementById("inventory-2").style.display = "block" ;
+		}
+	}
+	if (26 < window.itemPurchaseNo < 50 ) {
+		document.getElementById("equip-variable-buffer-2").style.height = ( 600 - (window.itemPurchaseNo * 11 ) ).toString() + "px" ;
+	}
+
+	if (window.itemPurchaseNo > 60 ) {
+		alert("Capacity Reached");
+	}
+}
+
 
 var buyItem = function(itemName, itemCost, itemWeight) {
 
@@ -1184,6 +1573,7 @@ var buyItem = function(itemName, itemCost, itemWeight) {
 		document.getElementById("total-weight").innerHTML = totalWeight;
 		
 		buySpecialItem(itemName, window.itemPurchaseNo);
+		invDisplay();
 		
 		
 	} else {
@@ -1212,6 +1602,8 @@ var buyItemStack = function(itemQty, itemName, itemCost, itemWeight) {
 		totalWeight += itemWeight;
 		document.getElementById("total-weight").innerHTML = totalWeight;
 		
+		invDisplay();
+
 	} else {
 		alert("You cannot afford this item.") ;
 	}
@@ -1277,6 +1669,9 @@ var buyWeapon = function(weaponName, itemCost, itemWeight, dmg, crit, rang, type
 			window.wSlotThr = new weaponSlot(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, exs);
 			window.weaponSlotThree = true;
 		} 
+
+		invDisplay();
+
 	} else {
 		alert("You cannot afford this item.") ;
 	}
@@ -1318,6 +1713,9 @@ var buyArmor = function(armorName, itemCost, itemWeight, armorBonus, maxDex, che
 			document.getElementById("print-armor-bonus").innerHTML = window.aSlot.arBonus;
 			// Update AC on character sheet. So it ca be relied upon later for calculations during population. 
 		}	
+
+		invDisplay();
+
 	} else {
 		alert("You cannot afford this item.") ;
 	}
@@ -1363,6 +1761,8 @@ var buyShield = function(shieldName, itemCost, itemWeight, armorBonus, maxDex, c
 			// Update AC on character sheet.
 		}
 		
+		invDisplay();
+
 	} else {
 		alert("You cannot afford this item.") ;
 	}
@@ -1376,6 +1776,8 @@ var buyShield = function(shieldName, itemCost, itemWeight, armorBonus, maxDex, c
 
 
 var populateCharacterSheet = function() {
+
+	navigate("print-sheets");
 	
 	var formName = document.getElementById("form-name").value;
 	var formPlayer = document.getElementById("form-player").value;
@@ -1534,7 +1936,7 @@ var populateCharacterSheet = function() {
 
 	if (window.weaponFinesse === true) {
 		document.getElementById("melee-attack-mod-title").innerHTML = ( "DEX<br>MODIFIER") ;
-		document.getElementById("melee-attack-mod").innerHTML = window.dexMod ;
+		document.getElementById("melee-attack-mod").innerHTML = ( "+" + window.dexMod ) ;
 		document.getElementById("print-attack-first-one").innerHTML = ( window.baseAttackBonus + window.dexMod ) ;
 	} else {
 		document.getElementById("print-attack-first-one").innerHTML = ( window.baseAttackBonus + window.strMod ) ;
@@ -1720,7 +2122,7 @@ var populateCharacterSheet = function() {
 	printLeftoverMoney();
 	calculateArmorClass();
 
-	alert("Character Sheet successfully populated.");
+	// alert("Character Sheet successfully populated.");
 
 }
 
