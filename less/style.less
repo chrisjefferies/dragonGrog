@@ -125,7 +125,6 @@ body
 		background-color: #111;
 		padding: 4px 2px;
 		border: 1px solid #444;
-
 		}
 	.top-button-40
 		{
@@ -138,6 +137,10 @@ body
 	.top-button-15
 		{
 		margin-top: 15vh;
+		}
+	.top-button-10
+		{
+		margin-top: 10vh;
 		}
 	.clear
 		{
@@ -422,6 +425,38 @@ body
 	select
 		{
 		margin: 10px 0;
+		}
+	}
+
+.final-text
+	{
+	width: 100%;
+	display: block;
+	height: 160px;
+	margin: 100px 0 0 0;
+	h2
+		{
+		font-size: 14px;
+		color: #000;
+		display: block;
+		width: 65%;
+		float: left;
+		clear: right;
+		margin: 2px 0;
+		background-color: #fff;
+		border: 1px solid #000;
+		}
+	h3
+		{
+		font-size: 12px;
+		width: 30%;
+		text-align: center;
+		display: block;
+		float: left;
+		clear: right;
+		margin: 3px 0;
+		color: #fff;
+		background-color: #000;
 		}
 	}
 
@@ -981,19 +1016,16 @@ body
 
 
 
-#instructions
-	{
-	display: none;
-	}
 
 
 
-#race-bonus-human, #race-bonus-elf, #race-bonus-dwarf, #class-monk, /* #handle-level-adv,*/ #final-base-attributes, #handle-ability-score-1, 
+
+#race-bonus-human, #race-bonus-elf, #race-bonus-dwarf, #class-monk, #handle-level-adv, #final-base-attributes, #handle-ability-score-1, 
 #handle-ability-score-2, #handle-ability-score-3, #handle-ability-score-4, #handle-ability-score-5, 
 
 #select-skills, #select-feats,
 #roll-allocate, #roll-playing, #print, #print-page-two, #print-page-three, #print-page-four, #page-space,
-#feats-combat, #feats-skill, #feats-other, #feats-proficiency, #feats-creation, #feats-casting, #feats-metamagic, 
+#feats-combat, #feats-skill, #feats-other, #feats-proficiency, #feats-creation, #feats-casting, #feats-metamagic, #roll-starting-gold,
 #inventory, #equip-variable-buffer, #inventory-2, #equip-simpweap, #equip-martweap, #equip-exotweap, #equip-armor, #equip-gear, #equip-tools, 
 #equip-substances, .page-space, #nav-controls
 	{
@@ -1002,8 +1034,33 @@ body
 
 
 
+#wrin-craft-1, #wrin-craft-2, #wrin-craft-3, #wrin-craft-4,
+#wrin-knowledge-1, #wrin-knowledge-2, #wrin-knowledge-3, #wrin-knowledge-4,
+#wrin-perform-1, #wrin-perform-2, #wrin-perform-3, #wrin-perform-4,
+#wrin-profession-1
+	{
+	display: none;
+	}
+
+@media print 
+{
+.page-space
+	{
+	height: 10px;
+	}
+
+body
+	{
+	background-color: #fff;
+	}
+	
+#build, #roll-playing, #mondodevspacer
+	{
+	display: none;
+	}
 
 
+}
 
 
 

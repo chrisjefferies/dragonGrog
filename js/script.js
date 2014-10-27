@@ -117,8 +117,8 @@ var classSelect = function(userClass) {
 	
 	if (window.selClass != 0) {
 	
-	document.getElementById("show-class").innerHTML = "Current Class: " + selClass; // turn on display of Choice.
-	document.getElementById("show-class-2").innerHTML = "Current Class: " + selClass;
+	document.getElementById("show-class").innerHTML = "Current Class: " + window.selClass; // turn on display of Choice.
+	document.getElementById("show-class-2").innerHTML = window.selClass;
 
 	// document.getElementById("class-select").style.display="none"; // hide select Class buttons.
 	document.getElementById("dice-sys").style.display="block";
@@ -139,7 +139,7 @@ var raceSelect = function(userRace) {
 	}
 	if (window.selRace != 0) {
 		document.getElementById("show-race").innerHTML = "Current Race: " + window.selRace;
-		document.getElementById("show-race-2").innerHTML = "Current Race: " + window.selRace;
+		document.getElementById("show-race-2").innerHTML = window.selRace;
 		// document.getElementById("race-select").style.display="none";
 		document.getElementById("class-source").style.display="block";
 		// document.getElementById("race-bonus-" + (window.selRace.toLowerCase()) ).style.display="block"; // Display information block for this Race.
@@ -229,7 +229,8 @@ var navigate = function(idCalled) {
 		break;
 		case "equipment":
 			document.getElementById(idCalled).style.display = "block" ;
-			document.getElementById("inventory").style.display = "block" ;
+			// document.getElementById("inventory").style.display = "block" ;
+			document.getElementById("roll-starting-gold").style.display = "block";
 			document.getElementById("select-feats").style.display = "none" ;
 			document.getElementById("roll-playing").style.display = "none" ;
 			featsSubMenu("all-off");
@@ -273,8 +274,7 @@ var navigate = function(idCalled) {
 			}
 		break;
 		case "start-over":
-			// Reset all Ability Score variables to zero. 
-			// turn roll buttons and other elements back on. 
+			location.reload();
 		break;
 	}
 }
@@ -566,6 +566,7 @@ var initiatePhaseTwo = function() {
 		window.levelAdvance =  Number(document.getElementById("level-input").value) ;
 		document.getElementById("final-base-attributes").style.display = "block";
 		document.getElementById("handle-level-adv").style.display = "block";
+		document.getElementById("show-level").innerHTML = window.levelAdvance;
 
 		var list = document.getElementsByClassName("sk-input");
 		for ( i = 0 ; i < list.length ; i++ ) {
@@ -577,10 +578,10 @@ var initiatePhaseTwo = function() {
 		//
 		//
 
-		for ( i = 2 ; i < window.levelAdvance ; i++ ) {
-			var lvlAS = i / 4 ;
-			if ( lvlAS === 1 || lvlAS === 2 || lvlAS === 3 || lvlAS === 4 || lvlAS === 5 ) {
-				document.getElementById("handle-ability-score-" + lvlAS ).style.display = "block" ;
+		for ( i = 2 ; i < ( window.levelAdvance + 1 ) ; i++ ) {
+			
+			if ( (i / 4) === Math.floor( i / 4 ) ) {
+				document.getElementById("handle-ability-score-" + ( i / 4 ) ).style.display = "block" ;
 			}
 			if ( i <= 3 ) { // Only levels unaffected by 1st ability score increase
 				
@@ -601,7 +602,7 @@ var initiatePhaseTwo = function() {
 
 		}
 
-
+		
 	}
 }
 
@@ -622,7 +623,9 @@ var levelSkillPointIncrease = function() {
 
 
 var addAbilityScore = function(whichLevel) {
+	
 	var whichAbility = document.getElementById("select-ability-score-" + Number(whichLevel) ).value ;
+	
 
 	switch (whichAbility) {
 		case "str":
@@ -647,7 +650,7 @@ var addAbilityScore = function(whichLevel) {
 
 	for ( i = ( whichLevel * 4 ) ; i < window.levelAdvance ; i++ ) {
 		
-		if ( i <= ( whichLevel * 4 + 3 ) ) { // Only levels unaffected by THIS (but not SUBSEQUENT) ability score increase
+		if ( i <= ( whichLevel * 4 + 3 ) ) { // Only levels affected by THIS (but not SUBSEQUENT) ability score increase
 			var adtlHitPoints = ( Math.floor(Math.random() * window.hitDie) + 1 ) + window.conMod ;
 			if (adtlHitPoints <= 0 ) {
 				window.hitPoints += 1 ;
@@ -655,6 +658,7 @@ var addAbilityScore = function(whichLevel) {
 				window.hitPoints += adtlHitPoints;
 			}
 			levelSkillPointIncrease();
+			
 		}
 		
 	}
@@ -669,6 +673,7 @@ var doneAdvLvl = function() {
 	document.getElementById("handle-level-adv").style.display = "none";
 	document.getElementById("select-skills").style.display = "block";
 	document.getElementById("feats-remaining").innerHTML = window.startingFeats;
+	document.getElementById("show-hp").innerHTML = window.hitPoints;
 }
 
 // here the selRace function calls on logMscSkModifiers to update Misc Modifiers (and other variables) with Racial Bonuses
@@ -1494,46 +1499,87 @@ var calculateGold = function(mxFactor, fMonks) {
 	}
 	document.getElementById("copper-remaining").innerHTML = startingGold; // Display.
 	document.getElementById("roll-starting-gold").style.display = "none" ; // Remove button to prevent repeats. 
+	document.getElementById("inventory").style.display = "block";
 	document.getElementById("equip-variable-buffer").style.display = "block" ;
 }
 
 
 
 
-var rollStartingGold = function () {
-	switch (window.selClass) {
-		
-		case "DRUID":
-			calculateGold(2, 10);
-		break;
-		
-		case "SORCERER":
-		case "WIZARD":
-			calculateGold(3, 10);
-		break;
-		case "BARD":
-		case "BARBARIAN":
-			calculateGold(4, 10);
-		break;
-		case "CLERIC":
-		case "ROGUE":
-			calculateGold(5, 10);
-		break;
-		
-		case "FIGHTER":
-		case "PALADIN":
-		case "RANGER":
-			calculateGold(6, 10);
-		break;
-		case "MONK":
-			calculateGold(5, 1);
-		break;
-		case "NewBlankClass":
-			// A placeholder for future class additions. 
-			//
-			// This is the SECOND place (in order of execution) where the value of window.selClass affects subsequent calculations. 
-			// 
-		break;
+var rollStartingGold = function (input) {
+
+	if (input === "first") {
+		switch (window.selClass) {
+			case "DRUID":
+				calculateGold(2, 10);
+			break;
+			case "SORCERER":
+			case "WIZARD":
+				calculateGold(3, 10);
+			break;
+			case "BARD":
+			case "BARBARIAN":
+				calculateGold(4, 10);
+			break;
+			case "CLERIC":
+			case "ROGUE":
+				calculateGold(5, 10);
+			break;
+			case "FIGHTER":
+			case "PALADIN":
+			case "RANGER":
+				calculateGold(6, 10);
+			break;
+			case "MONK":
+				calculateGold(5, 1);
+			break;
+			case "NewBlankClass":
+				// A placeholder for future class additions. 
+			break;
+		}
+	}
+	if (input === "leveled") {
+		/*
+		var gold = 0;
+		for ( i = 0 ; i < window.levelAdvance ; i++ ) {
+			gold += ( 9 * i ) * 10;
+		} */
+
+		switch (Number(window.levelAdvance) ) {
+			case 2:
+				var gold = 90000;
+			break;
+			case 3:
+				var gold = 270000;
+			break;
+			case 4:
+				var gold = 540000;
+			break;
+			case 5:
+				var gold = 900000;
+			break;
+			case 6:
+				var gold = 1300000;
+			break;
+			case 7:
+				var gold = 1900000;
+			break;
+			case 8:
+				var gold = 2700000;
+			break;
+		}
+
+
+		document.getElementById("copper-remaining").innerHTML = gold;
+		document.getElementById("roll-starting-gold").style.display = "none" ; // Remove button to prevent repeats. 
+		document.getElementById("inventory").style.display = "block";
+		document.getElementById("equip-variable-buffer").style.display = "block" ;
+	}
+	if (input === "input") {
+		document.getElementById("copper-remaining").innerHTML = document.getElementById("gold-input").value;
+		document.getElementById("roll-starting-gold").style.display = "none" ; // Remove button to prevent repeats. 
+		document.getElementById("inventory").style.display = "block";
+		document.getElementById("equip-variable-buffer").style.display = "block" ;
 	}
 }
 
@@ -1802,14 +1848,18 @@ var populateCharacterSheet = function() {
 	document.getElementById("print-other-info").innerHTML = document.getElementById("form-other-info").value;
 	
 	if (window.numOfFeats > 0) {
-		for (i = 1 ; i < (window.numOfFeats + 1) ; i++ ) {
-			document.getElementById("print-feat-" + i ).innerHTML = document.getElementById("feat-name-" + i ).innerHTML ;
+		if (window.numOfFeats != 0) {
+			for (i = 1 ; i < (window.numOfFeats + 1) ; i++ ) {
+				document.getElementById("print-feat-" + i ).innerHTML = document.getElementById("feat-name-" + i ).innerHTML ;
+			}
 		}
 	}
 	
 	if (window.itemPurchaseNo > 0) {
-		for (i = 1 ; i < (window.itemPurchaseNo + 1) ; i++ ) {
-			document.getElementById("print-item-" + i ).innerHTML = document.getElementById("item-purchase-no-" + i ).innerHTML ;
+		if (window.itemPurchaseNo != 0) {
+			for (i = 1 ; i < (window.itemPurchaseNo + 1) ; i++ ) {
+				document.getElementById("print-item-" + i ).innerHTML = document.getElementById("item-purchase-no-" + i ).innerHTML ;
+			}
 		}
 	}
 	
@@ -2202,8 +2252,34 @@ var testWriteInSkills = function() {
 
 
 
+// Arrow Key functionality (skills and other forms)
 
-
+// Arrow keys (37:left, 38:up, 39:right, 40:down)...
+// Tab (9)
+// if(event.shiftKey && event.keyCode == 9) { 
+	// shift was down when tab was pressed
+// }
+/*
+var doThing =  function(inputs) {    
+    for (var i=0; i<inputs.length; i++) {
+        inputs[i].onkeydown = function(e) {
+            if (e.keyCode==40) {
+                var node = this.nextSibling;
+                while (node) {
+                    console.log(node.tagName);
+                    if (node.tagName=='INPUT' || node.tagName=='SELECT') {
+                        node.focus();
+                        break;
+                    }
+                    node = node.nextSibling;                
+                }
+            }
+        };
+    };
+}
+doThing(document.getElementsByTagName('input'));
+doThing(document.getElementsByTagName('select'));
+*/
 
 
 

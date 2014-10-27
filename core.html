@@ -15,8 +15,10 @@
 
   <link rel="stylesheet/less" type="text/css" href="less/print.less" />
   <link rel="stylesheet/less" type="text/css" href="less/style.less" />
+  <!--
   <link rel="stylesheet/less" type="text/css" href="less/print-only.less" />
-  			
+  -->
+
   			<!-- js for uncompiled .less -->
   <script src="js/less-1.6.1.js" type="text/javascript"></script>
 
@@ -39,7 +41,6 @@
 <body>
 		<!-- Arrr Sticky me Menus -->
 	<script>
-
 		$(function(){
   			$(window).scroll(function(){
     			$('.menuspeed').each(function(){
@@ -61,7 +62,7 @@
 			<input class="button" type="button" value="Monster Races" onclick="rulesSelect(mons);">
 		</section>
 
-		<section id="instructions" class="menu menu-wide">
+		<section id="instructions" class="menu menu-tall menu-wide">
 			<h1>
 				Happy Brewing!
 			</h1>
@@ -89,10 +90,11 @@
 				interface and set sail with no headers/footers, no margins and background images and colors set to display. 
 				Everything else will automatically disappear. 
 			</p>
+			<div class="bottom-buffer"> </div>
 		</section>
 
 
-		<section id="race-select" class="menu">
+		<section id="race-select" class="menu menuspeed" data-scrollSpeed="-1">
 			<input class="button back-button" type="button" value="&#8592; Back" onclick="navigate('race-source');">
 			<h2 id="show-race">
 				Select Your Race
@@ -107,7 +109,7 @@
 			<!-- Adding new races: search for string "NewBlankRace" in script.js and add javascript accordingly based on new race perameters. -->
 		</section>
 
-		<section id="class-source" class="menu">
+		<section id="class-source" class="menu menuspeed" data-scrollSpeed="-1">
 			
 			<input class="button top-button-40" type="button" value="Base Classes" onclick="rulesSelect('baseClass');">
 			<input class="button" type="button" value="Players Handbook II" onclick="rulesSelect(mons);">
@@ -115,7 +117,7 @@
 		</section>
 		
 		
-		<section id="class-select" class="menu">
+		<section id="class-select" class="menu menuspeed" data-scrollSpeed="-1">
 			<input class="button back-button" type="button" value="&#8592; Back" onclick="navigate('class-source');">
 			<h2 id="show-class">
 				Select your Class
@@ -274,17 +276,21 @@
 				</form>
 			</div>
 			
-			
-			
-
 		</section>
 		
 		<section id="final-base-attributes" class="menu menuspeed" data-scrollSpeed="-1">
 			
 			<input class="button back-button" type="button" value="Start Over" onclick="navigate('start-over');">
 			
-			<h2 id="show-class-2"></h2>
-			<h2 id="show-race-2"></h2>
+			<div class="final-text">
+				<h3>Race:</h3>			<h2 id="show-race-2">Human</h2>
+				<h3>Class:</h3>			<h2 id="show-class-2">Fighter</h2>
+				<h3>Level:</h3>			<h2 id="show-level">1</h2>
+				<h3>HP:</h3>			<h2 id="show-hp">0</h2>
+
+				<h3>Money:</h3>			<h2 id="copper-remaining">0</h2>
+				<h3>Weight:</h3>		<h2 id="total-weight">0</h2>
+			</div>
 
 			<h2>
 				Final Scores
@@ -346,10 +352,7 @@
 
 			<div class="final-attr-spacer"></div>
 
-			<h3>Copper Coins: </h3>
-			<h5 id="copper-remaining">0</h5>
-			<h3>Total Weight: </h3>
-			<h5 id="total-weight">0</h5>
+			
 		</section>
 
 		<section id="handle-level-adv" class="menu menu-wide menu-tall">
@@ -360,11 +363,10 @@
 				Hit points gained during level advancement are randomly generated based on your 
 				class and Constitution Modifier. You can change them manually at the end. 
 			</p>
-			
+			<h2>
+				Ability Score Increases
+			</h2>
 			<form id="handle-ability-score-1">
-				<h2>
-					Ability Score Increases
-				</h2>
 				<p>
 					First advancement (4th level)
 				</p>
@@ -414,6 +416,21 @@
 				<p>
 					Fourth advancement (16th level)
 				</p>
+				<select id="select-ability-score-4" class="button">
+					<option value="blankSelect" disabled="disabled" selected="selected"> -- select -- </option>
+					<option class="str-option" value="str">STR</option>
+					<option class="dex-option" value="dex">DEX</option>
+					<option class="con-option" value="con">CON</option>
+					<option class="wis-option" value="wis">WIS</option>
+					<option class="int-option" value="int">INT</option>
+					<option class="cha-option" value="cha">CHA</option>
+				</select>
+				<input type="button" class="button" value="Apply" onclick="addAbilityScore(4);">
+			</form>
+			<form id="handle-ability-score-5">
+				<p>
+					Fifth advancement (20th level)
+				</p>
 				<select id="select-ability-score-5" class="button">
 					<option value="blankSelect" disabled="disabled" selected="selected"> -- select -- </option>
 					<option class="str-option" value="str">STR</option>
@@ -423,28 +440,13 @@
 					<option class="int-option" value="int">INT</option>
 					<option class="cha-option" value="cha">CHA</option>
 				</select>
-				<input type="button" class="button" value="Apply" onclick="addAbilityScore('fourth');">
-			</form>
-			<form id="handle-ability-score-5">
-				<p>
-					Fifth advancement (20th level)
-				</p>
-				<select id="handle-ability-score-5" class="button">
-					<option value="blankSelect" disabled="disabled" selected="selected"> -- select -- </option>
-					<option class="str-option" value="str">STR</option>
-					<option class="dex-option" value="dex">DEX</option>
-					<option class="con-option" value="con">CON</option>
-					<option class="wis-option" value="wis">WIS</option>
-					<option class="int-option" value="int">INT</option>
-					<option class="cha-option" value="cha">CHA</option>
-				</select>
-				<input type="button" class="button" value="Apply" onclick="addAbilityScore('fifth');">
+				<input type="button" class="button" value="Apply" onclick="addAbilityScore(5);">
 
 			</form>
 
 			<div class="bottom-buffer"></div>
 
-			<input type="button" class="button" value="All Done" onclick="doneAdvLvl();">
+			<input type="button" class="button" value="Next &#8594;" onclick="doneAdvLvl();">
 
 			<div class="bottom-buffer"></div>
 			<div class="bottom-buffer"></div>
@@ -1098,20 +1100,21 @@
 			<input class="button" type="button" value="Widen Spell" onclick="selectFeat('Widen Spell');">
 		</div>
 
+		<div id="roll-starting-gold" class="menu menu-narrow menuspeed" data-scrollSpeed="-1">
+			<h4>
+				Roll Starting Gold or input a value manually.
+			</h4>
+			<input type="button" class="button narrow-button top-button-20" value="Roll (1st Level)" onclick="rollStartingGold('first');">
+			<input type="button" class="button narrow-button" value="Wealth by Level" onclick="rollStartingGold('leveled');">
+			<input type="number" class="button narrow-button top-button-10" placeholder="Another Amount" id="gold-input">
+			<input type="button" class="button narrow-button" value="Apply" onclick="rollStartingGold('input');">
 
+		</div>
 
 		<div id="inventory" class="equip-list-item menu menu-narrow menuspeed" data-scrollSpeed="-1" >
 			
 			<div id="equip-variable-buffer"></div>
 			
-			<div id="roll-starting-gold">
-				<h4>
-					Roll Starting Gold or input a value manually.
-				</h4>
-				<input type="button" class="button narrow-button top-button-40" value="Roll" onclick="rollStartingGold();">
-
-			</div>
-
 			<h3 class="consumables">
 				Consumables
 			</h3>
@@ -1129,11 +1132,9 @@
 			<p class="item-stack" id="item-Torch"></p>			<p class="item-qty" id="qty-Torch"></p>
 			<p class="item-stack" id="item-Chain"></p>			<p class="item-qty" id="qty-Chain"></p>
 
-
 			<h3 class="button-top-20">
 				Inventory
 			</h3>
-			
 			
 			<!--
 			artisan’s outfit, 
@@ -1208,10 +1209,6 @@
 			<p class="item" id="item-purchase-no-59"></p>	
 			
 			-->
-
-
-			
-
 		</div>
 
 		<div id="inventory-2" class="equip-list-item menu menu-narrow menuspeed" data-scrollSpeed="-1" >
@@ -1292,6 +1289,7 @@
 			<input class="button" type="button" value="Gear" onclick="equipSubMenu('gear');">
 			<input class="button" type="button" value="Alchemical" onclick="equipSubMenu('substances');">
 			<input class="button" type="button" value="Tools & Kits" onclick="equipSubMenu('tools');">
+			<input class="button" type="button" value="Custom Item" onclick="equipSubMenu('custom');">
 
 
 
@@ -2168,6 +2166,59 @@
 			</div>
 			<div class="bottom-buffer"></div>
 		</section>
+
+		<section id="equip-custom" class="menu menu-tall">
+			<form id="custom-item">
+				<p>Kind of Item</p>
+				<select class="button">
+					<option class="button" value="weapon">Weapon</option>
+					<option class="button" value="armor">Armor</option>
+					<option class="button" selected="selected" value="item">Item</option>
+					<option class="button" value="consumable">Consumable</option>
+				</select>
+				<input class="button" type="button" value="Next &#8594;">
+
+			</form>
+
+
+			<form id="custom-weapon">
+				
+				<input class="button" type="text" placeholder="Weapon Name">
+				<input class="button" type="number" placeholder="Cost (CP)">
+
+				<input class="button" type="text" placeholder="Damage">
+				<input class="button" type="text" placeholder="Critical">
+				<input class="button" type="text" placeholder="Range Inc.">
+				<input class="button" type="text" placeholder="Type">
+				<input class="button" type="text" placeholder="Size">
+				<input class="button" type="text" placeholder="Weight">
+				<input class="button" type="text" placeholder="Hardness">
+				<input class="button" type="Number" min="0" placeholder="HP">
+				<input class="button" type="text" placeholder="Saves">
+			</form>
+			<form id="custom-armor">
+				
+				<input class="button" type="text" placeholder="Armor Name">
+				<input class="button" type="number" placeholder="Cost (CP)">
+
+				<input class="button" type="text" placeholder="Bonus">
+				<input class="button" type="text" placeholder="Max Dex">
+				<input class="button" type="text" placeholder="Check">
+				<input class="button" type="text" placeholder="Spell Failure">
+				<input class="button" type="text" placeholder="Max Speed">
+				<input class="button" type="text" placeholder="Weight">
+				<input class="button" type="text" placeholder="Hardness">
+				<input class="button" type="Number" min="0" placeholder="HP">
+				<input class="button" type="text" placeholder="Saves">
+				<input class="button" type="text" placeholder="Donning">
+			</form>
+
+			<div class="bottom-buffer"></div>
+		</section>
+
+
+
+
 
 	</section>
 	
@@ -6073,7 +6124,7 @@
 			
 	</section>
 
-	<div id="mondodevspacer"></div>
+
 
 
 
