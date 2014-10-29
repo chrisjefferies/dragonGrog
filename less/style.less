@@ -186,6 +186,12 @@ body
 	height: 200px;
 	}
 
+.top-buffer
+	{
+	.bottom-buffer;
+	height: 50px;
+	}
+
 #equip-variable-buffer, #equip-variable-buffer-2
 	{
 	width: 100%;
@@ -454,7 +460,8 @@ body
 		display: block;
 		float: left;
 		clear: right;
-		margin: 3px 0;
+		padding: 4px 2px;
+		margin: 0;
 		color: #fff;
 		background-color: #000;
 		}
@@ -464,6 +471,10 @@ body
 	{
 	width: 262px;
 	margin: 0 auto;
+	}
+
+.final-base-attributes
+	{
 	h2
 		{
 		text-align: center;
@@ -489,6 +500,7 @@ body
 		width: 170px;
 		padding: 22px 2px;
 		}
+	
 	}
 
 /*
@@ -720,13 +732,6 @@ body
 .feat-name-list
 	{
 	color: red;
-	}
-
-
-#equipment
-	{
-	#select-feats;
-	
 	}
 
 .buy-item-float
@@ -1023,11 +1028,11 @@ body
 #race-bonus-human, #race-bonus-elf, #race-bonus-dwarf, #class-monk, #handle-level-adv, #final-base-attributes, #handle-ability-score-1, 
 #handle-ability-score-2, #handle-ability-score-3, #handle-ability-score-4, #handle-ability-score-5, 
 
-#select-skills, #select-feats,
+#select-skills, #select-feats, #equipment,
 #roll-allocate, #roll-playing, #print, #print-page-two, #print-page-three, #print-page-four, #page-space,
 #feats-combat, #feats-skill, #feats-other, #feats-proficiency, #feats-creation, #feats-casting, #feats-metamagic, #roll-starting-gold,
 #inventory, #equip-variable-buffer, #inventory-2, #equip-simpweap, #equip-martweap, #equip-exotweap, #equip-armor, #equip-gear, #equip-tools, 
-#equip-substances, .page-space, #nav-controls
+#equip-substances, #equip-custom, #custom-weapon, #custom-armor, #custom-item, #custom-consumable, .page-space, #nav-controls
 	{
 	display: none;
 	}
