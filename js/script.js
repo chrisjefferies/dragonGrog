@@ -265,7 +265,6 @@ var navigate = function(idCalled) {
 			document.getElementById("build").style.display = "none" ;
 			document.getElementById("roll-playing").style.display = "none" ;
 			document.getElementsByTagName("body")[0].style.backgroundImage = "none" ;
-			document.getElementsByTagName("body")[0].style.backgroundColor = "#444" ;
 			var list = document.getElementsByClassName("page-space") ;
 			for ( i = 0 ; i < list.length ; i++ ) {
 				list[i].style.display = "block" ;
@@ -279,7 +278,6 @@ var navigate = function(idCalled) {
 			document.getElementById("print").style.display = "none" ;
 			document.getElementById("nav-controls").style.display = "none" ;
 			document.getElementsByTagName("body")[0].style.backgroundImage = "url('images/dnd-wp.jpg')" ;
-
 			document.getElementById("roll-playing").style.display = "block" ;
 			document.getElementById("build").style.display = "block" ;
 
@@ -1052,6 +1050,8 @@ var addSkill = function() {
 }
 
 var calcPoints = function() {
+
+	// this will be turned into a loop at some point.
 
 	window.inappr = Number(document.getElementById("in_appr").value );
 	window.inbala = Number(document.getElementById("in_bala").value );

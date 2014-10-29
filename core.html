@@ -15,9 +15,6 @@
 
   <link rel="stylesheet/less" type="text/css" href="less/print.less" />
   <link rel="stylesheet/less" type="text/css" href="less/style.less" />
-  <!--
-  <link rel="stylesheet/less" type="text/css" href="less/print-only.less" />
-  -->
 
   			<!-- js for uncompiled .less -->
   <script src="js/less-1.6.1.js" type="text/javascript"></script>
@@ -2525,21 +2522,19 @@
 	</section>
 
 
-
-	<div id="nav-controls">
-		<input class="button back-button" type="button" value="&#8592; Character" onclick="navigate('back-to-build');">
-
-		<form id="form-picture" runat="server">
-			<h3>
-				Upload a Character Sketch
-			</h3>
-			<p>
-				.jpg, .gif, .png files supported. Portrait layout images work best. 
-			</p>
-			<input type='file' id="picture-upload" />
-	
-		</form>
-
+	<div id="print-nav-wrap">
+		<div id="nav-controls">
+			<input class="button back-button" type="button" value="&#8592; Character" onclick="navigate('back-to-build');">
+			<form id="form-picture" runat="server">
+				<h3>
+					Upload a Character Sketch
+				</h3>
+				<p>
+					.jpg, .gif, .png files supported. Portrait layout images work best. 
+				</p>
+				<input type='file' id="picture-upload" />
+			</form>
+		</div>
 	</div>
 	
 	<section id="print-page-four">
