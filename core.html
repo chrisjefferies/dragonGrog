@@ -34,6 +34,17 @@
   
   <link rel="stylesheet" href="css/style.css">
   
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-43651845-3', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+  
 </head>
 
 <body>
@@ -69,7 +80,7 @@
 				of the Mountains of Doom. 
 			</p>
 			<p>
-				Heads up &mdash; hitting refresh will dump all your progress. You've been warned. 
+				This is an Alpha. Some things don't work. We are working hard to fix bugs and add more functionality.
 			</p>
 			<p>
 				We store none of your info - save it or print it if you want to keep it. 
@@ -286,7 +297,7 @@
 				<h3>Level:</h3>			<h2 id="show-level">1</h2>
 				<h3>HP:</h3>			<h2 id="show-hp">0</h2>
 
-				<h3>Money:</h3>			<h2 id="copper-remaining">0</h2>
+				<h3>Money:</h3>			<h2 id="copper-remaining">-</h2>
 				<h3>Weight:</h3>		<h2 id="total-weight">0</h2>
 			</div>
 
@@ -1109,7 +1120,7 @@
 
 		</div>
 
-		<div id="inventory" class="equip-list-item menu menu-narrow menuspeed" data-scrollSpeed="-1" >
+		<div id="inventory" class="equip-list-item menu menu-tall menu-narrow">
 			
 			<div id="equip-variable-buffer"></div>
 			
@@ -1169,54 +1180,7 @@
 			<p class="item" id="item-purchase-no-22"></p>
 			<p class="item" id="item-purchase-no-23"></p>		
 			<p class="item" id="item-purchase-no-24"></p>
-			<p class="item" id="item-purchase-no-25"></p>	
-			<!--	
-			<p class="item" id="item-purchase-no-26"></p>
-			<p class="item" id="item-purchase-no-27"></p>		
-			<p class="item" id="item-purchase-no-28"></p>
-			<p class="item" id="item-purchase-no-29"></p>	
-			<p class="item" id="item-purchase-no-30"></p>
-			<p class="item" id="item-purchase-no-31"></p>
-			<p class="item" id="item-purchase-no-32"></p>
-			<p class="item" id="item-purchase-no-33"></p>		
-			<p class="item" id="item-purchase-no-34"></p>
-			<p class="item" id="item-purchase-no-35"></p>		
-			<p class="item" id="item-purchase-no-36"></p>
-			<p class="item" id="item-purchase-no-37"></p>		
-			<p class="item" id="item-purchase-no-38"></p>
-			<p class="item" id="item-purchase-no-39"></p>	
-			<p class="item" id="item-purchase-no-40"></p>
-			<p class="item" id="item-purchase-no-41"></p>
-			<p class="item" id="item-purchase-no-42"></p>
-			<p class="item" id="item-purchase-no-43"></p>		
-			<p class="item" id="item-purchase-no-44"></p>
-			<p class="item" id="item-purchase-no-45"></p>		
-			<p class="item" id="item-purchase-no-46"></p>
-			<p class="item" id="item-purchase-no-47"></p>		
-			<p class="item" id="item-purchase-no-48"></p>
-			<p class="item" id="item-purchase-no-49"></p>	
-			<p class="item" id="item-purchase-no-50"></p>
-			<p class="item" id="item-purchase-no-51"></p>
-			<p class="item" id="item-purchase-no-52"></p>
-			<p class="item" id="item-purchase-no-53"></p>		
-			<p class="item" id="item-purchase-no-54"></p>
-			<p class="item" id="item-purchase-no-55"></p>		
-			<p class="item" id="item-purchase-no-56"></p>
-			<p class="item" id="item-purchase-no-57"></p>		
-			<p class="item" id="item-purchase-no-58"></p>
-			<p class="item" id="item-purchase-no-59"></p>	
-			
-			-->
-		</div>
-
-		<div id="inventory-2" class="equip-list-item menu menu-narrow menuspeed" data-scrollSpeed="-1" >
-			
-			<div id="equip-variable-buffer-2"></div>
-
-			<h3 class="button-top-20">
-				Inventory
-			</h3>
-			
+			<p class="item" id="item-purchase-no-25"></p>		
 			<p class="item" id="item-purchase-no-26"></p>
 			<p class="item" id="item-purchase-no-27"></p>		
 			<p class="item" id="item-purchase-no-28"></p>
@@ -1252,8 +1216,55 @@
 			<p class="item" id="item-purchase-no-58"></p>
 			<p class="item" id="item-purchase-no-59"></p>
 			<p class="item" id="item-purchase-no-60"></p>	
-
+			
 		</div>
+		<!-- Bad inventory Bug Fix for people who buy lots of items, but still breaks
+		for people who write in long names for items. 
+			<div id="inventory-2" class="equip-list-item menu menu-narrow menuspeed" data-scrollSpeed="-1" >
+				
+				<div id="equip-variable-buffer-2"></div>
+
+				<h3 class="button-top-20">
+					Inventory
+				</h3>
+				
+				<p class="item" id="item-purchase-no-26"></p>
+				<p class="item" id="item-purchase-no-27"></p>		
+				<p class="item" id="item-purchase-no-28"></p>
+				<p class="item" id="item-purchase-no-29"></p>	
+				<p class="item" id="item-purchase-no-30"></p>
+				<p class="item" id="item-purchase-no-31"></p>
+				<p class="item" id="item-purchase-no-32"></p>
+				<p class="item" id="item-purchase-no-33"></p>		
+				<p class="item" id="item-purchase-no-34"></p>
+				<p class="item" id="item-purchase-no-35"></p>		
+				<p class="item" id="item-purchase-no-36"></p>
+				<p class="item" id="item-purchase-no-37"></p>		
+				<p class="item" id="item-purchase-no-38"></p>
+				<p class="item" id="item-purchase-no-39"></p>	
+				<p class="item" id="item-purchase-no-40"></p>
+				<p class="item" id="item-purchase-no-41"></p>
+				<p class="item" id="item-purchase-no-42"></p>
+				<p class="item" id="item-purchase-no-43"></p>		
+				<p class="item" id="item-purchase-no-44"></p>
+				<p class="item" id="item-purchase-no-45"></p>		
+				<p class="item" id="item-purchase-no-46"></p>
+				<p class="item" id="item-purchase-no-47"></p>		
+				<p class="item" id="item-purchase-no-48"></p>
+				<p class="item" id="item-purchase-no-49"></p>	
+				<p class="item" id="item-purchase-no-50"></p>
+				<p class="item" id="item-purchase-no-51"></p>
+				<p class="item" id="item-purchase-no-52"></p>
+				<p class="item" id="item-purchase-no-53"></p>		
+				<p class="item" id="item-purchase-no-54"></p>
+				<p class="item" id="item-purchase-no-55"></p>		
+				<p class="item" id="item-purchase-no-56"></p>
+				<p class="item" id="item-purchase-no-57"></p>		
+				<p class="item" id="item-purchase-no-58"></p>
+				<p class="item" id="item-purchase-no-59"></p>
+				<p class="item" id="item-purchase-no-60"></p>	
+			</div>
+		-->
 
 		<section id="equipment" class="menu menuspeed" data-scrollSpeed="-1">
 			<input class="button back-button" type="button" value="&#8592; Feats" onclick="navigate('select-feats');">
@@ -1328,19 +1339,19 @@
 					</div>
 					<div class="buy-item">
 						<p>Spiked Gauntlet</p>
-						<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+						<input class="buy-item-button" type="button" value="500" onclick="buyItem( 'Spiked Gauntlet', 500, 1, '1d4', 'x2', '&mdash;', 'pirc', 'MED', 'No', '10', '-', '-' );">
 					</div>
 					<div class="buy-item">
 						<p>Light Mace</p>
-						<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+						<input class="buy-item-button" type="button" value="500" onclick="buyItem( 'Light Mace', 500, 4, '1d6', 'x2', '&mdash;', 'bldg', 'MED', 'No', '10', '10', '-' );">
 					</div>
 					<div class="buy-item">
 						<p>Sickle</p>
-						<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+						<input class="buy-item-button" type="button" value="600" onclick="buyItem( 'Sickle', 600, 2, '1d6', 'x2', '&mdash;', 'slsh', 'MED', 'No', '10', '2', '-' );">
 					</div>
 					<div class="buy-item">
 						<p>Club</p>
-						<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+						<input class="buy-item-button" type="button" value="1" onclick="buyItem( 'Club', 1, 3, '1d6', 'x2', '10ft', 'bldg', 'MED', 'No', '5', '5', '-' );">
 					</div>
 					<div class="buy-item">
 						<p>Heavy Mace</p>
@@ -2173,27 +2184,29 @@
 			<form id="custom-kind">
 				<p>Kind of Item</p>
 				<select id="custom-select" class="button">
+					<option selected="selected" value="item">Item</option>
 					<option value="weapon">Weapon</option>
 					<option value="armor">Armor</option>
-					<option selected="selected" value="item">Item</option>
 					<option value="consumable">Consumable</option>
 				</select>
 				<input class="button" type="button" value="Next &#8594;" onclick="customItemSubMenu();">
 
 			</form>
 
+		</section>
+		<section id="custom-weapon" class="menu menu-tall">
+			<p>
+				Custom Weapon
+			</p>
+			<p>
+				Any parameter without user input will print either as blank, or as a dash.
+			</p>
 
-			<form id="customweapon">
-				<div class="final-text">
-					<h3>Cost</h3>			<h2 id="cu-w-cost">&mdash;</h2>
-					<h3>Quality</h3>		<h2 id="cu-w-qual-disp">0</h2>
-					<h3>Price</h3>			<h2 id="cu-w-enhan">0</h2>
-					<h3>Crit</h3>			<h2 id="cu-w-crit">20</h2>
-					<h3>Bonus</h3>			<h2 id="cu-w-bonus">0</h2>
-				</div>
+			<form id="custom-weapon-form">
+				
 
 				<p>
-					Unique Name
+					Unique Name (or base weapon name)
 				</p>
 				<input id="cu-w-name" class="button" type="text" placeholder="Weapon Name">
 
@@ -2203,35 +2216,37 @@
 				<p>
 					Type
 				</p>
-				<select id="cu-w-type" class="button">
-					<option value="melee">Melee</option>
-					<option value="ranged">Ranged</option>
-					<option value="throwing">Throwing</option>
+				<select id="cu-w-weapon-type" class="button">
+					<option value="Light">Light</option>
+					<option value="One-Handed">One-Handed</option>
+					<option value="Two-Handed">Two-Handed</option>
+					<option value="Ranged">Ranged</option>
+					<option value="Throwing">Throwing</option>
 				</select>
 
 				
 				<input id="cu-w-basecost" class="button" type="number" min="0" placeholder="Base Cost (gp)">
 
 				<select id="cu-w-dmg-type" class="button">
-					<option selected="selected" disabled="disabled"> - Damage Type - </option>
-					<option>Piercing</option>
-					<option>Slashing</option>
-					<option>Bludgeoning</option>
-					<option>Bludgeoning & Piercing</option>
-					<option>Slashing or Piercing</option>
+					<option selected="selected" disabled="disabled" value="-"> - Damage Type - </option>
+					<option value="pirc">Piercing</option>
+					<option value="slsh">Slashing</option>
+					<option value="bldg">Bludgeoning</option>
+					<option value="b&p">Bludgeoning & Piercing</option>
+					<option value="s or p">Slashing or Piercing</option>
 				</select>
 
-				<select class="button">
-					<option selected="selected" disabled="disabled"> - Size - </option>
-					<option>Small</option>
-					<option>Medium</option>
-					<option>Large</option>
+				<select id="cu-w-size" class="button">
+					<option selected="selected" disabled="disabled" value="-"> - Size - </option>
+					<option value="SM">Small</option>
+					<option value="MED">Medium</option>
+					<option value="LG">Large</option>
 				</select>
 
 				<select id="cu-w-reac" class="button">
-					<option selected="selected" disabled="disabled"> - Reach? - </option>
-					<option>Yes</option>
-					<option>No</option>
+					<option selected="selected" disabled="disabled" value="-"> - Reach? - </option>
+					<option value="Yes">Yes</option>
+					<option value="No">No</option>
 				</select>
 				
 
@@ -2240,16 +2255,14 @@
 				<input id="cu-w-save" class="button" type="text" placeholder="Saves">
 
 				<input id="cu-w-weig" class="button" type="number" min="0" placeholder="Weight (lbs)">
-
 				<input id="cu-w-crit-rang" class="button" type="number" min="0" max="20" placeholder="Base Crit Range Min">
 				<input id="cu-w-crit-mult" class="button" type="number" min="0" max="3" placeholder="Crit Multiplier">
-				
 				<input id="cu-w-rang-base" class="button" type="number" min="0" max="120" placeholder="Base Range Inc.">
 
 				<p>
 					Base Damage
 				</p>
-				<select id="cu-w-dmg" class="button">
+				<select id="cu-w-dama" class="button">
 					<option value="1d2">1d2</option>
 					<option value="1d3">1d3</option>
 					<option value="1d4">1d4</option>
@@ -2265,7 +2278,7 @@
 					2nd Attack Damage (double weapon)
 				</p>
 				<select id="cu-w-dmg-doub" class="button">
-					<option value="none">Single Attack</option>
+					<option value="none" selected="selected">Single Attack</option>
 					<option value="1d2">1d2</option>
 					<option value="1d3">1d3</option>
 					<option value="1d4">1d4</option>
@@ -2281,7 +2294,7 @@
 					Quality
 				</p>
 				<select id="cu-w-qual" class="button">
-					<option value="0">Normal</option>
+					<option value="0" selected="selected">Normal</option>
 					<option value="1">Masterwork</option>
 				</select>
 
@@ -2289,15 +2302,20 @@
 					Material
 				</p>
 				<select id="cu-w-mater" class="button">
-					<option selected="selected" value="0">Steel</option>
-					<option value="0">Adamantine</option>
+					<option selected="selected" value="Steel">Steel</option>
+					<option value="Adamantine">Adamantine</option>
+					<option value="Deep Crystal">Deep Crystal</option>
+					<option value="Mundane Crystal">Mundane Crystal</option>
+					<option value="Cold Iron">Cold Iron</option>
+					<option value="Mithral">Mithral</option>
+					<option value="Alchemical Silver">Alchemical Silver</option>
 				</select>
 
 				<p>
 					Weapon Special Abilities
 				</p>
 				<select id="cu-w-enhan-val-1" class="button">
-					<option value="none">None</option>
+					<option value="none" selected="selected">None</option>
 					<option value="bane">Bane</option>
 					<option value="defe">Defending</option>
 					<option value="flam">Flaming</option>
@@ -2331,7 +2349,7 @@
 					<option value="vorp">Vorpal</option>
 				</select>
 				<select id="cu-w-enhan-val-2" class="button">
-					<option value="none">None</option>
+					<option value="none" selected="selected">None</option>
 					<option value="bane">Bane</option>
 					<option value="defe">Defending</option>
 					<option value="flam">Flaming</option>
@@ -2365,7 +2383,7 @@
 					<option value="vorp">Vorpal</option>
 				</select>
 				<select id="cu-w-enhan-val-3" class="button">
-					<option value="none">None</option>
+					<option value="none" selected="selected">None</option>
 					<option value="bane">Bane</option>
 					<option value="defe">Defending</option>
 					<option value="flam">Flaming</option>
@@ -2399,27 +2417,35 @@
 					<option value="vorp">Vorpal</option>
 				</select>
 
-				
-				
-				<p>
-					Add to Weapon Slot
-				</p>
-				<select class="button">
-					<option>Don't Equip</option>
-					<option value="w-s1">Slot One</option>
-					<option value="w-s2">Slot Two</option>
-					<option value="w-s3">Slot Three</option>
-				</select>
+
 				<input class="button" type="button" value="Submit" onclick="createCustomItem('weapon');">
+			
+
 			</form>
 
 			<script type="text/javascript">
-				$('#customweapon').on( 'change', function(){
+				$('#custom-weapon').on( 'change', function(){
 					updateCustomForm('weapon');
 				});
 			</script>
 
-			<form id="custom-armor">
+			
+
+			<div class="bottom-buffer"></div>
+		</section>
+
+		<section id="custom-weapon-display" class="menu menu-narrow menuspeed" data-scrollSpeed="-1">
+			<div class="final-text">
+					<h3>Cost</h3>			<h2 id="cu-w-cost">&mdash;</h2>
+					<h3>Quality</h3>		<h2 id="cu-w-qual-disp">0</h2>
+					<h3>Price</h3>			<h2 id="cu-w-enhan">0</h2>
+					<h3>Crit</h3>			<h2 id="cu-w-crit">-</h2>
+					<h3>Bonus</h3>			<h2 id="cu-w-bonus">0</h2>
+				</div>
+		</section>
+
+		<section id="custom-armor" class="menu menu-tall">
+			<form id="custom-armor-form">
 				
 				<input class="button" type="text" placeholder="Armor Name">
 				<input class="button" type="number" placeholder="Cost (CP)">
@@ -2435,8 +2461,94 @@
 				<input class="button" type="text" placeholder="Saves">
 				<input class="button" type="text" placeholder="Donning">
 			</form>
+		</section>
 
-			<div class="bottom-buffer"></div>
+		<section id="custom-item" class="menu menu-tall">
+			<p>
+				Custom Item
+			</p>
+			<p class="annotation">
+				<em>Darius Bellarium & Co.'s Atlas of Ye Olde This Campaign Setting</em>
+				(Blank Wizards Spellbook full o' maps, Masterwork, 65gp, 3lb., +2 Knowledge(local) )
+			</p>
+
+			
+			<form id="custom-item-form">
+				
+				<input id="cu-i-name" class="button" type="text" placeholder="Item Name">
+				<input id="cu-i-cost" class="button" type="number" min="0" placeholder="Base Cost (copper)">
+				<input id="cu-i-weig" class="button" type="number" min="0" placeholder="Weight (lbs)">
+				<input id="cu-i-note" class="button" type="text" placeholder="Anything Relevant">
+				
+				<p>
+					Quality
+				</p>
+
+				<select id="cu-i-qual" class="button">
+					<option value="0" selected="selected">Normal</option>
+					<option value="1">Masterwork</option>
+				</select>
+
+				<div id="cu-i-whichSkill">
+					<p>
+						Masterwork items (generally) grant a +2 bonus on a single skill check, 
+						and cost an additional 50gp. This is at your DM's discretion. A form
+						to auto update this is not yet functioning, for now, just write the bonus
+						in. 
+					</p>
+					
+					<select id="cu-i-skil" class="button">
+						<option value="appr">Appraise</option>
+						<option value="bala">Balance</option>
+						<option value="bluf">Bluff</option>
+						<option value="clim">Climb</option>
+						<option value="conc">Concentration</option>
+						<option value="craf">Craft</option>
+						<option value="deci">Decipher Script</option>
+						<option value="dipl">Diplomacy</option>
+						<option value="disa">Disable Device</option>
+						<option value="disg">Disguise</option>
+						<option value="esca">Escape Artist</option>
+						<option value="forg">Forgery</option>
+						<option value="gath">Gather Information</option>
+						<option value="hand">Handle Animal</option>
+						<option value="heal">Heal</option>
+						<option value="hide">Hide</option>
+						<option value="inti">Intimidate</option>
+						<option value="jump">Jump</option>
+						<option value="know">Knowledge</option>
+						<option value="list">Listen</option>
+						<option value="move">Move Silently</option>
+						<option value="open">Open Lock</option>
+						<option value="perf">Perform</option>
+						<option value="prof">Profession</option>
+						<option value="ride">Ride</option>
+						<option value="sear">Search</option>
+						<option value="sens">Sense Motive</option>
+						<option value="slei">Sleight of Hand</option>
+						<option value="spel">Spellcraft</option>
+						<option value="spot">Spot</option>
+						<option value="surv">Survival</option>
+						<option value="swim">Swim</option>
+						<option value="tumb">Tumble</option>
+						<option value="usem">Use Magic Device</option>
+						<option value="user">Use Rope</option>
+						<option value="write">Write In</option>
+					</select>
+					<input id="cu-i-writein" class="button" type="text" placeholder="Skill Name">
+					
+				</div>
+
+				<input class="button" type="button" value="Submit" onclick="createCustomItem('item');">
+
+			</form>
+
+			<script type="text/javascript">
+				$('#custom-item').on( 'change', function(){
+					updateCustomForm('item');
+				});
+			</script>
+
 		</section>
 
 
@@ -4829,7 +4941,7 @@
 					</div>
 					<div class="eighth">
 						
-						<div id="pr-w-s1-atkbonus" class="fill-space tall-weapon">
+						<div id="pr-w-s1-atkbonus" class="fill-space print-list tall-weapon">
 
 						</div>
 						<p class="label">
@@ -4882,7 +4994,7 @@
 				</div>
 				<!-- Notes -->
 				<div class="quarter">
-					<div class="fill-space tall-weapon">
+					<div id="pr-w-s1-notes" class="fill-space print-list tall-weapon">
 
 					</div>
 					<p class="label">
@@ -4891,7 +5003,7 @@
 				</div>
 				<!-- Ammo -->
 				<div class="quarter">
-					<div id="pr-w-s1-ammo" class="fill-space tall-weapon">
+					<div id="pr-w-s1-ammo" class="fill-space print-list tall-weapon">
 
 					</div>
 					<p class="label full-width">
@@ -4974,7 +5086,7 @@
 					</div>
 					<div class="eighth">
 						
-						<div id="pr-w-s2-atkbonus" class="fill-space tall-weapon">
+						<div id="pr-w-s2-atkbonus" class="fill-space print-list tall-weapon">
 
 						</div>
 						<p class="label">
@@ -5027,7 +5139,7 @@
 				</div>
 				<!-- Notes -->
 				<div class="quarter">
-					<div class="fill-space tall-weapon">
+					<div id="pr-w-s2-notes" class="fill-space print-list tall-weapon">
 
 					</div>
 					<p class="label">
@@ -5036,7 +5148,7 @@
 				</div>
 				<!-- Ammo -->
 				<div class="quarter">
-					<div id="pr-w-s2-ammo" class="fill-space tall-weapon">
+					<div id="pr-w-s2-ammo" class="fill-space print-list tall-weapon">
 
 					</div>
 					<p class="label full-width">
@@ -5119,7 +5231,7 @@
 					</div>
 					<div class="eighth">
 						
-						<div id="pr-w-s3-atkbonus" class="fill-space tall-weapon">
+						<div id="pr-w-s3-atkbonus" class="fill-space print-list tall-weapon">
 
 						</div>
 						<p class="label">
@@ -5172,7 +5284,7 @@
 				</div>
 				<!-- Notes -->
 				<div class="quarter">
-					<div class="fill-space tall-weapon">
+					<div id="pr-w-s3-notes" class="fill-space print-list tall-weapon">
 
 					</div>
 					<p class="label">
@@ -5181,7 +5293,7 @@
 				</div>
 				<!-- Ammo -->
 				<div class="quarter">
-					<div id="pr-w-s3-ammo" class="fill-space tall-weapon">
+					<div id="pr-w-s3-ammo" class="fill-space print-list tall-weapon">
 
 					</div>
 					<p class="label full-width">
@@ -5689,7 +5801,7 @@
 							MONEY
 						</h1>
 						<p>
-							THIS TUNIC BROUGHT TO YOU BY CAPITALISM
+							50 COINS = 1LB  |  THIS TUNIC BROUGHT TO YOU BY CAPITALISM
 						</p>
 					</div>
 

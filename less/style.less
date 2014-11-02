@@ -256,9 +256,23 @@ body
 		}
 	}
 
+.annotation
+	{
+	font-size: 11px;
+	background-color: rgba(0,0,0,0.5);
+	width: 90%;
+	padding: 5px;
+	text-align: center;
+	em
+		{
+		color: @green;
+		}
+	}
 
-
-
+#cu-i-whichSkill
+	{
+	padding-bottom: 10px;
+	}
 
 
 
@@ -799,7 +813,7 @@ body
 
 .equip-list-item
 	{
-	
+	border-bottom: 1px solid #fff;
 	p
 		{
 		padding: 2px 6px;
@@ -1009,9 +1023,10 @@ body
 	height: 500px;
 	}
 
-#mondodevspacer
+#instructions, #race-source, 
 	{
-	display: none;
+	/* display: none; */ 
+	/* Uncomment for development purposes */ 
 	}
 
 
@@ -1032,7 +1047,8 @@ body
 #roll-allocate, #roll-playing, #print, #print-page-two, #print-page-three, #print-page-four, #page-space,
 #feats-combat, #feats-skill, #feats-other, #feats-proficiency, #feats-creation, #feats-casting, #feats-metamagic, #roll-starting-gold,
 #inventory, #equip-variable-buffer, #inventory-2, #equip-simpweap, #equip-martweap, #equip-exotweap, #equip-armor, #equip-gear, #equip-tools, 
-#equip-substances, #equip-custom, #custom-weapon, #custom-armor, #custom-item, #custom-consumable, .page-space, #nav-controls
+#equip-substances, #equip-custom, #custom-weapon, #custom-weapon-display, #custom-armor, #custom-item, #cu-i-whichSkill, #cu-i-writein, 
+#custom-consumable, .page-space, #nav-controls
 	{
 	display: none;
 	}
