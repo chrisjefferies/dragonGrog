@@ -1,0 +1,753 @@
+/* style.less */
+
+
+@marker: 'Permanent Marker', 'helvetica neue', arial, sans-serif;
+@walter: 'Walter Turncoat', serif;
+@ubuntu: 'ubuntu', 'helvetica neue', 'helvetica', 'arial', sans-serif;
+@sintony: 'sintony', 'times', 'times new roman', serif;
+
+body
+	{
+	background-color: #222;
+	
+	font-family: Sintony;
+	}
+
+.intro
+	{
+	width: 90%;
+	max-width: 600px;
+	color: #fff;
+	margin: 0 auto;
+	h1, h2, h3
+		{
+		text-align: center;
+		}
+	}
+
+#build
+	{
+	h1
+		{
+		font-size: 60px;
+		}
+	h1, h2
+		{
+		text-align: center;
+		}
+	}
+
+.rules
+	{
+	font-family: ubuntu mono;
+	width: 90%;
+	max-width: 600px;
+	color: #fff;
+	background-color: #333;
+	margin: 0 auto;
+	h1, h2, h3, p
+		{
+		text-align: center;
+		padding: 30px 20px;
+		}
+	
+	}
+
+#build
+	{
+	width: 90%;
+	max-width: 800px;
+	display: block;
+	margin: 0 auto;
+	color: #fff;
+	}
+
+#class-select
+	{
+	display: block;
+	}
+
+
+#race-select
+	{
+	display: none;
+	}
+
+#race-bonus-human, #race-bonus-elf, #race-bonus-dwarf
+	{
+	display: none;
+	}
+/*
+#roll-stats
+	{
+	display: none;
+	}
+
+#dice-sys
+	{
+	display: none;
+	}
+
+
+#select-skills
+	{
+	display: none;
+	}
+*/
+
+#skills-finish
+	{
+	/* display: none; */
+	padding-bottom: 40px;
+	input
+		{
+		display: block;
+		margin: 0 auto;
+		}
+	}
+
+
+
+#initialize
+	{
+	width: 90%;
+	max-width: 700px;
+	margin: 0 auto;
+	padding-top: 30vh;
+	}
+
+.button
+	{
+	width: 200px;
+	margin: 0 auto;
+	display: block;
+	background-color: #ddd;
+	a
+		{
+		text-decoration: none;
+		text-align: center;
+		color: #222;
+		p
+			{
+			padding: 10px 0;
+			}
+		}
+	a:hover, a:hover > .button
+		{
+		color: #444;
+		}
+	}
+
+.button:hover
+	{
+	background-color: #fff;
+	}
+
+.sm-button
+	{
+	.button;
+	width: 50px;
+	}
+
+
+
+.roll-stats
+	{
+	article
+		{
+		.attribute-name, .attribute-value
+			{
+			width: 60px;
+			float: left;
+			}
+		.roll-buttons
+			{
+			width: 220px;
+			float: left;
+			input
+				{
+				margin: 17px 0;
+				}
+			}
+		}
+	}
+
+#dice-sys
+	{
+	form
+		{
+		clear: both;
+		}
+	label
+		{
+		float: left;
+		width: 30px;
+		font-size: 16px;
+		padding: 8px 0;
+		clear: both;
+		}
+	select
+		{
+		margin: 10px 0;
+		}
+	}
+
+#final-base-attributes
+	{
+	width: 310px;
+	margin: 0 auto;
+	h2
+		{
+		text-align: center;
+		}
+	h3, h4
+		{
+		float: left;
+		width: 80px;
+		background-color: black;
+		margin: 0 0;
+		padding: 4px 2px;
+		text-align: center;
+		}
+	h4
+		{
+		background-color: white;
+		color: black;
+		border: 2px solid black;
+		padding: 4px 2px;
+		}
+	input
+		{
+		display: none;
+		margin: 4px 0 4px 5px;
+		width: 40px;
+		height: 25px;
+		}
+	}
+#select-skills
+	{
+	padding-top: 50px;
+	clear: both;
+	}
+	
+.float-left
+	{
+	float: left;
+	font-size: 20px;
+	}
+
+.stat-values
+	{
+	padding-left: 10px;
+	padding-right: 30px;
+	}
+
+.total-points
+	{
+	clear: both;
+	text-align: center;
+	padding-top: 50px;
+	}
+
+#stat-assigner
+	{
+	display: block;
+	float: left;
+	width: 290px;
+	#stat-assgnr-one, #stat-assgnr-two, #stat-assgnr-three,
+	#stat-assgnr-four, #stat-assgnr-five, #stat-assgnr-six
+		{
+		height: 47px;
+		form
+			{
+			margin-top: 17px;
+			margin-right: 45px;
+			padding: 0;
+			float: left;
+			}
+		input
+			{
+			margin-top: 23px;
+			float: left;
+			}
+		}
+	}
+
+#stat-assgnr-two, #stat-assgnr-three,
+#stat-assgnr-four, #stat-assgnr-five, #stat-assgnr-six
+	{
+	display: none;
+	}
+
+.skills
+	{
+	float: left;
+	padding-right: 4px;
+	p
+		{
+		padding: 0;
+		margin: 0;
+		height: 28px;
+		}
+	}
+
+.class-name
+	{
+	input
+		{
+		height: 8px;
+		}
+	p
+		{
+		border-bottom: 1px solid #fff;
+		padding-top: 1px;
+		}
+	}
+
+.class-sk, .ab-mod, .skill-total
+	{
+	p
+		{
+		border-bottom: 1px solid #fff;
+		padding-top: 1px;
+		height: 28px;
+		}
+	input
+		{
+		height: 12px;
+		width: 80px;
+		}
+	}
+
+.input-points
+	{
+	padding-left: 4px;
+	p
+		{
+		border-bottom: 1px solid #fff;
+		height: 29px;
+		}
+	select
+		{
+		width: 80px;
+		height: 12px;
+		clear: both;
+		}
+	input
+		{
+		width: 40px;
+		height: 13px;
+		display: block;
+		padding-top: 2px;
+		margin: 4px auto 0 auto;
+		}
+	}
+
+.sk-input-wr
+	{
+	width: 60px;
+	height: 25px;
+	border-bottom: 1px solid #fff;
+	
+	}
+
+.full-width
+	{
+	width: 100%;
+	display: block;
+	clear: both;
+	padding-top: 50px;
+	input
+		{
+		display: block;
+		margin: 0 auto;
+		}
+	}
+
+.skill-button-top
+	{
+	width: 300px;
+	height: 50px;
+	margin: 0 auto;
+	display: block;
+	input
+		{
+		display: block;
+		float: left;
+		margin: 0 25px;
+		}
+	}
+
+.add-skills
+	{
+	width: 100%;
+	display: block;
+	.add-skill-labels 
+		{
+		width: 100%;
+		height: 20px;
+		p
+			{
+			font-size: 10px;
+			text-transform: uppercase;
+			text-align: center;
+			margin: 0 16px 0 0;
+			width: 88px;
+			display: block;
+			float: left;
+			}
+		}
+	}
+
+.user-added-skill
+	{
+	width: 80px;
+	margin-right: 15px;
+	}
+
+
+
+
+
+
+#select-feats
+	{
+	.feat-group
+		{
+		h2
+			{
+			padding: 0 10px;
+			margin: 10px 0;
+			}
+		input
+			{
+			width: 180px;
+			margin-top: 5px;
+			margin-bottom: 5px;
+			}
+		width: 200px;
+		text-align: center;
+		float: left;
+		margin: 0;
+		}
+	.feat-group-wide
+		{
+		width: 800px;
+		display: block;
+		float: none;
+		border: none;
+		clear: both;
+		input
+			{
+			margin: 5px auto;
+			}
+		}
+	.empty-feat-group
+		{
+
+		width: 200px;
+		margin: 0;
+		padding: 0 0 20px 0;
+		float: left;
+		border: none;
+		}
+	input
+		{
+		}
+	}
+
+.feat-name-list
+	{
+	color: red;
+	}
+
+
+#equipment
+	{
+	#select-feats;
+	
+	input
+		{
+		margin: 0 auto;
+		display: block;
+		}
+	}
+
+.buy-item-float
+	{
+	width: 200px;
+	float: left;
+	}
+
+.buy-item-float-5
+	{
+	.buy-item-float;
+	height: 198px;
+	}
+	
+.buy-item-float-10
+	{
+	.buy-item-float;
+	height: 220px;
+	}
+
+.buy-item-float-19
+	{
+	.buy-item-float;
+	height: 418px;
+	}
+
+.buy-item
+	{
+	border: 1px solid #444;
+	width: 198px;
+	height: 20px;
+	background-color: #111;
+	display: block;
+	p, input
+		{
+		float: left;
+		padding: 4px 0 0 5px;
+		margin: 0;
+		font-size: 11px;
+		text-transform: uppercase;
+		}
+	input
+		{
+		margin: 2px 5px 0 0;
+		float: right;
+		}
+	h3
+		{
+		text-align: center;
+		margin: 0;
+		padding: 3px 0 0 0;
+		font-size: 12px;
+		font-weight: 900;
+		text-transform: uppercase;
+		}
+	}
+
+.item-list
+	{
+	width: 200px;
+	padding-bottom: 20px;
+	float: left;
+	}
+
+.equip-list-item
+	{
+	p
+		{
+		padding: 2px 6px;
+		color: #66ff33;
+		background-color: #111;
+		font-size: 11px;
+		text-transform: uppercase;
+		border: 1px solid #444;
+		display: none;
+		
+		}
+	h3
+		{
+		color: #66ff33;
+		margin: 0;
+		width: 175px;
+		background-color: #111;
+		font-size: 13px;
+		padding: 3px 0;
+		text-transform: uppercase;
+		border: 1px solid #444;
+		text-align: center;
+		}
+	}
+
+.equip-list-stack
+	{
+	.equip-list-item;
+	margin: 0;
+	padding: 0;
+	width: 200px;
+	float: left;
+	display: none;
+	}
+
+.item-stack
+	{
+	margin: 0;
+	padding: 2px 6px;
+	width: 125px;
+	color: #66ff33;
+	background-color: #111;
+	font-size: 11px;
+	text-transform: uppercase;
+	border: 1px solid #444;
+	display: block;
+	float: left;
+	}
+
+.item
+	{
+	width: 163px;
+	margin: 0;
+	}
+
+
+.item-qty
+	{
+	float: right;
+	width: 20px;
+	margin: 0 23px 0 0;
+	}
+
+.equip-inv-stat
+	{
+	float: right;
+	padding: 50px 0;
+	width: 100%;
+	
+	p
+		{
+		width: 200px;
+		border: 1px solid #444;
+		margin: 0 auto;
+		padding: 0;
+		text-align: center;
+		}
+	}
+
+.sm-text-list
+	{
+	p
+		{
+		font-size: 8px;
+		}
+	}
+
+
+#roll-playing
+	{
+	#build;
+	}
+
+
+#describe
+	{
+
+	
+	h3
+		{
+		text-align: center;
+		margin: 20px auto 0 auto;
+		width: 405px;
+		background-color: #111;
+		padding: 1px 0 3px 0;
+		}
+	}
+
+.form-input
+	{
+	display: block;
+	margin: 10px auto 0 auto;
+	text-align: center;
+
+	}
+
+.form-small
+	{
+	margin-top: 10px;
+	text-align: center;
+	}
+
+.text-area,
+	{
+	display: block;
+	margin: 0 auto;
+	width: 384px;
+	height: 150px;
+	padding: 9px;
+	margin-top: 0;
+	text-align: left;
+	}
+
+.describe-small
+	{
+	height: 50px;
+	}
+
+.form-button
+	{
+	display: block;
+	margin: 0 auto;
+	margin-top: 40px;
+	}
+
+#form-picture
+	{
+	border: 1px solid #777;
+	h3
+		{
+		width: 100%;
+		margin-top: 0;
+		}
+	p
+		{
+		width: 50%; 
+		margin: 10px auto;
+		}
+	input
+		{
+		display: block;
+		margin: 10px auto;
+		padding: 10px 20px;
+		width: 50%;
+		background-color: #111;
+		transition: 1s ease;
+		}
+	input:hover
+		{
+		background-color: #000;
+		transition: 1s ease;
+		}
+	}
+
+
+
+
+
+#mondodevspacer
+	{
+	width: 100%;
+	display: block;
+	height: 500px;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

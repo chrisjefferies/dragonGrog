@@ -443,9 +443,12 @@ var assignAttribMan = function(form) {
 	logMscSkModifiers();				// Shows all Racial Skill Misc Modifiers (and other racial bonuses) and re-calculates ability modifiers.
 	addAbModifiers();					// Displays all Ability Modifiers in Skills Section
 	showClassSkills();					// Calculates Skill Points. Shows all Class Skills
-	logAllSavingThrows();				// Calculate Saving Throws and Base Attack Bonus. They Don't Display immediately.
 	
 	initiatePhaseTwo();
+
+	logAllSavingThrows();				// Calculate Saving Throws and Base Attack Bonus. They Don't Display immediately.
+	
+	
 }
 
 // -------------------------------------------------------------------
@@ -527,9 +530,12 @@ var assignAttributes = function(form) {
 		logMscSkModifiers();				// Shows all Racial Skill Misc Modifiers (and other racial bonuses) and re-calculates ability modifiers.
 		addAbModifiers();					// Displays all Ability Modifiers in Skills Section
 		showClassSkills();					// Calculates Skill Points. Shows all Class Skills
+		
+		initiatePhaseTwo();
+
 		logAllSavingThrows();				// Calculate Saving Throws and Base Attack Bonus. They Don't Display immediately.
 			
-		initiatePhaseTwo();
+		
 		
 	} else {
 		alert("An error occured. Verify that no Attributes are Duplicated.");
@@ -560,11 +566,11 @@ var initiatePhaseTwo = function() {
 	document.getElementById("race-select").style.display = "none";
 	document.getElementById("class-select").style.display = "none";
 	document.getElementById("dice-sys").style.display = "none";
+	window.levelAdvance = Number(document.getElementById("level-input").value);
 	if (window.levelAdvance === 1) {
 		document.getElementById("final-base-attributes").style.display = "block";
 		document.getElementById("select-skills").style.display = "block";
 	} else {
-		window.levelAdvance =  Number(document.getElementById("level-input").value) ;
 		document.getElementById("final-base-attributes").style.display = "block";
 		document.getElementById("handle-level-adv").style.display = "block";
 		document.getElementById("show-level").innerHTML = window.levelAdvance;
@@ -896,15 +902,34 @@ var showClassSkills = function() {
 
 
 var updateSavingThrows = function(fortSave, reflSave, willSave, baseAttack, hitDie) {
-	/*
-	window.forSave = (fortSave + window.conMod);
-	window.refSave = (reflSave + window.dexMod);
-	window.wilSave = (willSave + window.wisMod);
-	*/
+	
 	window.forSave = (fortSave);
 	window.refSave = (reflSave);
 	window.wilSave = (willSave);
-	window.baseAttackBonus = baseAttack; 
+	// window.baseAttackBonus = baseAttack; 
+	switch (baseAttack) {
+		case "G":
+			window.baseAttackBonus = window.levelAdvance;
+			window.baseAttackBonus2 = window.levelAdvance - 5;
+			window.baseAttackBonus3 = window.levelAdvance - 10;
+			window.baseAttackBonus4 = window.levelAdvance - 15;
+		break;
+		case "A":
+			window.baseAttackBonus = Math.floor( ( window.levelAdvance + (window.levelAdvance / 2) ) / 2 );
+			window.baseAttackBonus2 = window.baseAttackBonus - 5;
+			window.baseAttackBonus3 = window.baseAttackBonus - 10;
+			window.baseAttackBonus4 = window.baseAttackBonus - 15;
+		break;
+		case "P":
+			window.baseAttackBonus = Math.floor( window.levelAdvance / 2 );
+			window.baseAttackBonus2 = window.baseAttackBonus - 5;
+			window.baseAttackBonus3 = window.baseAttackBonus - 10;
+			window.baseAttackBonus4 = window.baseAttackBonus - 15;
+		break;
+	}
+
+	// alert("level: " + window.levelAdvance + "bab: " + window.baseAttackBonus);
+
 	window.hitPoints = hitDie + window.conMod;
 	if (window.hitpoints <= 0) {
 		window.hitPoints = 1;
@@ -921,30 +946,30 @@ var logAllSavingThrows = function() {
 	switch (window.selClass) {
 		case "CLERIC":
 		case "DRUID":
-			updateSavingThrows(2, 0, 2, 0, 8);
+			updateSavingThrows(2, 0, 2, "A", 8);
 		break;
 		case "SORCERER":
 		case "WIZARD":
-			updateSavingThrows(0, 0, 2, 0, 4);
+			updateSavingThrows(0, 0, 2, "P", 4);
 		break;
 		case "BARBARIAN":
-			updateSavingThrows(2, 0, 0, 1, 12)
+			updateSavingThrows(2, 0, 0, "G", 12)
 		break;
 		case "FIGHTER":
 		case "PALADIN":
-			updateSavingThrows(2, 0, 0, 1, 10);
+			updateSavingThrows(2, 0, 0, "G", 10);
 		break;
 		case "MONK":
-			updateSavingThrows(2, 2, 2, 0, 8);
+			updateSavingThrows(2, 2, 2, "A", 8);
 		break;
 		case "BARD":
-			updateSavingThrows(0, 2, 2, 0, 6);
+			updateSavingThrows(0, 2, 2, "A", 6);
 		break;
 		case "RANGER":
-			updateSavingThrows(2, 2, 0, 1, 8);
+			updateSavingThrows(2, 2, 0, "G", 8);
 		break;
 		case "ROGUE":
-			updateSavingThrows(0, 2, 0, 0, 6);
+			updateSavingThrows(0, 2, 0, "A", 6);
 		break;
 		case "NewBlankClass":
 			// A placeholder for future class additions. 
@@ -1619,27 +1644,27 @@ var populateCharacterSheet = function() {
 	
 	var listStr = document.getElementsByClassName("print-mod-str");
 	for ( var i = 0 ; i < listStr.length ; i++ ) {
-		listStr[i].innerHTML = ("+ " + window.strMod); }
+		listStr[i].innerHTML = ("+" + window.strMod); }
 
 	var listDex = document.getElementsByClassName("print-mod-dex");
 	for ( var i = 0 ; i < listDex.length ; i++ ) {
-		listDex[i].innerHTML = ("+ " + window.dexMod); }
+		listDex[i].innerHTML = ("+" + window.dexMod); }
 
 	var listCon = document.getElementsByClassName("print-mod-con");
 	for ( var i = 0 ; i < listCon.length ; i++ ) {
-		listCon[i].innerHTML = ("+ " + window.conMod);
+		listCon[i].innerHTML = ("+" + window.conMod);
 	}
 	var listWis = document.getElementsByClassName("print-mod-wis");
 	for ( var i = 0 ; i < listWis.length ; i++ ) {
-		listWis[i].innerHTML = ("+ " + window.wisMod);
+		listWis[i].innerHTML = ("+" + window.wisMod);
 	}
 	var listInt = document.getElementsByClassName("print-mod-int");
 	for ( var i = 0 ; i < listInt.length ; i++ ) {
-		listInt[i].innerHTML = ("+ " + window.intMod);
+		listInt[i].innerHTML = ("+" + window.intMod);
 	}
 	var listCha = document.getElementsByClassName("print-mod-cha");
 	for ( var i = 0 ; i < listCha.length ; i++ ) {
-		listCha[i].innerHTML = ("+ " + window.chaMod);
+		listCha[i].innerHTML = ("+" + window.chaMod);
 	}
 
 
@@ -1647,9 +1672,26 @@ var populateCharacterSheet = function() {
 
 	var listBab = document.getElementsByClassName("print-bab-one");
 	for ( var i = 0 ; i < listBab.length ; i++ ) {
-		listBab[i].innerHTML = ("+ " + window.baseAttackBonus);
+		listBab[i].innerHTML = ("+" + window.baseAttackBonus);
 	}
-	
+	if (window.levelAdvance > 5) {
+		var listBab = document.getElementsByClassName("print-bab-two");
+		for ( var i = 0 ; i < listBab.length ; i++ ) {
+			listBab[i].innerHTML = ("+" + window.baseAttackBonus2);
+		}
+	}
+	if (window.levelAdvance > 10) {
+		var listBab = document.getElementsByClassName("print-bab-three");
+		for ( var i = 0 ; i < listBab.length ; i++ ) {
+			listBab[i].innerHTML = ("+" + window.baseAttackBonus3);
+		}
+	}
+	if (window.levelAdvance > 15) {
+		var listBab = document.getElementsByClassName("print-bab-four");
+		for ( var i = 0 ; i < listBab.length ; i++ ) {
+			listBab[i].innerHTML = ("+" + window.baseAttackBonus4);
+		}
+	}	
 
 
 
@@ -1657,14 +1699,24 @@ var populateCharacterSheet = function() {
 		document.getElementById("melee-attack-mod-title").innerHTML = ( "DEX<br>MODIFIER") ;
 		document.getElementById("melee-attack-mod").innerHTML = ( "+" + window.dexMod ) ;
 		document.getElementById("print-attack-first-one").innerHTML = ( window.baseAttackBonus + window.dexMod ) ;
+		if (window.small) {
+			document.getElementById("print-attack-first-one").innerHTML = ( window.baseAttackBonus + window.dexMod + 1 ) ;
+		}
 	} else {
 		document.getElementById("print-attack-first-one").innerHTML = ( window.baseAttackBonus + window.strMod ) ;
 		document.getElementById("melee-attack-mod").innerHTML = window.strMod ;
+		if (window.small) {
+			document.getElementById("print-attack-first-one").innerHTML = ( window.baseAttackBonus + window.strMod + 1 ) ;
+		}
 	}
 
 	document.getElementById("print-ranged-first-one").innerHTML = ( window.baseAttackBonus + window.dexMod ) ;
 	document.getElementById("print-grapple-tot").innerHTML = ( window.baseAttackBonus + window.strMod ) ;
 
+	if (window.small) {
+		document.getElementById("print-attack-first-one").innerHTML = ( window.baseAttackBonus + window.strMod + 1 ) ;
+		document.getElementById("print-grapple-tot").innerHTML = ( window.baseAttackBonus + window.strMod + 1 ) ;
+	}
 
 	if (window.improvedInitiative === true) {
 		window.iniMiscMod = 4; // This is so it can be modified later if need be. 
@@ -2644,7 +2696,7 @@ var createCustomItem = function(itemKind) {
 			goldRemaining = goldRemaining - itemCost ;
 			document.getElementById("copper-remaining").innerHTML = goldRemaining ;
 			window.itemPurchaseNo += 1;
-			document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = weaponName + "(+" + bonus + ")";
+			document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = weaponName + " (" + bonus + ")";
 			document.getElementById("item-purchase-no-" + window.itemPurchaseNo).style.display = "block" ;
 			var totalWeight = Number(document.getElementById("total-weight").innerHTML);
 			totalWeight += itemWeight;
