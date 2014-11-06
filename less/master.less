@@ -10,6 +10,20 @@
 @blue:		#b6f2ea;
 @blueDark:	#456662;
 @pink:		#D660C6;
+@purpleWarm:	#4a0b15;
+@purpleCool:	#350D21;
+
+.gradiated {
+background: #4a0b15; /* Old browsers */
+background: -moz-linear-gradient(left, #4a0b15 0%, #350d21 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#4a0b15), color-stop(100%,#350d21)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left, #4a0b15 0%,#350d21 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left, #4a0b15 0%,#350d21 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left, #4a0b15 0%,#350d21 100%); /* IE10+ */
+background: linear-gradient(to right, #4a0b15 0%,#350d21 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4a0b15', endColorstr='#350d21',GradientType=1 ); /* IE6-9 */
+}
+
 
 body, html, h1, h2, h3, p
 	{
@@ -154,7 +168,8 @@ nav
 
 .intro
 	{
-	background: url('../images/print-bg-2.png') no-repeat top center;
+	background-color: #fff;
+	background: url('../images/print-bg-2.png') top center;
 	background-size: 100% auto;
 	height: auto;
 	p
@@ -185,7 +200,7 @@ nav
 	.intro;
 	background: url('../images/screen-inv-bg.png') no-repeat top center;
 	background-size: 100% auto;
-	background-color: @blueDark;
+	background-color: @purpleWarm;
 	height: 650px;
 	p 
 		{
