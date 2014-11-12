@@ -2402,6 +2402,10 @@ var updateCustomForm = function(kindOfItem) {
 			// Print total enhancement bonus from enchantments.
 			var base = Number(document.getElementById("cu-w-basecost").value) * 100;
 			var qual = Number(document.getElementById("cu-w-qual").value);
+			var weaponType = document.getElementById("cu-w-weapon-type").value;
+			var material = document.getElementById("cu-w-mater").value;
+			var weight = Number(document.getElementById("cu-w-weig").value );
+			var baseMaterial = document.getElementById("cu-w-base-material").value;
 			
 			var en1 = document.getElementById("cu-w-enhan-val-1").value;
 			switch (en1) {
@@ -2494,17 +2498,17 @@ var updateCustomForm = function(kindOfItem) {
 				break;
 			}
 
-			var material = document.getElementById("cu-w-mater").value;
-
 			var materialPrice = 0;
 
 			switch (material) {
-				case "Steel":
+				case "Standard":
 					var materialPrice = 0;
 				break;
 				case "Adamantine":
-				case "Mithral":
 					var materialPrice = 300000;
+				break;
+				case "Mithral":
+					var materialPrice = 50000 * weight;
 				break;
 				case "Deep Crystal":
 					var materialPrice = 100000;
@@ -2516,12 +2520,45 @@ var updateCustomForm = function(kindOfItem) {
 					var materialPrice = base;
 				break;
 				case "Alchemical Silver":
-					var materialPrice = 12500;
+					switch (weaponType) {
+						case "Light":
+							var materialPrice = 2000;
+						break;
+						case "One-Handed":
+							var materialPrice = 9000;
+						break;
+						case "Two-Handed":
+							var materialPrice = 18000;
+						break;
+					}
+					// var materialPrice = 12500;
 				break;
 			}
 			
-			document.getElementById("cu-w-qual-disp").innerHTML = qual;
+			switch ( baseMaterial ) {
+				case "Steel":
+					var list = document.getElementsByClassName("steel-only");
+					for ( i = 0 ; i < list.length ; i++ ) {
+						list[i].style.display = "block" ;
+					}
+					var list = document.getElementsByClassName("wood-only");
+					for ( i = 0 ; i < list.length ; i++ ) {
+						list[i].style.display = "none" ;
+					}
+				break;
+				case "Wood":
+					var list = document.getElementsByClassName("wood-only");
+					for ( i = 0 ; i < list.length ; i++ ) {
+						list[i].style.display = "block" ;
+					}
+					var list = document.getElementsByClassName("steel-only");
+					for ( i = 0 ; i < list.length ; i++ ) {
+						list[i].style.display = "none" ;
+					}
+				break;
+			}
 
+			document.getElementById("cu-w-qual-disp").innerHTML = qual;
 			document.getElementById("cu-w-enhan").innerHTML = enchant1 + enchant2 + enchant3;
 			document.getElementById("cu-w-bonus").innerHTML = qual;
 			
@@ -2543,6 +2580,7 @@ var updateCustomForm = function(kindOfItem) {
 			}
 
 			switch (material) {
+				case "Darkwood":
 				case "Adamantine":
 				case "Mithral":
 				case "Deep Crystal":
@@ -2564,12 +2602,24 @@ var updateCustomForm = function(kindOfItem) {
 			var critMult = Number(document.getElementById("cu-w-crit-mult").value);
 			document.getElementById("cu-w-crit").innerHTML = critRan + "+/x" + critMult;
 
-			var isMelee = document.getElementById("cu-w-weapon-type").value;
+			if (weaponType === "Light" || weaponType === "One-Handed" || weaponType === "Two-Handed" ) {
+				var isMelee = true;
+			} else {
+				var isMelee = false;
+			}
 
-			if ( isMelee === "Light" || isMelee === "One-Handed" || isMelee === "Two-Handed") {
+			if ( isMelee ) {
 				document.getElementById("cu-w-rang-base").style.display = "none";
+				var list = document.getElementsByClassName("melee-only");
+				for ( i = 0 ; i < list.length ; i++ ) {
+					list[i].style.display = "block" ;
+				}
 			} else {
 				document.getElementById("cu-w-rang-base").style.display = "block";
+				var list = document.getElementsByClassName("melee-only");
+				for ( i = 0 ; i < list.length ; i++ ) {
+					list[i].style.display = "none" ;
+				}
 			}
 		break;
 		case "item":

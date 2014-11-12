@@ -2209,7 +2209,8 @@
 				<input id="cu-w-name" class="button" type="text" placeholder="Weapon Name">
 
 				<p>
-					First, input data about the base weapon. 
+					First, input data about the base weapon before enhancements. Copy this information
+					directly from the desired source book or the DnD wiki <a href="http://www.dandwiki.com/wiki/SRD:Weapons" target="_blank">HERE (New Tab)</a>. Enhancements are calculated automatically.
 				</p>
 				<p>
 					Type
@@ -2222,7 +2223,6 @@
 					<option value="Throwing">Throwing</option>
 				</select>
 
-				
 				<input id="cu-w-basecost" class="button" type="number" min="0" placeholder="Base Cost (gp)">
 
 				<select id="cu-w-dmg-type" class="button">
@@ -2245,6 +2245,14 @@
 					<option selected="selected" disabled="disabled" value="-"> - Reach? - </option>
 					<option value="Yes">Yes</option>
 					<option value="No">No</option>
+				</select>
+				<p>
+					For Base Material, think the business end of the weapon, not necessarily the handle. 
+				</p>
+				<select id="cu-w-base-material" class="button">
+					<option selected="selected" disabled="disabled" value="-"> - Base Material - </option>
+					<option value="Steel">Steel</option>
+					<option value="Wood">Wood</option>
 				</select>
 				
 
@@ -2297,16 +2305,17 @@
 				</select>
 
 				<p>
-					Material
+					Advanced Materials
 				</p>
 				<select id="cu-w-mater" class="button">
-					<option selected="selected" value="Steel">Steel</option>
-					<option value="Adamantine">Adamantine</option>
+					<option selected="selected" value="Standard">Standard</option>
+					<option class="wood-only" value="Darkwood">Darkwood</option>
+					<option class="steel-only" value="Adamantine">Adamantine</option>
 					<option value="Deep Crystal">Deep Crystal</option>
 					<option value="Mundane Crystal">Mundane Crystal</option>
-					<option value="Cold Iron">Cold Iron</option>
-					<option value="Mithral">Mithral</option>
-					<option value="Alchemical Silver">Alchemical Silver</option>
+					<option class="steel-only" value="Cold Iron">Cold Iron</option>
+					<option class="steel-only" value="Mithral">Mithral</option>
+					<option class="steel-only" value="Alchemical Silver">Alchemical Silver</option>
 				</select>
 
 				<p>
@@ -2415,9 +2424,7 @@
 					<option value="vorp">Vorpal</option>
 				</select>
 
-
-				<input class="button" type="button" value="Submit" onclick="createCustomItem('weapon');">
-			
+				<input class="button" type="button" value="Submit" onclick="createCustomItem('weapon');">			
 
 			</form>
 
